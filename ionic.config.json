@@ -1,0 +1,7 @@
+{
+  "name": "Guzman Motos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
