@@ -1,0 +1,241 @@
+@use 'src/theme/variables.scss' as *;
+
+/* ======================
+   CONTENEDOR GENERAL
+====================== */
+
+ion-col{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+}
+
+
+/* ======================
+   CONTENEDOR DE CARDS
+====================== */
+
+.cards-container{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:2vmin;
+  padding:1vmin;
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+
+/* ======================
+   CARD
+====================== */
+
+ion-card{
+  border-radius:1.2rem;
+  border:4px solid $gm-naranja;
+  background:$gm-gris-card;
+  color:white;
+  transition:transform .2s ease, box-shadow .2s ease;
+
+  &:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 25px rgba(0,0,0,.35);
+  }
+}
+
+
+/* FOTO */
+
+.card-foto{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:1rem;
+
+  img{
+    max-width:160px;
+    max-height:160px;
+    border-radius:50%;
+  }
+}
+
+
+/* ESTADO */
+
+.card-estado{
+  text-align:center;
+  font-weight:600;
+  color:$gm-naranja-soft;
+  font-size:1.1rem;
+  margin-bottom:.6rem;
+}
+
+
+/* BOTONES CARD */
+
+.card-buttons{
+  display:flex;
+  gap:.6rem;
+  margin-top:1rem;
+
+  ion-button{
+    flex:1;
+    font-size:.9rem;
+  }
+}
+
+
+/* ======================
+   PAGINACIÓN
+====================== */
+
+.pagination{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1.5rem;
+  margin-top:2rem;
+  padding:.6rem 1rem;
+  border-radius:.5rem;
+  background:$gm-naranja-soft;
+}
+
+.btn-paginacion{
+
+  --background:#{$gm-azul};
+  --color:#{$gm-naranja};
+
+  width:3rem;
+  height:3rem;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+  transition:transform .15s ease;
+
+  ion-icon{
+    color:$gm-naranja;
+    font-size:1.4rem;
+  }
+
+  &:hover{
+    transform:scale(1.08);
+  }
+
+  &:disabled{
+    opacity:.35;
+  }
+}
+
+
+/* ======================
+   BOTÓN FLOTANTE
+====================== */
+
+.btn-add-floating{
+  position:absolute;
+  top:4rem;
+  left:1.2rem;
+  z-index:999;
+
+  ion-button{
+    --background:#{$gm-naranja};
+    --border-radius:50%;
+
+    width:56px;
+    height:56px;
+
+    ion-icon{
+      font-size:1.8rem;
+    }
+  }
+}
+
+
+/* ======================
+   SWITCH ESTADOS
+====================== */
+
+.estado-switch{
+  display:flex;
+  justify-content:center;
+  margin:1rem 0 2rem;
+
+  ion-segment{
+    width:90%;
+    max-width:600px;
+    --background:#{$gm-bg-soft};
+    border-radius:1rem;
+  }
+
+  ion-segment-button{
+    font-weight:600;
+
+    &.segment-button-checked{
+      background:$gm-naranja;
+      color:white;
+    }
+  }
+}
+
+
+/* ======================
+   MENSAJE SIN TRABAJOS
+====================== */
+
+.empty-state{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  width:60vw;
+  border-radius:1rem;
+  background:$gm-naranja-light;
+
+  ion-icon{
+    font-size:4rem;
+    color:$gm-naranja;
+    margin-bottom:1rem;
+  }
+
+  h2{
+    font-size:1.5rem;
+    color:$gm-principal;
+  }
+
+  p{
+    color:$gm-texto;
+    opacity:.7;
+  }
+}
+
+
+/* ======================
+   DESKTOP
+====================== */
+
+@media (min-width:500px){
+
+  /* cards en 3 columnas */
+
+  .cards-container{
+    grid-template-columns:repeat(3,1fr);
+    gap:2rem;
+    padding:2rem 4rem;
+  }
+
+  /* paginación fija al fondo */
+
+  .pagination{
+    position:fixed;
+    bottom:2vh;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:50;
+  }
+
+}

@@ -1,0 +1,146 @@
+@use 'src/theme/variables.scss' as *;
+
+/* =========================
+   TITULO
+========================= */
+
+.title {
+  font-size: 1.6rem;
+  color: $gm-principal;
+  justify-content: center;
+  font-weight: 600;
+  letter-spacing: -0.03rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 1.8rem;
+}
+
+.title::before,
+.title::after {
+  position: absolute;
+  content: "";
+  height: 0.9rem;
+  width: 0.9rem;
+  border-radius: 50%;
+  left: 5rem;
+  background-color: $gm-naranja;
+}
+
+.title::after {
+  animation: pulse 1s linear infinite;
+}
+
+/* =========================
+   TEXTOS
+========================= */
+
+.message,
+.signin {
+  color: $gm-texto;
+  font-size: 0.85rem;
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a {
+  color: $gm-naranja;
+  font-weight: 500;
+}
+
+.signin a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.flex {
+  padding: 0;
+}
+
+/* =========================
+   BOTON
+========================= */
+
+.submit {
+  --background: #{$gm-naranja};
+  --background-hover: #{$gm-naranja-hover};
+  --border-radius: 2rem;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  margin-top: 0.5rem;
+}
+
+/* =========================
+   ANIMACION
+========================= */
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* =========================
+   CONTENEDOR ARREGLOS
+========================= */
+
+.zona-futura {
+
+  height: 35vh;
+  max-height: 35vh;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+
+.presupuesto-total{
+  color: $gm-naranja-strong;
+  text-align: center;
+  font-size: 2rem;
+}
+
+/* =========================
+   AJUSTES PARA WEB
+========================= */
+
+@media (min-width: 1024px) {
+
+  form {
+
+    max-width: 1000px;
+    margin: 0 auto;
+
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+  }
+
+  .flex {
+
+    gap: 1rem;
+
+  }
+
+  .zona-futura {
+
+    height: 40;
+    max-height: 40;
+
+  }
+
+}

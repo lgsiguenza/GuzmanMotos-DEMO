@@ -1,0 +1,66 @@
+@use 'src/theme/variables.scss' as *;
+
+.lista-servicios{
+  background: $gm-bg-soft;
+  padding: 0.2rem;
+  border-radius: 12px;
+}
+
+/* HEADER */
+
+.lista-header{
+  display:flex;
+  background:$gm-naranja-light;
+  border-bottom:2px solid $gm-borde;
+  font-weight:600;
+  color:$gm-principal;
+}
+
+.fila{
+  display:flex;
+  background:$gm-principal;
+  border-bottom:1px solid $gm-azul-claro;
+}
+
+/* COLUMNAS */
+
+.col{
+  padding:0.5rem;
+}
+
+.unidades{
+  width:10%;
+}
+
+.nombre{
+  width:20%;
+}
+
+.detalle{
+  width:50%;
+}
+
+.precio{
+  width:20%;
+}
+
+/* BOTON */
+
+.agregar-container{
+  display:flex;
+  justify-content:center;
+  padding-top:1rem;
+}
+
+ion-button{
+  --background:$gm-naranja;
+  --background-hover:$gm-naranja-hover;
+  --color:white;
+}
+.lista-header,.fila{
+  align-items:center;
+}
+
+.fila:hover{
+  background:$gm-naranja-soft;
+}

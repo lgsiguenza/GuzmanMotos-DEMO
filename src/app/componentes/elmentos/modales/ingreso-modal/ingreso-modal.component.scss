@@ -1,0 +1,221 @@
+@use 'src/theme/variables.scss' as *;
+
+/* =========================
+   CONTENT
+========================= */
+
+.login-content {
+
+  --background: #{$gm-bg};
+
+}
+
+/* =========================
+   WRAPPER (centra el modal)
+========================= */
+
+.login-wrapper {
+    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+--background: #{$gm-bg};
+
+  height: auto;
+  --height: auto;
+
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-container {
+
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 2rem;
+
+}
+
+.logo-img {
+
+  width: 45vw;
+  max-width: 160px;
+
+}
+
+/* =========================
+   CARD
+========================= */
+
+.login-card {
+
+  --background: #{$gm-bg-soft};
+
+  border-radius: 1rem;
+
+  box-shadow: 0 0.4rem 1rem rgba(0,0,0,0.15);
+
+}
+
+ion-card-title {
+
+  color: $gm-principal;
+  font-weight: 600;
+
+}
+
+/* =========================
+   FORM
+========================= */
+
+.auth-form {
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+}
+
+/* =========================
+   BOTÓN LOGIN
+========================= */
+
+.btn-login {
+
+  --background: #{$gm-naranja};
+  --background-hover: #{$gm-naranja-hover};
+
+  --color: white;
+
+  --border-radius: 1rem;
+
+  margin-top: 0.8rem;
+
+}
+
+/* =========================
+   BOTÓN ACCESO RÁPIDO
+========================= */
+
+.btn-rapido {
+
+  --border-color: #{$gm-azul};
+  --color: #{$gm-azul};
+
+  --border-radius: 1rem;
+
+}
+
+.acceso-rapido {
+
+  margin-top: 0.8rem;
+
+}
+
+/* =========================
+   VALIDATORS
+========================= */
+
+.validators {
+
+  font-size: 0.8rem;
+  color: var(--ion-color-danger);
+  margin-left: 0.5rem;
+
+}
+@media (min-width: 400px) {
+
+  /* =========================
+     WRAPPER
+  ========================= */
+
+  .login-wrapper {
+
+    max-width: 600px;
+    margin: 0 auto;
+
+    padding: 1.6rem 1.4rem;
+
+  }
+
+  /* =========================
+     LOGO
+  ========================= */
+
+  .logo-container {
+
+    margin-bottom: 1.4rem;
+
+  }
+
+  .logo-img {
+
+    width: 320px;
+    max-width: 270px;
+
+  }
+
+  /* =========================
+     CARD
+  ========================= */
+
+  .login-card {
+
+    border-radius: 14px;
+
+  }
+
+  ion-card-title {
+
+    font-size: 1.25rem;
+
+  }
+
+  /* =========================
+     FORM
+  ========================= */
+
+  .auth-form {
+
+    gap: 0.7rem;
+
+  }
+
+  /* =========================
+     BOTÓN LOGIN
+  ========================= */
+
+  .btn-login {
+
+    --border-radius: 12px;
+
+    font-size: 1rem;
+
+  }
+
+  /* =========================
+     BOTÓN ACCESO RÁPIDO
+  ========================= */
+
+  .btn-rapido {
+
+    --border-radius: 12px;
+
+    font-size: 0.9rem;
+
+  }
+
+  /* =========================
+     VALIDATORS
+  ========================= */
+
+  .validators {
+
+    font-size: 0.85rem;
+
+  }
+
+}

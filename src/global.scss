@@ -1,37 +1,194 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
-/* Core CSS required for Ionic components to work properly */
+@use 'src/theme/variables.scss' as *;
 @import "@ionic/angular/css/core.css";
 
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+/* =========================
+         FONDO APP
+========================= */
+
+ion-content {
+   --background: #{$gm-azul};
+   background-color: #{$gm-azul};
+   color: $gm-texto;
+}
+
+/* =========================
+         MODALS
+========================= */
+
+.gm-modal-sm {
+  --width: 320px;
+}
+
+.gm-modal-md {
+  --width: 500px;
+}
+
+.gm-modal-lg {
+  --width: 800px;
+}
+
+.gm-modal {
+
+  --height: fit-content;
+  --max-height: 90vh;
+  --border-radius: 20px;
+
+  --backdrop-opacity: 0.45;
+
+  &::part(content) {
+    background: $gm-bg-soft;
+    border-radius: 18px;
+
+    border: 2px solid rgba($gm-principal, 0.25);
+
+    box-shadow:
+      0 20px 40px rgba(0,0,0,0.18),
+      0 6px 14px rgba(0,0,0,0.12);
+
+    overflow: hidden;
+
+    position: relative;
+  }
+
+  &::part(content)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+      90deg,
+      $gm-naranja,
+      $gm-naranja-soft,
+      $gm-acento
+    );
+  }
+}
+
+/* =========================
+     AJUSTE PARA WEB
+========================= */
+
+@media (min-width: 768px) {
+
+  .gm-modal {
+    --height: auto;
+    --max-height: 90vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+/* ================== Loader Custom ================== */
+
+/* Overlay glass */
+.custom-loading {
+  --background: rgba(34, 49, 51, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Wrapper central */
+.custom-loading .loading-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  width: 25vh;
+  height: 25vh;
+  border-radius: 50%;
+}
+.custom-loading .loading-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 200, 87, 0.15),
+    rgba(255, 107, 61, 0.12)
+  );
+
+  border: 3px solid rgba(255, 200, 87, 0.95); /* amarillo neón */
+
+  box-shadow:
+    0 0 14px rgba(255, 200, 87, 0.9),
+    0 0 28px rgba(255, 200, 87, 0.7),
+    0 0 45px rgba(255, 107, 61, 0.65), /* rojo/coral */
+    inset 0 0 14px rgba(255, 255, 255, 0.35);
+
+  animation: neon-spin 0.75s linear infinite;
+  z-index: 0;
+}
+
+.custom-loading .loading-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 18%;
+
+  background: url("assets/guzmanIcon.png")
+    no-repeat center / contain;
+
+  border-radius: 50%;
+  scale: 1.45;
+
+  filter:
+    drop-shadow(0 0 6px rgba(255, 200, 87, 0.8))
+    drop-shadow(0 0 14px rgba(255, 107, 61, 0.6));
+
+  z-index: 2;
+  animation: rotation 0.6s linear infinite;
+}
+
+
+/* Animación del anillo */
+@keyframes neon-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Animación de giro de la imagen */
+@keyframes rotation {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(359deg); }
+}
+/* Posicionar el mensaje debajo del círculo relativo al overlay */
+.custom-loading .loading-wrapper .loading-message {
+  position: absolute;
+  top: calc(50% + 20vh); /* 50% del overlay + radio del círculo aprox */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00BEDC;
+  font-weight: 600;
+  font-size: 1rem;
+  text-shadow: 0 0 8px rgba(0, 190, 220, 0.7);
+  text-align: center;
+  z-index: 3;
+}

@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <ion-row class="ion-align-items-center">
+
+      <!-- Botón Volver 15% -->
+      <div class="col volver">
+        <ion-button fill="clear" (click)="volver()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <!-- Logo 60% -->
+      <div class="col logo">
+        <img src="assets/guzmanLogo.png" alt="Logo Empresa" class="logo-header">
+      </div>
+
+      <!-- Botón Cerrar sesión 15% -->
+      <div class="col cerrar">
+        <ion-button  (click)="cerrarSesion()">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <!-- Botón Opciones 10% -->
+      <div class="col opciones">
+        <ion-button fill="clear" (click)="abrirOpciones()">
+          <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </div>
+
+    </ion-row>
+  </ion-toolbar>
+</ion-header>

@@ -1,0 +1,89 @@
+@use 'src/theme/variables.scss' as *;
+
+/* =========================
+   FOOTER BASE
+========================= */
+
+.gm-footer {
+
+  width: 100%;
+
+  ion-toolbar {
+
+    width: 100%;
+
+    --background: $gm-bg-soft;
+
+    border-top: 0.15rem solid $gm-acento;
+
+    padding-inline: 0.6rem;
+
+    box-shadow: 0 -0.4rem 1rem rgba(0,0,0,0.15);
+
+  }
+
+  /* contenedor de botones ocupa todo el ancho */
+  ion-buttons {
+
+    width: 100%;
+    display: flex;
+    gap: 0.6rem;
+
+  }
+
+  /* los botones se reparten el espacio */
+  ion-button {
+
+    flex: 1;
+    width: 100%;
+
+  }
+
+}
+
+
+/* =========================
+   BOTON CERRAR
+========================= */
+
+.btn-cerrar {
+
+  --color: #{$gm-azul};
+  --border-color: #{$gm-azul};
+
+  --background: transparent;
+  --background-hover: rgba(11, 60, 111, 0.08);
+
+  --border-radius: 2rem;
+
+  font-weight: 600;
+
+}
+
+
+/* =========================
+   BOTON SUCCESS
+========================= */
+
+.btn-success {
+
+  --background: #{$gm-naranja};
+  --background-hover: #{$gm-naranja-hover};
+  --background-activated: #{$gm-naranja-hover};
+
+  --color: white;
+
+  --border-radius: 2rem;
+
+  font-weight: 600;
+
+}
+
+
+/* mantener el radio interno */
+.btn-cerrar::part(native),
+.btn-success::part(native) {
+
+  border-radius: 2rem;
+
+}

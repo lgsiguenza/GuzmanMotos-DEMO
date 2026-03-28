@@ -1,0 +1,124 @@
+<ion-col>
+
+  <!------------- BOTON FLOTANTE ------------->
+  
+  <div class="btn-add-floating">
+  <ion-button (click)="abrirFormularioNuevo()">
+    <ion-icon name="add-outline"></ion-icon>
+  </ion-button>
+</div>
+
+
+<!------------- SWITCH ESTADOS ------------->
+
+<div class="estado-switch">
+  
+  <ion-segment value="solicitudes">
+
+    <ion-segment-button value="solicitudes">
+      <ion-label>Solicitudes</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="proceso">
+      <ion-label>En proceso</ion-label>
+    </ion-segment-button>
+    
+    <ion-segment-button value="completados">
+      <ion-label>Completados</ion-label>
+    </ion-segment-button>
+
+  </ion-segment>
+  
+</div>
+
+
+
+<!------------- CONTENIDO ------------->
+
+@if (paginatedItems.length === 0) {
+  
+  <div class="empty-state">
+    
+    <ion-icon name="construct-outline"></ion-icon>
+
+    <h2>No hay trabajos todavía</h2>
+    
+    <p>
+      Cuando los clientes soliciten trabajos aparecerán aquí.
+    </p>
+
+  </div>
+  
+} @else {
+
+  <div class="cards-container">
+
+    @for (item of paginatedItems; track item.id) {
+      
+      <ion-card>
+
+        <ion-card-header>
+          <ion-card-title>{{ item.vehiculo }}</ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          
+          <div class="card-estado">
+            Ingreso: <strong>{{ item.ingreso }}</strong>
+          </div>
+          
+          @if (item.estado) {
+            <div class="card-estado">Estado: Aprobado</div>
+          } @else {
+            <div class="card-estado">Estado: Pendiente</div>
+          }
+          
+          <div class="card-buttons">
+            
+            <ion-button color="warning" (click)="abrirFormularioEdicion(item)">
+              <ion-icon slot="start" name="build-outline"></ion-icon>
+              Editar
+            </ion-button>
+            
+            <ion-button color="primary" (click)="verDetalles(item)">
+              <ion-icon slot="start" name="aperture-outline"></ion-icon>
+              Detalles
+            </ion-button>
+            
+          </div>
+          
+          <ion-button color="danger" expand="block" (click)="eliminarUsuario(item)">
+            <ion-icon slot="start" name="trash-outline"></ion-icon>
+            Eliminar
+          </ion-button>
+
+        </ion-card-content>
+        
+      </ion-card>
+      
+    }
+    
+  </div>
+
+}
+
+
+
+<!------------- PAGINACIÓN ------------->
+
+<div class="pagination">
+
+  <ion-button class="btn-paginacion"
+  (click)="prevPage()" [disabled]="page() === 1">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+  </ion-button>
+
+  <span>{{ page() }} de {{ totalPages() }}</span>
+
+  <ion-button class="btn-paginacion"
+  (click)="nextPage()" [disabled]="page() === totalPages()">
+    <ion-icon name="chevron-forward-outline"></ion-icon>
+  </ion-button>
+
+</div>
+</ion-col>

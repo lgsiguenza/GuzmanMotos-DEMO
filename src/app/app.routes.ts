@@ -1,13 +1,24 @@
 import { Routes } from '@angular/router';
+import { ControlPage } from './paginas/control/control.page';
+import { PreloginPage } from './paginas/prelogin/prelogin.page';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    path: 'prelogin',
+    loadComponent: () => import('./paginas/prelogin/prelogin.page').then(m => PreloginPage)
+
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'prelogin',
     pathMatch: 'full',
+  },
+  {
+    path: 'inicio',
+    loadComponent: () => import('./paginas/auth/inicio/inicio.page').then( m => m.InicioPage)
+  },
+  {
+    path: 'control',
+    loadComponent: () => import('./paginas/control/control.page').then(m => ControlPage)
   },
 ];

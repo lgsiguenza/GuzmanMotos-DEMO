@@ -1,0 +1,68 @@
+
+  <div class="login-wrapper">
+
+    <div class="logo-container">
+      <img src="assets/guzmanLogo.png" class="logo-img"/>
+    </div>
+
+    <ion-card class="login-card">
+
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">
+          Iniciar sesión
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <form [formGroup]="form" class="auth-form" (ngSubmit)="ingresar()">
+
+          <app-lgs-input
+            control="correo"
+            placeholder="Correo"
+            [form]="form"
+            mensajeValidacion="Debe poseer la estructura 'texto@texto.texto'">
+          </app-lgs-input>
+
+          <app-lgs-input
+            control="contrasenia"
+            tipo="password"
+            placeholder="Contraseña"
+            nombreControl="Contraseña"
+            [form]="form"
+            mensajeValidacion="Debe poseer al menos 3 caracteres">
+          </app-lgs-input>
+
+          <ion-button expand="block" class="btn-login" type="submit">
+            Entrar
+          </ion-button>
+
+        </form>
+
+        <div class="acceso-rapido">
+
+          <ion-button
+            fill="outline"
+            expand="block"
+            size="small"
+            class="btn-rapido"
+            (click)="autocompletar('administrador@admin.adm','admin345')">
+
+            Acceso rápido
+
+          </ion-button>
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+    
+    <app-modal-footer
+      (cerrar)="cerrar()"
+      (success)="ingresar()"
+      successText="Ingresar">
+    </app-modal-footer>
+  </div>
+
+    

@@ -1,0 +1,57 @@
+<div class="lista-servicios">
+
+  <div class="lista-header">
+    <div class="col unidades">Unid.</div>
+    <div class="col nombre">Nombre</div>
+    <div class="col detalle">Detalle</div>
+    <div class="col precio">Precio</div>
+  </div>
+
+  @for(item of items; track $index){
+
+    <div class="fila">
+
+      <div class="col unidades">
+        <ion-input
+          type="number"
+          placeholder="Ej: 0"
+          [(ngModel)]="item.unidades"
+          (ionInput)="calcularTotal()">
+        </ion-input>
+      </div>
+
+      <div class="col nombre">
+        <ion-textarea
+          placeholder="Ej: Problema del chásis"
+          [(ngModel)]="item.nombre">
+        </ion-textarea>
+      </div>
+
+      <div class="col detalle">
+        <ion-textarea
+          placeholder="Ej: Abolladura visible en la parte inferior de la puerta."
+          [(ngModel)]="item.detalle">
+        ></ion-textarea>
+      </div>
+
+      <div class="col precio">
+        <ion-input
+          type="number"
+          placeholder="Ej: 25000"
+          [(ngModel)]="item.precio"
+          (ionInput)="calcularTotal()">
+          <ion-label slot="start">$</ion-label>
+        </ion-input>
+      </div>
+
+    </div>
+
+  }
+
+  <div class="agregar-container">
+    <ion-button (click)="agregar()" shape="round">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </div>
+
+</div>

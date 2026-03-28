@@ -1,0 +1,25 @@
+<ion-footer class="gm-footer">
+
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-button
+        fill="outline"
+        class="btn-cerrar"
+        (click)="cerrar.emit()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button
+        type="success"
+        class="btn-success"
+        (click)="success.emit()">
+        {{ successText }}
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+
+</ion-footer>

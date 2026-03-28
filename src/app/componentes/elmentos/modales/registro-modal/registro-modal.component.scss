@@ -1,0 +1,118 @@
+@use 'src/theme/variables.scss' as *;
+
+
+
+
+/* =========================
+   TITULO
+========================= */
+
+.title {
+  font-size: 1.6rem;
+  color: $gm-principal;
+  justify-content: center;
+  font-weight: 600;
+  letter-spacing: -0.03rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 1.8rem;
+}
+
+.title::before,
+.title::after {
+  position: absolute;
+  content: "";
+  height: 0.9rem;
+  width: 0.9rem;
+  border-radius: 50%;
+  left: 5rem;
+  background-color: $gm-naranja;
+}
+
+.title::after {
+  animation: pulse 1s linear infinite;
+}
+
+/* =========================
+   TEXTOS
+========================= */
+
+.message,
+.signin {
+  color: $gm-texto;
+  font-size: 0.85rem;
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a {
+  color: $gm-naranja;
+  font-weight: 500;
+}
+
+.signin a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.flex {
+  padding: 0;
+}
+
+/* =========================
+   BOTON
+========================= */
+
+.submit {
+  --background: #{$gm-naranja};
+  --background-hover: #{$gm-naranja-hover};
+  --border-radius: 2rem;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  margin-top: 0.5rem;
+}
+
+/* =========================
+   ANIMACION
+========================= */
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+.telefono-input{
+  display: flex;
+  align-items: stretch; // importante
+  gap: .5rem;
+}
+
+.prefijo{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  flex-direction: row;
+  align-items: baseline;   // centra el +54 verticalmente
+  color: $gm-naranja;
+  border-radius: 1rem;
+  
+  font-size: 1.6rem;
+}
+
+.telefono-input app-lgs-input{
+  flex: 1;
+}

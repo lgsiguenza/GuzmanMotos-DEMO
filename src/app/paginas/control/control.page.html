@@ -1,0 +1,46 @@
+<ion-content id="main-content">
+  <app-header></app-header>
+@switch (this.userSvc.usrActual()?.rol) {
+  @case ('dueño') { <ng-container *ngTemplateOutlet="panelAdmin"></ng-container> }
+  @case ('cliente'){
+    <ion-segment class="full-width-segment">
+      <ion-segment-button value="clientes" content-id="clientes">
+        Usuario
+      </ion-segment-button>
+      <ion-segment-button value="lespera" content-id="lespera">
+        Vehículos
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-segment-view>
+      <ion-segment-content value="clientes" id="clientes">
+        <app-panel-usuario></app-panel-usuario>
+      </ion-segment-content>
+      <ion-segment-content value="lespera" id="lespera">
+        <app-panel-vehiculos></app-panel-vehiculos>
+      </ion-segment-content>
+    </ion-segment-view>
+    }
+  }
+</ion-content>
+
+<ng-template #panelAdmin>
+   <!-- Contenido para supervisor y dueño -->
+    <ion-segment class="full-width-segment">
+      <ion-segment-button value="empleados" content-id="alta">
+        Trabajos
+      </ion-segment-button>
+      <ion-segment-button value="mesas" content-id="mesas">
+        Vehículos
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-segment-view>
+      <ion-segment-content value="empleados" id="alta">
+        <app-panel-trabajos></app-panel-trabajos>
+      </ion-segment-content>
+      <ion-segment-content value="mesas" id="mesas">
+        <app-panel-vehiculos></app-panel-vehiculos>
+      </ion-segment-content>
+    </ion-segment-view>
+</ng-template>

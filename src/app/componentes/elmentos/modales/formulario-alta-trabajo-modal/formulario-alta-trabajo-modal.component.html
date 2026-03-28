@@ -1,0 +1,62 @@
+<form>
+<br>
+  <ion-text class="title ion-text-center">Registrar Trabajo</ion-text>
+  <ion-grid class="flex">
+<!--//! ================== Modelo vehículo ==================-->
+    <ion-row>
+      <ion-col>
+        <app-lgs-input
+          class="ion-text-center"
+          control="vehiculo"
+          [form]="form"
+          mensajeValidacion="Debe poseer al menos 3 caracteres"
+          placeholder="Modelo del vehículo."
+          size="md"  
+        ></app-lgs-input>
+      </ion-col>  
+        
+      <ion-col>
+        <app-lgs-input
+        class="ion-text-center"
+        control="propietario"
+        [form]="form"
+        mensajeValidacion="Debe poseer al menos 3 caracteres"
+        placeholder="Nombre del propietario."
+          tipo="text"
+          size="md"  
+        ></app-lgs-input>
+      </ion-col>  
+    </ion-row>    
+      
+<!--//! ================== Observaciones ==================-->
+      <app-lgs-input
+      class="ion-text-center"
+        control="observaciones"
+        tipo="textarea"
+        [form]="form"
+        mensajeValidacion="Debe poseer al menos 3 caracteres"
+        placeholder="Observaciones destacables."
+        size="md"  
+      ></app-lgs-input>
+<!--//! ================== Arreglos ==================-->
+  <div class="zona-futura">
+    <app-listado-arreglos 
+      (totalChange)="presupuesto.set($event)"
+      (listaArreglos)="arreglos.set($event)"
+
+    ></app-listado-arreglos>
+  </div>
+  
+<!--//! ================== Presupuesto ==================-->
+  <div class="presupuesto-total">
+    Presupuesto total: {{ presupuesto() | currency:'ARS':'symbol':'1.0-0' }}
+  </div>
+<!--//! ================== Botón de registro ==================-->
+    <app-modal-footer class="submit"
+      (cerrar)="cerrarModal()"
+      (success)="registrar()" 
+      successText="Registrar"
+    ></app-modal-footer>
+    
+  </ion-grid>
+</form>

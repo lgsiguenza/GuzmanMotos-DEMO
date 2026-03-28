@@ -1,0 +1,63 @@
+@use 'src/theme/variables.scss' as *;
+
+.app-toolbar {
+  --background: $gm-azul;       // fondo azul principal
+  background-color: $gm-azul;
+  --color: $gm-principal;        // texto e iconos
+  min-height: 56px;
+
+  /* sombra inferior solamente */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+ion-row.ion-align-items-center {
+  display: flex;
+  align-items: center;
+}
+
+.col {
+  display: flex;
+  align-items: center;
+}
+
+.col.volver { flex: 0 0 15%; }
+.col.logo { 
+  flex: 0 0 50%; 
+  justify-content: center;
+  background-color: $gm-naranja-soft;
+  border-radius: 10rem;
+}
+.col.cerrar { flex: 0 0 15%; justify-content: flex-end; } 
+.col.opciones { flex: 0 0 10%; justify-content: flex-end; }
+
+.logo-header { max-height: 40px; }
+
+ion-button {
+  --background: transparent;
+  background-color: $gm-naranja-soft;
+  border-radius: 50rem;
+  box-shadow: none; /* elimina todas las sombras de los botones */
+
+  ion-icon {
+    color: $gm-principal; // color de los iconos
+  }
+}
+/* =========================
+   HEADER RESPONSIVE
+========================= */
+
+@media (max-width: 500px) {
+
+  ion-row.ion-align-items-center {
+    flex-wrap: wrap;
+  }
+
+  .col {
+    flex: 0 0 50%;
+    max-width: 45%;
+    justify-content: center;
+  }
+
+
+
+}
