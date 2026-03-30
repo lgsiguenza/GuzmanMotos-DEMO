@@ -24,6 +24,7 @@ export class FormularioAltaTrabajoModalComponent  {
   private userSvc = inject(UsuarioSb);
   private tbjSvc = inject(TrabajoSb);
   private modalCtrl = inject(ModalController);
+  protected isEdicion!: boolean;
 
   presupuesto = signal<number>(0);
   arreglos = signal<Arreglo[]>([])
@@ -39,7 +40,9 @@ export class FormularioAltaTrabajoModalComponent  {
     listadoArreglos: new FormControl(this.arreglos, Validators.required),
   });
 
-  ngOnInit() {}
+  ngOnInit() {
+    alert(this.isEdicion);
+  }
 
   //! =============== Métodos funcionales ===============
 

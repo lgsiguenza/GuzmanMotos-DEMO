@@ -7,13 +7,14 @@ import { Trabajo } from 'src/app/models/trabajo';
 import { TrabajoSb } from 'src/app/servicios/trabajo-sb';
 import { Utils } from 'src/app/servicios/utils';
 import { FormularioAltaTrabajoModalComponent } from '../elmentos/modales/formulario-alta-trabajo-modal/formulario-alta-trabajo-modal.component';
+import { FormatoFechaPipe } from 'src/app/pipes/formato-fecha-pipe';
 
 @Component({
   selector: 'app-panel-trabajos',
   templateUrl: './panel-trabajos.component.html',
   styleUrls: ['./panel-trabajos.component.scss'],
-  imports: [IonLabel, IonSegmentButton, IonSegment, IonIcon, IonCardContent, 
-    IonCardHeader, IonCardTitle, IonCard, IonButton, CommonModule, IonCol]
+  imports: [IonLabel, IonSegmentButton, IonSegment, IonIcon, IonCardContent,
+    IonCardHeader, IonCardTitle, IonCard, IonButton, CommonModule, IonCol, FormatoFechaPipe, IonButtons]
   })
 export class PanelTrabajosComponent {
   //! =================== Servicios y variables ===================
@@ -29,7 +30,7 @@ export class PanelTrabajosComponent {
 
     //* ✅ Señal para la página actual
   page = signal(1);
-  pageSize = 1; 
+  pageSize = 3; 
   
   //* ✅ Lista paginada derivada de la lista filtrada
   get paginatedItems(): Trabajo[] {
@@ -64,12 +65,13 @@ export class PanelTrabajosComponent {
   }
 
   async abrirFormularioNuevo(){
-    const modal = await this.utilSvc.crearModal(FormularioAltaTrabajoModalComponent, 'lg',{},true)
-    
+    const modal = await this.utilSvc.crearModal(FormularioAltaTrabajoModalComponent, 'lg',{isEdicion: false},true)
     const {data, role} = await modal.onDidDismiss<Trabajo>();
 
     if(role === 'confirm'){
         this.utilSvc.mostrarToast("¡Usuario agregado exitosamente!", 'success','middle',500);
+      } else{
+        this.utilSvc.mostrarToast("Acción cancelada.", 'primary','middle',100);
     }
     
   }

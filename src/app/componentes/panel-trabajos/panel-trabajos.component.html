@@ -2,11 +2,6 @@
 
   <!------------- BOTON FLOTANTE ------------->
   
-  <div class="btn-add-floating">
-  <ion-button (click)="abrirFormularioNuevo()">
-    <ion-icon name="add-outline"></ion-icon>
-  </ion-button>
-</div>
 
 
 <!------------- SWITCH ESTADOS ------------->
@@ -50,46 +45,54 @@
   </div>
   
 } @else {
-
-  <div class="cards-container">
+  
+  <div class="btn-add-floating">
+    <ion-button (click)="abrirFormularioNuevo()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <div 
+  class="cards-container"
+  [class.one]="paginatedItems.length === 1"
+  [class.two]="paginatedItems.length === 2"
+  [class.three]="paginatedItems.length >= 3"
+  >
 
     @for (item of paginatedItems; track item.id) {
       
       <ion-card>
 
         <ion-card-header>
-          <ion-card-title>{{ item.vehiculo }}</ion-card-title>
+          <ion-card-title class="ion-text-center">{{ item.vehiculo }}</ion-card-title>
         </ion-card-header>
         
         <ion-card-content>
           
           <div class="card-estado">
-            Ingreso: <strong>{{ item.ingreso }}</strong>
+            Ingreso: <strong>{{ item.ingreso | formatoFecha}}</strong>
           </div>
           
-          @if (item.estado) {
-            <div class="card-estado">Estado: Aprobado</div>
-          } @else {
-            <div class="card-estado">Estado: Pendiente</div>
-          }
+         
+            <div class="card-estado">Estado: <strong>{{item.estado | titlecase}}</strong></div>
           
-          <div class="card-buttons">
-            
-            <ion-button color="warning" (click)="abrirFormularioEdicion(item)">
-              <ion-icon slot="start" name="build-outline"></ion-icon>
-              Editar
-            </ion-button>
-            
-            <ion-button color="primary" (click)="verDetalles(item)">
+          
+            <ion-buttons class="card-buttons">
+
+              <ion-button color="warning" fill="outline" (click)="abrirFormularioEdicion(item)">
+                <ion-icon slot="start" name="build-outline"></ion-icon>
+                Actualizar
+              </ion-button>
+              
+              <ion-button color="primary" fill="outline" (click)="verDetalles(item)">
               <ion-icon slot="start" name="aperture-outline"></ion-icon>
               Detalles
             </ion-button>
+          </ion-buttons>
             
-          </div>
           
-          <ion-button color="danger" expand="block" (click)="eliminarUsuario(item)">
+          <ion-button color="success" expand="block" (click)="eliminarUsuario(item)">
             <ion-icon slot="start" name="trash-outline"></ion-icon>
-            Eliminar
+            Completar
           </ion-button>
 
         </ion-card-content>

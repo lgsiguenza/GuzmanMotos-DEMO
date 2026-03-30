@@ -99,7 +99,8 @@ export class Utils {
       color: tipoAsig,
       duration: duracion,
       message: mensaje,
-      position: posicion
+      position: posicion,
+      cssClass: 'ion-text-center'
     }
     )
     return toast.present();

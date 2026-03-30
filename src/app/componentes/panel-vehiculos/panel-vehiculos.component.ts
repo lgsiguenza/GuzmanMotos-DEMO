@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-panel-vehiculos',
   templateUrl: './panel-vehiculos.component.html',
   styleUrls: ['./panel-vehiculos.component.scss'],
-  imports: [IonLabel, IonSegmentButton, IonSegment,  IonIcon, IonCardContent,
+  imports: [ IonIcon, IonCardContent,
      IonCardHeader, IonCardTitle, IonCard, IonButton, CommonModule, IonCol]})
 export class PanelVehiculosComponent  implements OnInit {
 

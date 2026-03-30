@@ -18,11 +18,46 @@ ion-col{
 
 .cards-container{
   display:grid;
+  position: relative;
   grid-template-columns:1fr;
-  gap:2vmin;
-  padding:1vmin;
+  gap:2rem;
+  padding:1rem;
+  width:100%;
   max-height:90vh;
   overflow-y:auto;
+  justify-content:center;
+  justify-items:center;
+}
+
+
+/* ======================
+   CENTRADO SEGÚN CANTIDAD
+====================== */
+
+.cards-container.one{
+  grid-template-columns:1fr;
+}
+
+.cards-container.two{
+  grid-template-columns:repeat(2, minmax(0,22rem));
+}
+
+.cards-container.three{
+  grid-template-columns:repeat(3, minmax(0,22rem));
+}
+
+
+/* ======================
+   ADAPTACIÓN WEB
+====================== */
+
+@media (min-width:768px){
+
+  .cards-container{
+    grid-template-columns:repeat(3, minmax(0,22rem));
+    justify-content:center;
+  }
+
 }
 
 
@@ -31,25 +66,36 @@ ion-col{
 ====================== */
 
 ion-card{
+
+  width:100%;
+  max-width:22rem;
+
   border-radius:1.2rem;
   border:4px solid $gm-naranja;
+
   background:$gm-gris-card;
   color:white;
+
   transition:transform .2s ease, box-shadow .2s ease;
 
   &:hover{
     transform:translateY(-4px);
     box-shadow:0 12px 25px rgba(0,0,0,.35);
   }
+
 }
 
 
-/* FOTO */
+/* ======================
+   FOTO
+====================== */
 
 .card-foto{
+
   display:flex;
   justify-content:center;
   align-items:center;
+
   margin-bottom:1rem;
 
   img{
@@ -57,31 +103,49 @@ ion-card{
     max-height:160px;
     border-radius:50%;
   }
+
 }
 
 
-/* ESTADO */
+/* ======================
+   ESTADO
+====================== */
 
 .card-estado{
+
   text-align:center;
   font-weight:600;
   color:$gm-naranja-soft;
+
   font-size:1.1rem;
   margin-bottom:.6rem;
+
+  strong{
+    color: $gm-acento;
+  }
 }
 
 
-/* BOTONES CARD */
+
+/* ======================
+   BOTONES CARD
+====================== */
 
 .card-buttons{
+
   display:flex;
   gap:.6rem;
   margin-top:1rem;
-
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: center;
+      align-items: stretch;
+  
   ion-button{
     flex:1;
     font-size:.9rem;
   }
+
 }
 
 
@@ -90,15 +154,22 @@ ion-card{
 ====================== */
 
 .pagination{
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   gap:1.5rem;
+
   margin-top:2rem;
   padding:.6rem 1rem;
+
   border-radius:.5rem;
+
   background:$gm-naranja-soft;
+
 }
+
 
 .btn-paginacion{
 
@@ -113,6 +184,7 @@ ion-card{
   justify-content:center;
 
   border-radius:50%;
+
   transition:transform .15s ease;
 
   ion-icon{
@@ -127,6 +199,7 @@ ion-card{
   &:disabled{
     opacity:.35;
   }
+
 }
 
 
@@ -135,12 +208,16 @@ ion-card{
 ====================== */
 
 .btn-add-floating{
+
   position:absolute;
-  top:4rem;
-  left:1.2rem;
+
+  top:2rem;
+  left: 13rem;
+
   z-index:999;
 
   ion-button{
+
     --background:#{$gm-naranja};
     --border-radius:50%;
 
@@ -150,7 +227,9 @@ ion-card{
     ion-icon{
       font-size:1.8rem;
     }
+
   }
+
 }
 
 
@@ -159,25 +238,35 @@ ion-card{
 ====================== */
 
 .estado-switch{
+
   display:flex;
+  position: relative;
   justify-content:center;
+
   margin:1rem 0 2rem;
 
   ion-segment{
+
     width:90%;
     max-width:600px;
+
     --background:#{$gm-bg-soft};
+
     border-radius:1rem;
+
   }
 
   ion-segment-button{
+
     font-weight:600;
 
     &.segment-button-checked{
       background:$gm-naranja;
       color:white;
     }
+
   }
+
 }
 
 
@@ -186,15 +275,22 @@ ion-card{
 ====================== */
 
 .empty-state{
+
   display:flex;
   flex-direction:column;
+
   align-items:center;
   justify-content:center;
+
   text-align:center;
 
   width:60vw;
+
   border-radius:1rem;
+
   background:$gm-naranja-light;
+
+  padding:2rem;
 
   ion-icon{
     font-size:4rem;
@@ -208,34 +304,132 @@ ion-card{
   }
 
   p{
-    color:$gm-texto;
-    opacity:.7;
+    color:$gm-principal;
   }
+
+}
+
+/* =========================================
+   RESPONSIVE ≤700px
+========================================= */
+
+@media (max-width:1200px){
+  .btn-add-floating{
+
+    position:absolute;
+
+    top:2rem;
+    left: 0rem;
+  }
+}
+@media (max-width:700px){
+  
+  .btn-add-floating{
+
+    position:absolute;
+
+    top:2rem;
+    left: 0rem;
+  }
+
+  .cards-container{
+    gap:1.4rem;
+    padding:.6rem;
+    max-height:85vh;
+  }
+
+  .cards-container.two{
+    grid-template-columns:repeat(2, minmax(0,18rem));
+  }
+
+  .cards-container.three{
+    grid-template-columns:repeat(2, minmax(0,18rem));
+  }
+
+  ion-card{
+    max-width:18rem;
+  }
+
+  .card-foto{
+
+    margin-bottom:.7rem;
+
+    img{
+      max-width:130px;
+      max-height:130px;
+    }
+
+  }
+
+  .card-estado{
+    font-size:1rem;
+  }
+
+  .card-buttons{
+
+    gap:.4rem;
+
+    ion-button{
+      font-size:.8rem;
+    }
+
+  }
+
 }
 
 
-/* ======================
-   DESKTOP
-====================== */
+/* =========================================
+   RESPONSIVE ≤500px
+========================================= */
 
-@media (min-width:500px){
+@media (max-width:500px){
+  .btn-add-floating{
 
-  /* cards en 3 columnas */
+    position:absolute;
 
+    top:3.5rem;
+    left: 0rem;
+  }
   .cards-container{
-    grid-template-columns:repeat(3,1fr);
-    gap:2rem;
-    padding:2rem 4rem;
+    gap:1rem;
+    padding:.4rem;
+    max-height:82vh;
   }
 
-  /* paginación fija al fondo */
+  .cards-container.two,
+  .cards-container.three{
+    grid-template-columns:1fr;
+  }
 
-  .pagination{
-    position:fixed;
-    bottom:2vh;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:50;
+  ion-card{
+    max-width:100%;
+    border-width:3px;
+  }
+
+  .card-foto{
+
+    margin-bottom:.5rem;
+
+    img{
+      max-width:100px;
+      max-height:100px;
+    }
+
+  }
+
+  .card-estado{
+    font-size:.9rem;
+    margin-bottom:.4rem;
+  }
+
+  .card-buttons{
+
+    gap:.3rem;
+
+    ion-button{
+      font-size:.75rem;
+    }
+
   }
 
 }

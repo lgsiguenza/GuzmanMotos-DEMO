@@ -57,10 +57,121 @@ ion-button{
   --background-hover:$gm-naranja-hover;
   --color:white;
 }
+
 .lista-header,.fila{
   align-items:center;
 }
 
 .fila:hover{
   background:$gm-naranja-soft;
+}
+
+
+/* ========================================= */
+/* RESPONSIVE <= 700px */
+/* ========================================= */
+
+@media (max-width:700px){
+
+  .lista-servicios{
+    padding:0.15rem;
+  }
+
+  .col{
+    padding:0.25rem;
+  }
+
+  .lista-header{
+    font-size:0.75rem;
+  }
+
+  .fila{
+    font-size:0.8rem;
+  }
+
+  ion-input,
+  ion-textarea{
+    font-size:0.8rem;
+  }
+
+  ion-textarea{
+    --padding-start:4px;
+    --padding-end:4px;
+    --padding-top:4px;
+    --padding-bottom:4px;
+  }
+
+  ion-input{
+    --padding-start:4px;
+    --padding-end:4px;
+  }
+
+  ion-button{
+    transform:scale(0.9);
+  }
+
+  .agregar-container{
+    padding-top:0.6rem;
+  }
+
+}
+/* ========================================= */
+/* RESPONSIVE <= 500px */
+/* ========================================= */
+
+@media (max-width:500px){
+
+  .lista-servicios{
+    padding:0.1rem;
+    border-radius:10px;
+  }
+
+  .col{
+    padding:0.15rem;
+  }
+
+  .lista-header{
+    font-size:0.65rem;
+    font-weight:600;
+  }
+
+  .fila{
+    font-size:0.7rem;
+  }
+
+  ion-input,
+  ion-textarea{
+    font-size:0.7rem;
+  }
+
+  ion-textarea{
+    --padding-start:3px;
+    --padding-end:3px;
+    --padding-top:3px;
+    --padding-bottom:3px;
+  }
+
+  ion-input{
+    --padding-start:3px;
+    --padding-end:3px;
+  }
+
+  /* reduce altura visual */
+  ion-input::part(native){
+    min-height:28px;
+  }
+
+  ion-textarea::part(native){
+    min-height:32px;
+  }
+
+  /* botón más compacto */
+  ion-button{
+    transform:scale(0.8);
+  }
+
+  .agregar-container{
+    padding-top:0.4rem;
+  }
+
 }

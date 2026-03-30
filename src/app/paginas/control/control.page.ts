@@ -13,7 +13,7 @@ import { PanelTrabajosComponent } from "src/app/componentes/panel-trabajos/panel
   templateUrl: './control.page.html',
   styleUrls: ['./control.page.scss'],
   standalone: true,
-  imports: [IonSegmentButton, IonSegment, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, HeaderComponent, IonSegmentView, IonSegmentContent, PanelUsuarioComponent, PanelVehiculosComponent, PanelTrabajosComponent]
+  imports: [IonSegmentButton, IonSegment, IonContent, CommonModule, FormsModule, HeaderComponent, IonSegmentView, IonSegmentContent, PanelUsuarioComponent, PanelVehiculosComponent, PanelTrabajosComponent]
 })
 export class ControlPage implements OnInit {
 

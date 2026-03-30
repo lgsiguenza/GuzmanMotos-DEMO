@@ -1,36 +1,38 @@
 <form>
 <br>
-  <ion-text class="title ion-text-center">Registrar Trabajo</ion-text>
+  <ion-text class="title ion-text-center">{{this.isEdicion ? 'Actualizar trabajo' : 'Agregar trabajo'}}</ion-text>
   <ion-grid class="flex">
 <!--//! ================== Modelo vehículo ==================-->
     <ion-row>
-      <ion-col>
-        <app-lgs-input
+      @if(!isEdicion){
+        <ion-col>
+          <app-lgs-input
+            class="ion-text-center"
+            control="vehiculo"
+            [form]="form"
+            mensajeValidacion="Debe poseer al menos 3 caracteres"
+            placeholder="Modelo del vehículo."
+            size="md"  
+          ></app-lgs-input>
+        </ion-col>  
+          
+        <ion-col>
+          <app-lgs-input
           class="ion-text-center"
-          control="vehiculo"
+          control="propietario"
           [form]="form"
           mensajeValidacion="Debe poseer al menos 3 caracteres"
-          placeholder="Modelo del vehículo."
-          size="md"  
-        ></app-lgs-input>
-      </ion-col>  
-        
-      <ion-col>
-        <app-lgs-input
-        class="ion-text-center"
-        control="propietario"
-        [form]="form"
-        mensajeValidacion="Debe poseer al menos 3 caracteres"
-        placeholder="Nombre del propietario."
-          tipo="text"
-          size="md"  
-        ></app-lgs-input>
-      </ion-col>  
+          placeholder="Nombre del propietario."
+            tipo="text"
+            size="md"  
+          ></app-lgs-input>
+        </ion-col>  
+      }
     </ion-row>    
       
 <!--//! ================== Observaciones ==================-->
       <app-lgs-input
-      class="ion-text-center"
+        class="ion-text-center"
         control="observaciones"
         tipo="textarea"
         [form]="form"
