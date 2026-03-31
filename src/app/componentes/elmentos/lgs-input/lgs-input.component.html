@@ -6,13 +6,15 @@
       autoGrow="true"
       [formControl]="formControl"
       (ionInput)="limitarLongitud($event)"
-      placeholder="{{placeholder}}">
+      placeholder="{{placeholder}}"
+      [disabled]="this.deshabilitado">
     </ion-textarea>
 
   } @else {
 
     <ion-input
       [type]="tipo"
+      [disabled]="this.deshabilitado"
       [formControl]="formControl"
       (ionInput)="limitarLongitud($event)"
       placeholder="{{placeholder}}">

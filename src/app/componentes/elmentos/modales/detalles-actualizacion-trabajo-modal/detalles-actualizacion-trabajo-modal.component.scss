@@ -1,0 +1,66 @@
+@use 'src/theme/variables.scss' as *;
+
+.modal-container{
+    background-color: $gm-azul;
+    height:100%;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+/* 5% */
+.modal-titulo{
+  height:5%;
+  background-color: $gm-azul-claro;
+  color: $gm-naranja-strong;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* 15% */
+.modal-parametros{
+    background-color: $gm-azul-claro;
+    height:15%;
+    color: $gm-bg-soft;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+
+    strong{
+        color: $gm-naranja-strong;
+    }
+}
+
+.parametro{
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+}
+
+/* 60% */
+.modal-contenido{
+  height:60%;
+  overflow:auto;
+}
+
+/* 10% */
+.modal-presupuesto{
+  height:10%;
+  background-color: $gm-principal;
+  color: $gm-naranja-strong;
+  display:flex;
+  font-size: 2rem;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+/* 10% */
+.modal-footer{
+  height:10%;
+  display:flex;
+  background-color: $gm-azul-claro;
+  justify-content:space-evenly;
+  align-items:center;
+}

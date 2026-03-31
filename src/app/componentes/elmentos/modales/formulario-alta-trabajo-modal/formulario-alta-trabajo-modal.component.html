@@ -4,11 +4,12 @@
   <ion-grid class="flex">
 <!--//! ================== Modelo vehículo ==================-->
     <ion-row>
-      @if(!isEdicion){
+
         <ion-col>
           <app-lgs-input
             class="ion-text-center"
             control="vehiculo"
+            [deshabilitado]="this.isEdicion"
             [form]="form"
             mensajeValidacion="Debe poseer al menos 3 caracteres"
             placeholder="Modelo del vehículo."
@@ -20,6 +21,7 @@
           <app-lgs-input
           class="ion-text-center"
           control="propietario"
+          [deshabilitado]="this.isEdicion"
           [form]="form"
           mensajeValidacion="Debe poseer al menos 3 caracteres"
           placeholder="Nombre del propietario."
@@ -27,7 +29,7 @@
             size="md"  
           ></app-lgs-input>
         </ion-col>  
-      }
+      
     </ion-row>    
       
 <!--//! ================== Observaciones ==================-->
@@ -43,6 +45,7 @@
 <!--//! ================== Arreglos ==================-->
   <div class="zona-futura">
     <app-listado-arreglos 
+      [listadoArreglos]="this.arreglos()"
       (totalChange)="presupuesto.set($event)"
       (listaArreglos)="arreglos.set($event)"
 

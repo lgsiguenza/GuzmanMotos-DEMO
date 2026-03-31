@@ -1,9 +1,10 @@
 @use 'src/theme/variables.scss' as *;
 
 .lista-servicios{
-  background: $gm-bg-soft;
+  background: $gm-azul-claro;
   padding: 0.2rem;
-  border-radius: 12px;
+  border-end-start-radius: 12px;
+  border-end-end-radius: 12px;
 }
 
 /* HEADER */
@@ -16,10 +17,12 @@
   color:$gm-principal;
 }
 
+
 .fila{
   display:flex;
   background:$gm-principal;
   border-bottom:1px solid $gm-azul-claro;
+  transition:background 0.15s ease;
 }
 
 /* COLUMNAS */
@@ -53,17 +56,34 @@
 }
 
 ion-button{
+
   --background:$gm-naranja;
   --background-hover:$gm-naranja-hover;
   --color:white;
-}
 
+}
 .lista-header,.fila{
   align-items:center;
 }
 
 .fila:hover{
   background:$gm-naranja-soft;
+}
+
+.checkbox-estado{
+
+  --size:20px;
+
+  --checkbox-background:white;
+
+  --checkbox-background-checked:#{$gm-verde};
+
+  --border-color:#{$gm-acento};
+
+  --border-color-checked:#{$gm-verde};
+
+  --checkmark-color:white;
+
 }
 
 

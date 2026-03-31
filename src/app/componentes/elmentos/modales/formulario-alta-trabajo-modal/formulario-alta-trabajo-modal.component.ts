@@ -19,13 +19,18 @@ import { TrabajoSb } from 'src/app/servicios/trabajo-sb';
     IonText, ListadoArreglosComponent, IonCol, IonRow],
 })
 export class FormularioAltaTrabajoModalComponent  {
- //! =============== Variables y servicios ===============
+  //! =============== Variables y servicios ===============
+  //~ =============== Servicios
   private utilSvc = inject(Utils);
   private userSvc = inject(UsuarioSb);
   private tbjSvc = inject(TrabajoSb);
   private modalCtrl = inject(ModalController);
+  
+  //~ =============== Inputs Modal
   protected isEdicion!: boolean;
-
+  protected trabajoActualización!: Trabajo
+  
+  //~ =============== signals
   presupuesto = signal<number>(0);
   arreglos = signal<Arreglo[]>([])
 
@@ -40,8 +45,20 @@ export class FormularioAltaTrabajoModalComponent  {
     listadoArreglos: new FormControl(this.arreglos, Validators.required),
   });
 
-  ngOnInit() {
-    alert(this.isEdicion);
+  async ngOnInit() {
+    if(this.isEdicion){
+      const carga = await this.utilSvc.loading();
+      await carga.present()
+      const lista = await this.tbjSvc.obtenerListadoArreglos(this.trabajoActualización.uid!)
+      this.arreglos.set(lista)
+      this.form.patchValue({
+        vehiculo: this.trabajoActualización.vehiculo,
+        observaciones: this.trabajoActualización.descripcion,
+        propietario: this.trabajoActualización.usuario,
+      })
+      await carga.dismiss()
+    };
+
   }
 
   //! =============== Métodos funcionales ===============

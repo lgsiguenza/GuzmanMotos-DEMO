@@ -7,7 +7,7 @@ import { Utils } from './utils';
   providedIn: 'root',
 })
 export class SbService {
-   private utilSvc = inject(Utils);
+  private utilSvc = inject(Utils);
   sb:SupabaseClient
   
   constructor() {
@@ -69,6 +69,17 @@ export class SbService {
   //! ======================= Métodos genéricos =======================
 
   //~ ======================= Métodos Select 
+
+  async listarTodosFiltrados<T>(tabla: string, columnaIdent: string, identificador: string){
+    const {data, error} = await this.sb
+      .from(tabla)
+      .select('*')
+      .eq(columnaIdent, identificador)
+    if(error) throw new Error('No se pudo encontrar coincidencias o algo ha fallado.');
+
+    return data as T[];
+
+  }
   async listarTodos<T>(tabla: string): Promise<T[]>{
     const {data, error} = await this.sb
       .from(tabla)

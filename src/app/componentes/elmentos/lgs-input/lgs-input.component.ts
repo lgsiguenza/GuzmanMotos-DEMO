@@ -24,6 +24,9 @@ export class LgsInputComponent {
   @Input() tipo: 'text' | 'number' | 'email' | 'password' | 'textarea' = 'text';
   @Input() mensajeValidacion: string = '';
   @Input() nombreControl:string = '';
+  @Input() deshabilitado: boolean = false;
+
+
   @HostBinding('class')
   get hostClasses(){
     return `gm-input-${this.size}`;
@@ -32,7 +35,13 @@ export class LgsInputComponent {
   @Input() minLength?: number;
   @Input() maxLength?: number;
 
-
+  ngOnChanges() {
+    if (this.deshabilitado) {
+      this.formControl.disable();
+    } else {
+      this.formControl.enable();
+    }
+  }
   get formControl(): FormControl {
     return this.form.get(this.control!) as FormControl;
   }

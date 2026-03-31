@@ -8,6 +8,7 @@ import { TrabajoSb } from 'src/app/servicios/trabajo-sb';
 import { Utils } from 'src/app/servicios/utils';
 import { FormularioAltaTrabajoModalComponent } from '../elmentos/modales/formulario-alta-trabajo-modal/formulario-alta-trabajo-modal.component';
 import { FormatoFechaPipe } from 'src/app/pipes/formato-fecha-pipe';
+import { DetallesActualizacionTrabajoModalComponent } from '../elmentos/modales/detalles-actualizacion-trabajo-modal/detalles-actualizacion-trabajo-modal.component';
 
 @Component({
   selector: 'app-panel-trabajos',
@@ -76,12 +77,20 @@ export class PanelTrabajosComponent {
     
   }
 
-  async abrirFormularioEdicion(usuario: Trabajo){
-  
+  async abrirFormularioEdicion(tbj: Trabajo){
+    const modal = await this.utilSvc.crearModal(FormularioAltaTrabajoModalComponent, 'lg',{isEdicion: true, trabajoActualización: tbj },true)
+    const {data, role} = await modal.onDidDismiss<Trabajo>();
+
+    if(role === 'confirm'){
+        this.utilSvc.mostrarToast("¡Usuario agregado exitosamente!", 'success','middle',500);
+      } else{
+        this.utilSvc.mostrarToast("Acción cancelada.", 'primary','middle',100);
+    }  
   }
 
-  async verDetalles(usr: Trabajo){
-  
+  async verDetalles(tbj: Trabajo){
+    const modal = await this.utilSvc.crearModal(DetallesActualizacionTrabajoModalComponent, 'lg',{tbj: tbj},true);
+    const {data, role} = await modal.onDidDismiss();
   }
 
 }

@@ -18,7 +18,12 @@ export class TrabajoSb {
   listaArreglos = signal<Arreglo[]>([]);
 
   //! =================== Métodos CRUD ===================
-   async agregarTrabajo(tbj: Trabajo, arr: Arreglo[])
+  async obtenerListadoArreglos(uuid: string){
+    const lista = await this.sbSvc.listarTodosFiltrados<Arreglo>('Arreglos','trabajo',uuid);
+    return lista
+  } 
+  
+  async agregarTrabajo(tbj: Trabajo, arr: Arreglo[])
    {
     const identificador = crypto.randomUUID();
     tbj.uid = identificador;

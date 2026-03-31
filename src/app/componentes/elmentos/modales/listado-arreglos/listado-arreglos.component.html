@@ -5,9 +5,12 @@
     <div class="col nombre">Nombre</div>
     <div class="col detalle">Detalle</div>
     <div class="col precio">Precio</div>
+    @if(this.isEdicion){
+    <div class="col estado">Estado</div>
+    }
   </div>
 
-  @for(item of items; track $index){
+  @for(item of listadoArreglos; track $index){
 
     <div class="fila">
 
@@ -15,7 +18,7 @@
         <ion-input
           type="number"
           placeholder="Ej: 0"
-          [(ngModel)]="item.unidades"
+          [(ngModel)]="item.cantidad"
           (ionInput)="calcularTotal()">
         </ion-input>
       </div>
@@ -30,7 +33,7 @@
       <div class="col detalle">
         <ion-textarea
           placeholder="Ej: Abolladura visible en la parte inferior de la puerta."
-          [(ngModel)]="item.detalle">
+          [(ngModel)]="item.problema">
         ></ion-textarea>
       </div>
 
@@ -38,18 +41,28 @@
         <ion-input
           type="number"
           placeholder="Ej: 25000"
-          [(ngModel)]="item.precio"
+          [(ngModel)]="item.costo"
           (ionInput)="calcularTotal()">
           <ion-label slot="start">$</ion-label>
         </ion-input>
       </div>
+      @if(this.isEdicion){
+        <div class="col estado">
+          <ion-checkbox
+            class="checkbox-estado"
+            [(ngModel)]="item.estado"
+            (ionChange)="toggleEstado(item, $event.detail.checked)">
+          </ion-checkbox>
+        </div>
+      }
+
 
     </div>
 
   }
 
   <div class="agregar-container">
-    <ion-button (click)="agregar()" shape="round">
+    <ion-button color="success" (click)="agregar()" shape="round">
       <ion-icon name="add"></ion-icon>
     </ion-button>
   </div>

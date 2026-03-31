@@ -1,0 +1,49 @@
+<div class="modal-container">
+
+  <!-- 5% -->
+  <div class="modal-titulo">
+    <h2>Estado de trabajo</h2>
+  </div>
+
+  <!-- 15% -->
+  <div class="modal-parametros">
+
+    <div class="parametro">
+      <span class="label">Propietario</span>
+      <span class="valor"><strong>{{tbj.usuario}}</strong></span>
+    </div>
+
+    <div class="parametro">
+      <span class="label">Modelo</span>
+      <span class="valor"><strong>{{tbj.vehiculo}}</strong></span>
+    </div>
+
+  </div>
+
+  <!-- 60% -->
+  <div class="modal-contenido">
+    <app-listado-arreglos
+      [isEdicion]="true"
+      [listadoArreglos]="arreglos()"
+      (listaArreglos)="arreglos()"  
+      (totalChange)="presupuesto()"
+    ></app-listado-arreglos>
+  </div>
+
+  <!-- 10% -->
+  <div class="modal-presupuesto">
+
+    <span>Presupuesto total</span>
+    <strong>${{this.presupuesto()}}</strong>
+
+  </div>
+
+  <!-- 10% -->
+  <div class="modal-footer">
+
+    <ion-button fill="outline">Cancelar</ion-button>
+    <ion-button color="warning">Guardar</ion-button>
+
+  </div>
+
+</div>
