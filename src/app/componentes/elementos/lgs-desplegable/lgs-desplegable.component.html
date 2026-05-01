@@ -1,0 +1,31 @@
+
+  
+<div class="gm-select-wrapper">
+
+  <ion-select
+    class="gm-select"
+    [label]="label()"
+    labelPlacement="floating"
+    [disabled]="deshabilitar"
+    [placeholder]="placeholder()"
+    [formControl]="control()"
+    interface="alert"
+    [interfaceOptions]="{ cssClass: 'gm-select-alert' }"
+  >
+
+    @for(opcion of listado(); track $index){
+      <ion-select-option [value]="parametroValor() ? opcion[parametroValor()] : opcion">
+        {{opcion[parametroNombre()]}} {{opcion[parametroAdicional() ?? '']}}
+      </ion-select-option>
+    }
+
+  </ion-select>
+@if (control().invalid &&control().touched) {
+  <div class="validators small mt-1">
+    No válido.<br />
+    {{ mensajeValidacion() | titlecase }}
+  </div>
+}
+
+</div>
+

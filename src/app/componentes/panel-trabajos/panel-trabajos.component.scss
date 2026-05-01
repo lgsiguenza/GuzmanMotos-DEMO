@@ -134,9 +134,11 @@ ion-card{
 .card-buttons{
 
   display:flex;
+  flex-direction: column;
   gap:.6rem;
   margin-top:1rem;
-      flex-direction: row;
+  
+      flex-direction: column;
       flex-wrap: wrap;
       align-content: center;
       align-items: stretch;
@@ -159,9 +161,7 @@ ion-card{
   align-items:center;
   justify-content:center;
 
-  gap:1.5rem;
 
-  margin-top:2rem;
   padding:.6rem 1rem;
 
   border-radius:.5rem;
@@ -238,35 +238,25 @@ ion-card{
 ====================== */
 
 .estado-switch{
-
   display:flex;
-  position: relative;
   justify-content:center;
 
-  margin:1rem 0 2rem;
-
   ion-segment{
-
     width:90%;
     max-width:600px;
-
     --background:#{$gm-bg-soft};
-
     border-radius:1rem;
-
   }
 
   ion-segment-button{
-
     font-weight:600;
+    color: $gm-naranja;
 
     &.segment-button-checked{
       background:$gm-naranja;
-      color:white;
+      color:$gm-azul;
     }
-
   }
-
 }
 
 
@@ -294,17 +284,25 @@ ion-card{
 
   ion-icon{
     font-size:4rem;
-    color:$gm-naranja;
-    margin-bottom:1rem;
+    color:$gm-azul;
   }
 
   h2{
     font-size:1.5rem;
-    color:$gm-principal;
+    color:$gm-principal !important;
+    --color:$gm-principal !important;
+  } :host{
+    color:$gm-principal !important;
+    --color:$gm-principal !important;
   }
 
   p{
-    color:$gm-principal;
+    color:$gm-texto !important;
+    --color: $gm-texto !important
+  } :host{
+    color:$gm-texto !important;
+    --color: $gm-texto !important
+    
   }
 
 }
@@ -431,5 +429,4 @@ ion-card{
     }
 
   }
-
 }

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonSegment, IonSegmentButton, IonSegmentView, IonSegmentContent } from '@ionic/angular/standalone';
-import { HeaderComponent } from "src/app/componentes/elmentos/header/header.component";
+import { HeaderComponent } from "src/app/componentes/elementos/header/header.component";
 import { UsuarioSb } from 'src/app/servicios/usuario-sb';
 import { PanelUsuarioComponent } from "src/app/componentes/panel-usuario/panel-usuario.component";
 import { PanelVehiculosComponent } from "src/app/componentes/panel-vehiculos/panel-vehiculos.component";
@@ -22,7 +22,8 @@ export class ControlPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.userSvc.recuperarSesion();
   }
 
 }

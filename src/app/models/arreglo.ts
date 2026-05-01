@@ -1,6 +1,6 @@
 export interface Arreglo{
     id?: number,
-    trabajo?: string,
+    uid_trabajo?: string,
     estado?: 'completado' | 'en proceso',
     nombre: string,
     problema: string,

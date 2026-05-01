@@ -22,6 +22,7 @@ export class Utils {
   isWeb = signal<boolean>(Capacitor.getPlatform() === 'web');
 
   
+
   //! ================== Redirección ==================
   async redirigir(ruta: string, sinLoading: boolean = false): Promise<void> {
     this.reproducirSonidoPorDuracion('assets/sonidos/nav.m4a', 1000)
@@ -92,7 +93,7 @@ export class Utils {
     duracion: number = 1500
   ){
     let tipoAsig: string
-    if(tipo === 'info') tipoAsig = 'medium' 
+    if(tipo === 'info') tipoAsig = 'secondary' 
     if(tipo === 'error') tipoAsig = 'danger' 
     else tipoAsig = tipo; 
     const toast = await this.toastCtrl.create({
@@ -107,7 +108,7 @@ export class Utils {
   }
 
   //! ================== Modals ==================
-  async crearModal(component: any, size: 'sm' | 'md' | 'lg', 
+  async crearModal(component: any, size: 'sm' | 'md' | 'lg'|'' = '', 
     data?: Record<string, any>, dismissBackdrop: boolean = true, cssClassExtra?: string) {
 
   const clases: string[] = ['gm-modal', `gm-modal-${size}`];
@@ -127,62 +128,7 @@ export class Utils {
 
   return modal;
 }
-  //! ================== Métodos para imágenes ==================
-  /**
-   * Convierte un archivo (File) a su representación base64 completa (con prefijo data:[tipo];base64,)
-   * @param file Archivo a convertir
-   * @returns Promise<string> cadena base64 completa
-   */
-  private convertirArchivoABase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        const result = reader.result as string;
-        resolve(result);
-        console.log(resolve)
-      };
-
-      reader.onerror = (error) => reject(error);
-
-      reader.readAsDataURL(file);  // Documentación: readAsDataURL devuelve DataURL con prefijo. :contentReference[oaicite:3]{index=3}
-    });
-  }
-
-  /**
-   * Convierte un string base64 completo (con prefijo data:[tipo];base64,) a un Blob válido para subir.
-   * @param base64 cadena base64 completa con prefijo
-   * @returns Blob o null si el formato es inválido
-   */
-  public formatearBase64AImagen(base64: string): Blob | null {
-    if (!base64 || !base64.startsWith('data:')) {
-      console.warn('El string no tiene prefijo data: esperado.');
-    }
-
-    // Extraer el tipo MIME
-    const match = base64.match(/^data:(.*?);base64,/);
-    if (!match) {
-      console.warn('No se pudo extraer MIME del prefijo del base64.');
-      return null;
-    }
-    const mimeType = match[1];
-
-    // Eliminar el prefijo para obtener solo la parte base64
-    const base64Data = base64.substring(base64.indexOf(',') + 1);
-
-    // Decodificar a bytes
-    const byteChars = atob(base64Data);  // atob decodifica base64 → string de bytes. :contentReference[oaicite:4]{index=4}
-    const byteNumbers = new Array(byteChars.length);
-    for (let i = 0; i < byteChars.length; i++) {
-      byteNumbers[i] = byteChars.charCodeAt(i);
-    }
-
-    const byteArray = new Uint8Array(byteNumbers);
-
-    // Crear Blob
-    const blob = new Blob([byteArray], { type: mimeType });
-    return blob;
-  }
+  
     //! ==================== Desencriptación ====================
   formatearPdf147(str: string): string {
      try {

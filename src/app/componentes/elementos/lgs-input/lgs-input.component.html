@@ -4,9 +4,10 @@
 
     <ion-textarea
       autoGrow="true"
+      class="ion-text-center"
       [formControl]="formControl"
       (ionInput)="limitarLongitud($event)"
-      placeholder="{{placeholder}}"
+      placeholder="{{placeholder | titlecase}}"
       [disabled]="this.deshabilitado">
     </ion-textarea>
 
@@ -14,20 +15,15 @@
 
     <ion-input
       [type]="tipo"
+      class="ion-text-center"
       [disabled]="this.deshabilitado"
       [formControl]="formControl"
       (ionInput)="limitarLongitud($event)"
-      placeholder="{{placeholder}}">
+      placeholder="{{placeholder | titlecase}}">
     </ion-input>
 
   }
-
-@if(this.formControl.touched && this.tipo !== 'textarea'){
-  <ion-label class="form-label">
-    {{ placeholder }}
-  </ion-label>
-}
-
+  
 @if (tipo === 'number' && maxLength != null) {
   <div class="contador">
     {{ contador }}
@@ -37,7 +33,7 @@
 @if (form.get(control!)?.invalid && form.get(control!)?.touched) {
   <div class="validators small mt-1">
     No válido.<br />
-    {{ mensajeValidacion }}
+    {{ mensajeValidacion | titlecase }}
   </div>
 }
 

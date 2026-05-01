@@ -6,33 +6,31 @@
     <ion-row>
 
         <ion-col>
-          <app-lgs-input
-            class="ion-text-center"
-            control="vehiculo"
-            [deshabilitado]="this.isEdicion"
-            [form]="form"
-            mensajeValidacion="Debe poseer al menos 3 caracteres"
-            placeholder="Modelo del vehículo."
-            size="md"  
-          ></app-lgs-input>
+          <app-lgs-desplegable
+            label="Vehículo."
+            placeholder="Seleccione un vehículo."
+            [control]="form.controls.vehiculo"
+            [opciones]="vehiculoSvc.listaVehiculos()"
+            parametroValor="uid"
+            parametroNombre="modelo"
+            parametroAdicional="nombrePropietario"
+
+          ></app-lgs-desplegable>
         </ion-col>  
           
-        <ion-col>
-          <app-lgs-input
-          class="ion-text-center"
-          control="propietario"
-          [deshabilitado]="this.isEdicion"
-          [form]="form"
-          mensajeValidacion="Debe poseer al menos 3 caracteres"
-          placeholder="Nombre del propietario."
-            tipo="text"
-            size="md"  
-          ></app-lgs-input>
+        <ion-col class="ion-display-flex ion-justify-content-center fondo-principal" 
+        style="margin-bottom: 1rem;
+          margin-top: 0.25rem; border-radius: 0.8rem;">
+          <ion-title class="ion-text-center texto-acento"> 
+            Propietario: 
+              <strong class="texto-naranja">{{vehiculoSeleccionado() ?? 'No seleccionado'}} </strong>
+             </ion-title>
         </ion-col>  
       
     </ion-row>    
       
 <!--//! ================== Observaciones ==================-->
+
       <app-lgs-input
         class="ion-text-center"
         control="observaciones"
@@ -42,6 +40,16 @@
         placeholder="Observaciones destacables."
         size="md"  
       ></app-lgs-input>
+
+    <ion-row>
+      <ion-col class="contenedor-20vh ion-justify-content-center ">
+        <app-lgs-carrusel
+          [imagenes]="imagenes()"
+          [editable]="true"
+          (imagenesChange)="imagenes.set($event)"
+        ></app-lgs-carrusel>
+      </ion-col>
+    </ion-row>
 <!--//! ================== Arreglos ==================-->
   <div class="zona-futura">
     <app-listado-arreglos 

@@ -5,8 +5,8 @@ import { IonContent, IonCard, IonCardHeader, IonCardTitle,
   IonCardContent, IonButton, ModalController } from '@ionic/angular/standalone';
 import { Utils } from 'src/app/servicios/utils';
 import { defineCustomElements } from '@ionic/core/loader';
-import { RegistroModalComponent } from 'src/app/componentes/elmentos/modales/registro-modal/registro-modal.component';
-import { IngresoModalComponent } from 'src/app/componentes/elmentos/modales/ingreso-modal/ingreso-modal.component';
+import { RegistroModalComponent } from 'src/app/componentes/elementos/modales/registro-modal/registro-modal.component';
+import { IngresoModalComponent } from 'src/app/componentes/elementos/modales/ingreso-modal/ingreso-modal.component';
 
 
 @Component({

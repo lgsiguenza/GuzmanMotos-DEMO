@@ -10,8 +10,7 @@ import { eyeOutline, eyeOffOutline } from 'ionicons/icons';
   selector: 'app-lgs-input',
   templateUrl: './lgs-input.component.html',
   styleUrls: ['./lgs-input.component.scss'],
-    imports: [ IonInput, IonLabel,ReactiveFormsModule, IonTextarea
-  ],
+    imports: [ IonInput,ReactiveFormsModule, IonTextarea, TitleCasePipe],
 })
 export class LgsInputComponent {
 

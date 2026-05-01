@@ -1,0 +1,129 @@
+<ion-content class="ion-padding">
+
+  <ion-grid >
+
+    <ion-row  class="ion-justify-content-center">
+      <!-- contenedor responsive -->
+      <ion-col size="12" size-md="10" size-sm="10" size-lg="12" class="fondo-gris-card ion-padding borde-naranja-strong">
+
+        <ion-title class="ion-text-center ion-margin-bottom">
+          <strong style="font-size: 2rem;" class="texto-acento">Alta de vehículo</strong>
+        </ion-title>
+
+        <ion-row class="ion-align-items-center">
+          @if(isEdicion === false && this.usuarioSvc.usrActual()?.rol !== 'cliente'){
+          <ion-col>
+            <app-lgs-desplegable
+              label="Propietario"
+              placeholder="Seleccione o añada."
+              [opciones]="this.usuarioSvc.listaUsuarios()"
+              parametroValor="uid"
+              parametroNombre="nombre"
+              parametroAdicional="apellido"
+              [control]="form.controls.propietario"
+            >
+
+            </app-lgs-desplegable>
+
+          </ion-col>
+          @if(this.usuarioSvc.usrActual()?.rol != 'cliente'){
+            <ion-col
+                  size="1"
+                  size-md="1"
+                  size-lg="1"
+                  class="ion-align-items-center ion-justify-content-start">
+              <ion-button style="margin-bottom: 1.5rem; margin-left: -0.3rem;"
+                shape="round" size="small" color="warning" (click)="agregarUsuario()">
+              <ion-icon name="add-circle" slot="icon-only" style="font-size:2rem"></ion-icon>
+            </ion-button>
+          </ion-col>
+          }
+      } @else{
+            <ion-col class="ion-display-flex ion-justify-content-center fondo-principal" 
+              style="margin-bottom: 1rem;
+                margin-top: 0.25rem; border-radius: 0.8rem;">
+                <ion-title class="ion-text-center texto-acento"> 
+                  Propietario: 
+                    <strong class="texto-naranja">{{vehiculoEditado()!.nombrePropietario}} </strong>
+                  </ion-title>
+              </ion-col> 
+          }
+        </ion-row>
+          <ion-row>
+
+            <ion-col class="">
+              <app-lgs-input [form]="form" 
+              placeholder="Modelo"
+              control="modelo"
+              tipo="text">
+            </app-lgs-input>
+            
+          </ion-col>
+        </ion-row>
+          
+        <ion-row>
+          <ion-col >
+            <app-lgs-input 
+              placeholder="Patente"
+              control="patente" 
+              [form]="form" [minLength]="6" tipo="text">
+            </app-lgs-input>
+          </ion-col>
+
+          <ion-col>
+            <app-lgs-input 
+              placeholder="Kilometraje"
+              control="metraje" 
+              [form]="form" tipo="number">
+            </app-lgs-input>
+          </ion-col>
+          <ion-col size="1" class="texto-naranja  ion-display-flex" 
+                style="margin-bottom: 1rem; align-items: center;">
+            <ion-label>
+            <strong style="font-size: 1.6rem;">
+                Km
+            </strong>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+
+        <div class="ion-text-center ion-margin-bottom ion-display-flex ion-justify-content-center">
+          <ion-row>
+            <ion-col class="contenedor-20vh ion-display-flex ion-justify-content-center ion-align-items-center">
+              <app-lgs-carrusel
+              [imagenes]="imagenes()"
+              [editable]="true"
+              (imagenesChange)="imagenes.set($event)"
+            ></app-lgs-carrusel>
+          </ion-col>
+          </ion-row>
+        </div>
+
+        <app-lgs-input 
+          [form]="form" 
+          placeholder="Observaciones (Opcional)" 
+          control="observaciones" 
+          tipo="textarea">
+        </app-lgs-input>
+
+        @if(perfilActual === 'dueño'){
+            <app-lgs-input 
+              [form]="form" 
+              placeholder="Código del chásis" 
+              control="chasis" 
+              tipo="text">
+            </app-lgs-input>
+        }
+
+        <ion-buttons class="ion-justify-content-center">
+          <ion-button (click)="cerrar()" expand="block" color="danger" fill="outline" shape="round" class="fondo-gris-card">
+            Cancelar
+          </ion-button>
+          <ion-button (click)="aceptarVehiculo()" expand="block" color="success" fill="solid" shape="round" class="fondo-gris-card">
+            Aceptar
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>

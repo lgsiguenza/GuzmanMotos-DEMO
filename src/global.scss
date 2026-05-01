@@ -16,6 +16,94 @@
 @import '@ionic/angular/css/palettes/dark.system.css';
 
 
+
+/* =========================
+   MAPA DE COLORES
+========================= */
+
+$gm-colores: (
+  bg: $gm-bg,
+  bg-soft: $gm-bg-soft,
+  principal: $gm-principal,
+  acento: $gm-acento,
+  azul: $gm-azul,
+  azul-claro: $gm-azul-claro,
+  verde: $gm-verde,
+
+  naranja: $gm-naranja,
+  naranja-soft: $gm-naranja-soft,
+  naranja-hover: $gm-naranja-hover,
+  naranja-strong: $gm-naranja-strong,
+  naranja-light: $gm-naranja-light,
+
+  rojo: $gm-rojo,
+  gris-card: $gm-gris-card,
+  borde: $gm-borde
+);
+
+/* =========================
+   CONTENEDORES VW
+========================= */
+
+@for $i from 10 through 100 {
+
+  .contenedor-#{$i}vw {
+    width: #{$i}vw;
+    display: flex;
+  }
+
+}
+/* =========================
+   CONTENEDORES VH
+========================= */
+
+@for $i from 10 through 100 {
+  .contenedor-#{$i}vh {
+    height: #{$i}vh;
+    display: flex;
+  }
+
+}
+
+/* =========================
+   FONDOS AUTOMÁTICOS
+========================= */
+
+@each $nombre, $color in $gm-colores {
+
+  .fondo-#{$nombre} {
+    background: $color;
+    --background: $color;
+  }
+
+}
+/* =========================
+   TEXTOS AUTOMÁTICOS
+========================= */
+
+@each $nombre, $color in $gm-colores {
+
+  .texto-#{$nombre} {
+    color: $color;
+    --color: $color;
+
+  }
+
+}
+
+/* =========================
+   BORDES AUTOMÁTICOS
+========================= */
+
+@each $nombre, $color in $gm-colores {
+
+  .borde-#{$nombre} {
+    border: 2px solid $color;
+    --background: $color;
+  }
+
+}
+
 /* =========================
          FONDO APP
 ========================= */
@@ -26,7 +114,9 @@ ion-content {
    color: $gm-texto;
 }
 
-/* =========================
+
+
+  /* =========================
          MODALS
 ========================= */
 
@@ -44,10 +134,11 @@ ion-content {
 
 .gm-modal {
 
-  --height: fit-content;
-  --max-height: auto;
-  --border-radius: 20px;
+  /* 👇 CLAVE: altura controlada para que ion-content funcione */
+  --height: 100%;
+  --max-height: 90vh;
 
+  --border-radius: 20px;
   --backdrop-opacity: 0.45;
 
   &::part(content) {
@@ -62,7 +153,16 @@ ion-content {
 
     overflow: hidden;
 
+    /* 👇 CLAVE: layout vertical para ion-content */
+    display: flex;
+    flex-direction: column;
+
     position: relative;
+  }
+
+  /* 👇 hace que ion-content ocupe el espacio restante */
+  ion-content {
+    flex: 1;
   }
 
   &::part(content)::before {
@@ -90,19 +190,21 @@ ion-content {
 @media (min-width: 768px) {
 
   .gm-modal {
-    --height: auto;
-    --max-height: 90vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .gm-modal::part(content) {
+    width: 100%;
+    max-width: 600px; // podés mantener tus tamaños
   }
 
 }
 /* ================== Loader Custom ================== */
 
 /* Overlay glass */
-.custom-loading {
+.cust|om-loading {
   --background: rgba(34, 49, 51, 0.55);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -191,4 +293,46 @@ ion-content {
   text-shadow: 0 0 8px rgba(0, 190, 220, 0.7);
   text-align: center;
   z-index: 3;
+}
+
+/****************************
+  Alert Personalizado
+*****************************/
+
+.gm-select-alert [aria-checked=true].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
+  color: #FF6B3D;
+  --color: #FF6B3D
+}
+
+.gm-select-alert .alert-radio-inner.sc-ion-alert-md {
+  top: 3.6px;
+  margin-left: 0.6px;
+}
+
+.gm-select-alert  .alert-wrapper.sc-ion-alert-md {
+  border: 2px solid $gm-naranja-strong;
+}
+.gm-select-alert {
+  --background: #223133;
+  --color: #F2F6F7;
+
+}
+.gm-select-alert .alert-head{
+  text-align: center;
+}
+
+.gm-select-alert .alert-radio-label {
+  color: #F2F6F7;
+}
+
+.gm-select-alert .alert-radio-icon {
+  border-color: #1D9DB1;
+}
+
+.gm-select-alert .alert-radio-inner {
+  background-color: #b1561d;
+}
+
+.gm-select-alert .alert-button {
+  color: #FF6B3D;
 }

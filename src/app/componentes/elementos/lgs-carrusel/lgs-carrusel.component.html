@@ -1,0 +1,91 @@
+<div class="carousel-container ion-display-flex ion-justify-content-center">
+
+  <!-- EMPTY -->
+  @if (imagenes()!.length === 0) {
+    <div class="empty " (click)="onAgregar()">
+      <ion-icon style="font-size: 8rem;" name="camera-outline"></ion-icon>
+    </div>
+  }
+
+  <!-- CARRUSEL -->
+  @else {
+    <div
+      class="carousel"
+      (touchstart)="onTouchStart($event)"
+      (touchend)="onTouchEnd($event)"
+    >
+      <div
+        class="slides"
+        [style.transform]="'translateX(-' + index() * 100 + '%)'"
+      >
+
+        <!-- IMÁGENES -->
+        @for (img of imagenes(); track $index) {
+          <div class="slide">
+            
+            <div class="img-wrapper">
+              @if(editable){
+                <img (click)="modificar($index)" [src]="img">
+
+                <!-- BOTÓN ELIMINAR -->
+                <ion-button
+                  class="delete-btn"
+                  color="danger"
+                  shape="round"
+                  size="small"
+                  (click)="eliminar($index); $event.stopPropagation()"
+                >
+                  <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                </ion-button>
+
+              }@else{
+                <img [src]="img">
+              }
+            </div>
+
+          </div>
+        }
+
+        <!-- SLIDE EXTRA (AGREGAR) -->
+        @if (editable) {
+          <div class="slide empty " (click)="onAgregar()">
+            <ion-icon style="font-size: 8rem;" name="camera-outline"></ion-icon>
+          </div>
+        }
+
+      </div>
+
+      <!-- BOTONES -->
+      @if (mostrarNav()) {
+        @if(editable){
+          <button class="nav-side left" (click)="anterior()" [disabled]="index() === 0">
+            <ion-icon name="chevron-back"></ion-icon>
+          </button>
+  
+          <button
+            class="nav-side right"
+            (click)="siguiente()"
+            [disabled]="index() === totalSlides() - 1"
+          >
+            <ion-icon name="chevron-forward"></ion-icon>
+
+          </button>
+        } @else {
+
+          <button class="nav-side visual left" (click)="anterior()" [disabled]="index() === 0">
+            <ion-icon name="chevron-back"></ion-icon>
+          </button>
+  
+          <button
+            class="nav-side visual right"
+            (click)="siguiente()"
+            [disabled]="index() === totalSlides() - 1"
+          >
+            <ion-icon name="chevron-forward"></ion-icon>
+          </button>
+        }
+      }
+    </div>
+  }
+
+</div>

@@ -1,0 +1,87 @@
+<div class="lista-servicios">
+
+  <div class="lista-header">
+    <div class="col unidades">Unid.</div>
+    <div class="col nombre">Nombre</div>
+    <div class="col detalle">Detalle</div>
+    <div class="col precio">Precio</div>
+    @if(this.isEdicion){
+    <div class="col estado">Estado</div>
+    }
+  </div>
+
+  @for(group of arreglos.controls; let i = $index; track $index){
+    <div [formGroup]="group" class="fila">
+
+      <div class="col unidades">
+        <ion-input 
+          type="number" 
+          formControlName="cantidad"
+          placeholder="Ej: 10"
+          [readonly]="i !== arreglos.length - 1"
+          (ionInput)="calcularTotal()">
+        </ion-input>
+      </div>
+
+      <div class="col nombre">
+        <ion-textarea 
+          formControlName="nombre"
+          placeholder="Ej: Abolladura en el chásis"
+          [readonly]="i !== arreglos.length - 1">
+        </ion-textarea>
+      </div>
+
+      <div class="col detalle">
+        <ion-textarea 
+          formControlName="problema"
+          placeholder="Ej: Deformación en la carrosería producto de un impácto."
+          [readonly]="i !== arreglos.length - 1">
+        </ion-textarea>
+      </div>
+
+      <div class="col precio">
+        @if(i === arreglos.length - 1){
+          <!-- editable -->
+          <ion-input 
+            type="number" 
+            formControlName="costo"
+            placeholder="$20.000"
+            (ionChange)="calcularTotal()">
+            <ion-label slot="start">$</ion-label>
+          </ion-input>
+        } @else {
+          <!-- solo lectura formateado -->
+          <span>
+            {{ group.value.costo | currency }}
+          </span>
+        }
+      </div>
+
+      @if(this.isEdicion){
+        <div class="col estado">
+          <ion-checkbox (ionChange)="toggleEstado(group.value, $event.detail.checked)">
+          </ion-checkbox>
+        </div>
+      }
+
+      @if(i !== arreglos.length - 1){
+        <div class="col eliminar ion-display-flex ion-justify-content-center ion-align-items-center">
+          <ion-button 
+            shape="round" 
+            size="small" 
+            color="danger"
+            (click)="eliminar(i)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </div>
+      }
+    </div>
+  }
+
+  <div class="agregar-container">
+    <ion-button color="success" type="button" (click)="agregar()" shape="round">
+      <ion-icon slot="icon-only" name="add"></ion-icon>
+    </ion-button>
+  </div>
+
+</div>

@@ -1,5 +1,17 @@
 @use 'src/theme/variables.scss' as *;
 
+.fila {
+  position: relative;
+}
+
+.col.eliminar {
+  position: absolute;
+  right: 0rem; // ajustá según tu diseño
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 22;
+}
+
 .lista-servicios{
   background: $gm-azul-claro;
   padding: 0.2rem;

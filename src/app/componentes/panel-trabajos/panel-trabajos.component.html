@@ -10,15 +10,15 @@
   
   <ion-segment value="solicitudes">
 
-    <ion-segment-button value="solicitudes">
+    <ion-segment-button (click)="modificarFiltro('solicitado')"  value="solicitudes">
       <ion-label>Solicitudes</ion-label>
     </ion-segment-button>
 
-    <ion-segment-button value="proceso">
+    <ion-segment-button (click)="modificarFiltro('en proceso')"  value="proceso">
       <ion-label>En proceso</ion-label>
     </ion-segment-button>
     
-    <ion-segment-button value="completados">
+    <ion-segment-button (click)="modificarFiltro('completado')"  value="completados">
       <ion-label>Completados</ion-label>
     </ion-segment-button>
 
@@ -32,8 +32,12 @@
 
 @if (paginatedItems.length === 0) {
   
-  <div class="empty-state">
-    
+  <div class="empty-state ion-margin-top ion-margin-bottom">
+  <div class="btn-add-floating">
+    <ion-button (click)="abrirFormularioNuevo()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+  </div>
     <ion-icon name="construct-outline"></ion-icon>
 
     <h2>No hay trabajos todavía</h2>
@@ -45,8 +49,7 @@
   </div>
   
 } @else {
-  
-  <div class="btn-add-floating">
+    <div class="btn-add-floating">
     <ion-button (click)="abrirFormularioNuevo()">
       <ion-icon name="add-outline"></ion-icon>
     </ion-button>
@@ -63,11 +66,25 @@
       <ion-card>
 
         <ion-card-header>
-          <ion-card-title class="ion-text-center">{{ item.vehiculo }}</ion-card-title>
+          <ion-card-title class="ion-text-center">{{ item.vehiculo?.modelo }}</ion-card-title>
         </ion-card-header>
         
         <ion-card-content>
-          
+          <div class="contenedor-20vh ion-display-flex ion-flex-column ion-justify-content-center ion-align-items-center">
+          @if(item.imagenes?.length === 0){
+            <ion-row>
+              <ion-icon name="cloud-offline-outline" style="font-size: 3.5rem; margin-bottom: 0.8rem;"></ion-icon>
+
+            </ion-row>
+            <ion-text class="ion-text-center texto-naranja-light"><strong>No hay imágenes asociadas aún.</strong> </ion-text>
+          } @else{
+            <app-lgs-carrusel
+              [imagenes]="item.imagenes ?? []"
+              [editable]="false"
+            ></app-lgs-carrusel>
+          }
+          </div>
+
           <div class="card-estado">
             Ingreso: <strong>{{ item.ingreso | formatoFecha}}</strong>
           </div>
@@ -77,23 +94,38 @@
           
           
             <ion-buttons class="card-buttons">
+              <ion-buttons>
 
-              <ion-button color="warning" fill="outline" (click)="abrirFormularioEdicion(item)">
-                <ion-icon slot="start" name="build-outline"></ion-icon>
-                Actualizar
+                <ion-button color="warning" fill="outline" (click)="abrirFormularioEdicion(item)">
+                  <ion-icon slot="start" name="build-outline"></ion-icon>
+                  Actualizar
+                </ion-button>
+                
+                <ion-button color="primary" fill="outline" (click)="verDetalles(item)">
+                <ion-icon slot="start" name="aperture-outline"></ion-icon>
+                Detalles
               </ion-button>
+            </ion-buttons>
               
-              <ion-button color="primary" fill="outline" (click)="verDetalles(item)">
-              <ion-icon slot="start" name="aperture-outline"></ion-icon>
-              Detalles
-            </ion-button>
-          </ion-buttons>
-            
-          
-          <ion-button color="success" expand="block" (click)="eliminarUsuario(item)">
-            <ion-icon slot="start" name="trash-outline"></ion-icon>
-            Completar
-          </ion-button>
+            @if(item.estado === 'en proceso'){
+              <ion-button color="success" fill="solid" expand="block" (click)="completarTrabajo(item)">
+                <ion-icon slot="start" name="bag-check-outline"></ion-icon>
+                Completar
+              </ion-button>
+            }
+            @if (item.estado === 'completado') {
+              <ion-button color="danger" fill="solid" expand="block" (click)="completarTrabajo(item)">
+                <ion-icon slot="start" name="trash-outline"></ion-icon>
+                Eliminar del registro
+              </ion-button>
+            }
+            @if (item.estado === 'solicitado') {
+              <ion-button color="tertiary" fill="solid" expand="block" (click)="completarTrabajo(item)">
+                <ion-icon slot="start" name="caret-up-outline"></ion-icon>
+                Aceptar solicitud.
+              </ion-button>
+            }
+              </ion-buttons>
 
         </ion-card-content>
         
@@ -111,16 +143,16 @@
 
 <div class="pagination">
 
-  <ion-button class="btn-paginacion"
+  <ion-button class="btn-paginacion" shape="round"
   (click)="prevPage()" [disabled]="page() === 1">
-    <ion-icon name="chevron-back-outline"></ion-icon>
+    <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
   </ion-button>
 
   <span>{{ page() }} de {{ totalPages() }}</span>
 
-  <ion-button class="btn-paginacion"
+  <ion-button class="btn-paginacion" shape="round"
   (click)="nextPage()" [disabled]="page() === totalPages()">
-    <ion-icon name="chevron-forward-outline"></ion-icon>
+    <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
   </ion-button>
 
 </div>

@@ -1,0 +1,94 @@
+@use 'src/theme/variables.scss' as *;
+
+.gm-select-wrapper {
+  position: relative;
+  width: 100%;
+
+  border-radius: 2vh;
+  border: 0.18vh solid $gm-acento;
+  background-color: $gm-principal;
+
+  margin-bottom: 2vh;
+
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* focus elegante */
+
+.gm-select-wrapper:focus-within {
+  border-color: $gm-naranja;
+  box-shadow: 0 0 0.6rem rgba($gm-naranja, 0.35);
+}
+
+.gm-select {
+
+  width: 100%;
+
+  --padding-start: clamp(0.8rem, 2vw, 1.2rem);
+  --padding-end: clamp(0.8rem, 2vw, 1.2rem);
+
+  --color: white;
+  --placeholder-color: rgba(255,255,255,0.7);
+
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+
+}
+
+.gm-select-wrapper::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: clamp(0.8rem, 2vw, 1.2rem);
+  right: clamp(0.8rem, 2vw, 1.2rem);
+
+
+  height: 0.15vh;
+
+  background-color: $gm-acento;
+
+  border-radius: 1vh;
+
+  opacity: 0.6;
+
+  transition: opacity 0.25s ease;
+}
+
+.gm-select-wrapper:focus-within::after {
+  opacity: 0;
+}
+
+.gm-select::part(icon) {
+  color: $gm-acento;
+}
+.gm-select {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+@media (max-width: 600px) {
+  .gm-select {
+    font-size: 0.8rem;
+  }
+}
+
+/* =========================
+   VALIDADORES
+========================= */
+
+.validators {
+  color: $gm-naranja;
+
+  font-size: clamp(0.75rem, 0.9vw, 0.9rem);
+  font-weight: bold;
+
+  text-align: center;
+
+  background-color: rgba($gm-azul, 0.25);
+
+  border-radius: 1vh;
+
+  margin-top: 0.6rem;
+
+  padding: 0.5rem 0.8rem;
+}

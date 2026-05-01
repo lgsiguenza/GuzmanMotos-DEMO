@@ -26,17 +26,37 @@
   
 } @else {
 
-  <div class="cards-container">
+  <div 
+    class="cards-container"
+    [class.one]="paginatedItems.length === 1"
+    [class.two]="paginatedItems.length === 2"
+    [class.three]="paginatedItems.length >= 3"
+  >
 
     @for (item of paginatedItems; track item.id) {
       
       <ion-card>
 
         <ion-card-header>
-          <ion-card-title>{{ item.modelo }}</ion-card-title>
+          <ion-card-title class="ion-text-center texto-acento"><strong> {{ item.modelo }} ─ {{item.nombrePropietario}}</strong></ion-card-title>
         </ion-card-header>
-        
+
         <ion-card-content>
+             <div class="contenedor-20vh ion-display-flex ion-flex-column ion-justify-content-center ion-align-items-center">
+            @if(item.imagenes?.length === 0){
+              <ion-row>
+                <ion-icon name="cloud-offline-outline" style="font-size: 3.5rem; margin-bottom: 0.8rem;"></ion-icon>
+  
+              </ion-row>
+              <ion-text class="ion-text-center texto-naranja-light"><strong>No hay imágenes asociadas aún.</strong> </ion-text>
+            } @else{
+              <app-lgs-carrusel
+                [imagenes]="item.imagenes ?? []"
+                [editable]="false"
+              ></app-lgs-carrusel>
+            }
+          </div>
+
           
           <div class="card-estado">
             Patente: <strong>{{ item.patente }}</strong>
@@ -56,7 +76,7 @@
             
           </div>
           
-          <ion-button color="danger" expand="block" (click)="eliminarUsuario(item)">
+          <ion-button color="danger" expand="block" (click)="eliminar(item)">
             <ion-icon slot="start" name="trash-outline"></ion-icon>
             Eliminar
           </ion-button>
@@ -77,16 +97,16 @@
 @if(this.paginatedItems.length >= 1){
   <div class="pagination">
   
-    <ion-button class="btn-paginacion"
+    <ion-button class="btn-paginacion" shape="round"
     (click)="prevPage()" [disabled]="page() === 1">
-      <ion-icon name="chevron-back-outline"></ion-icon>
+      <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
     </ion-button>
   
     <span>{{ page() }} de {{ totalPages() }}</span>
   
-    <ion-button class="btn-paginacion"
+    <ion-button shape="round" class="btn-paginacion"
     (click)="nextPage()" [disabled]="page() === totalPages()">
-      <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
     </ion-button>
   
   </div>

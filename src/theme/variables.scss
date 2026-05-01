@@ -16,6 +16,7 @@ $gm-verde: #2AA198;
 $gm-texto: #1E2A32;
 
 
+
 /* =========================
    NARANJAS MECÁNICA
 ========================= */
@@ -34,3 +35,22 @@ $gm-naranja-light: #FFD2A8;
 $gm-rojo: #C62828;
 $gm-gris-card: #2F2F2F;
 $gm-borde: #FF9E3D;
+//? Comentario para seccionar los componentes:
+
+  //! ======================= Variables y servicios =======================
+  //~ ======================= Servicios 
+  //~ ======================= Propiedades
+
+  //~ ======================= Inicializadores
+
+  //! ======================= Métodos =======================
+
+  //~ ======================= Paginación
+
+  //~ ======================= Lógicos
+  /*
+
+      const carga = await this.utilSvc.loading()
+      await carga.present();
+      await carga.dismiss();
+  */

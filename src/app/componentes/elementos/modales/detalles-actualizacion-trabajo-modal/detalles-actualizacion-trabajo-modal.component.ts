@@ -41,13 +41,13 @@ export class DetallesActualizacionTrabajoModalComponent  implements OnInit {
   async ngOnInit() {
     const carga = await this.utilSvc.loading();
     await carga.present()
-      const lista = await this.tbjSvc.obtenerListadoArreglos(this.tbj.uid!)
-      this.arreglos.set(lista)
-      this.form.patchValue({
-        vehiculo: this.tbj.vehiculo,
-        observaciones: this.tbj.descripcion,
-        propietario: this.tbj.usuario,
-      })
+      // const lista = await this.tbjSvc.obtenerListadoArreglos(this.tbj.uid!)
+      // this.arreglos.set(lista)
+      // this.form.patchValue({
+      //   vehiculo: this.tbj.vehiculo,
+      //   observaciones: this.tbj.descripcion,
+      //   propietario: this.tbj.usuario,
+      // })
     await carga.dismiss()
   }
   constructor() { }

@@ -105,9 +105,10 @@
   display: flex;
   flex-wrap: wrap;
   align-content: center;
+  margin-bottom: 0.6rem;
   flex-direction: row;
   align-items: baseline;   // centra el +54 verticalmente
-  color: $gm-naranja;
+  color: $gm-naranja-strong;
   border-radius: 1rem;
   
   font-size: 1.6rem;
@@ -116,3 +117,4 @@
 .telefono-input app-lgs-input{
   flex: 1;
 }
+

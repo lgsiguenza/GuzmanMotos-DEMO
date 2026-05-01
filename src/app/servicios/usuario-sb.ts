@@ -2,6 +2,8 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { Usuario } from '../models/usuario';
 import { AuthUser, RealtimeChannel } from '@supabase/supabase-js';
 import { SbService } from './sb-service';
+import { ArchivosCapacitorService } from './archivos-capacitor-service';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +11,11 @@ import { SbService } from './sb-service';
 export class UsuarioSb {
 
   private sbSvc = inject(SbService);
+  private archivosSvc = inject(ArchivosCapacitorService)
 
   listaUsuarios = signal<Usuario[]>([])
   usrSeleccionado = signal<Usuario | null>(null);
+
   usrAuth = signal<AuthUser | null>(null);
   usrActual = signal<Usuario | null>(null);
 
@@ -79,7 +83,7 @@ export class UsuarioSb {
       }
     )
     .subscribe((status) => {
-      console.log("Estado canal realtime:", status);
+      console.log("Estado canal realtime USUARIOS:", status);
     });
   }
 
@@ -98,17 +102,37 @@ export class UsuarioSb {
 
     const usrBd = await this.obtenerUsuario(authUser.user.id);
     this.usrActual.set(usrBd) 
+
+    const data: {usrTabla: Usuario, usrAuth: AuthUser} ={
+      usrAuth: authUser.user as AuthUser,
+      usrTabla: usrBd!,
+    }
+
+    //! login y asignación de tag de OneSignal.
+    // if(Capacitor.getPlatform() !== 'web')
+    // {
+    //   let iDUsuario = this.usrActual()!.uid!.replace(/-/g, "");
+    //   OneSignal.login(iDUsuario);
+    //   this.agregarTagNotificacionSegunPerfil();
+    // }
+      
+    await this.archivosSvc.guardarArchivoLocal('usuario.sesion', data);
   }
 
   async recuperarSesion(){
-    const sb = await  this.sbSvc.recuperarSesion(); 
-    if(sb === null) {
-      throw new Error('No hay sesión que recuperar.')
-    }
-    const uid = sb.session?.user.id
+    const sb = await this.sbSvc.recuperarSesion(); 
 
-    this.usrAuth.set(sb.session?.user as AuthUser);
-    this.usrActual.set(await this.obtenerUsuario(uid!));
+    if(!sb){
+      return null;
+    }
+
+    const data = await this.archivosSvc.recuperarArchivoGuardado
+    <{usrTabla: Usuario, usrAuth: AuthUser}>('usuario.sesion');
+    
+    this.usrAuth.set(data.usrAuth);
+    this.usrActual.set(data.usrTabla);
+
+    return sb;
   }
 
   async cerrarSesion(){
@@ -117,7 +141,14 @@ export class UsuarioSb {
       throw new Error('No hay sesión que cerrar.')
     }
 
-    this.sbSvc.cerrarSesion();
+    await this.sbSvc.cerrarSesion();
+    await this.archivosSvc.eliminarArchivoLocal('usuario.sesion');
+    //! logout de OneSignal
+    // if(Capacitor.getPlatform() !== 'web')
+    // {
+    //   OneSignal.logout();
+    //   this.notificacionService.removerTagPerfil();
+    // }
     this.usrActual.set(null);
     this.usrAuth.set(null);
   }
@@ -127,7 +158,9 @@ export class UsuarioSb {
   }
 
   private async refrescarListaUsuarios(){
-    const ls = await this.sbSvc.listarTodos<Usuario>('Usuarios');
+    const relaciones = ['vehiculos: Vehiculos(*)']
+    
+    const ls = await this.sbSvc.listarTodosConRelaciones<Usuario>('Usuarios',relaciones);
     const usuarios = await Promise.all(
       ls.map(async (u) => {
         u.foto = await this.sbSvc.obtenerUrl('foto-usuario', `${u.uid}.png`);
@@ -152,6 +185,7 @@ export class UsuarioSb {
 
     //? Insertamos en tabla
     const datos:Usuario = {
+      vehiculos: undefined,
       uid: dataAuth.user?.id,
       apellido: usr.apellido,
       dni: usr.dni,
@@ -172,6 +206,7 @@ export class UsuarioSb {
       dni: actualizacion.dni,
       correo: actualizacion.correo,
       rol: actualizacion.rol,
+      vehiculos: undefined,
     };
 
     const dataBD = await this.sbSvc.actualizar<Usuario>('Usuarios','uid',actualizacion.uid!, usrActualizado)
