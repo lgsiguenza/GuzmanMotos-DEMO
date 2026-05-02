@@ -2,7 +2,7 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { IonGrid, IonRow, IonCol, ModalController, IonText, IonLabel, IonTitle, IonIcon } from '@ionic/angular/standalone';
+import { IonGrid, IonRow, IonCol, ModalController, IonText, IonLabel, IonTitle, IonIcon, IonContent } from '@ionic/angular/standalone';
 import { ModalFooterComponent } from "../modal-footer/modal-footer.component";
 import { Utils } from 'src/app/servicios/utils';
 import { UsuarioSb } from 'src/app/servicios/usuario-sb';
@@ -22,8 +22,8 @@ import { LgsCarruselComponent } from "../../lgs-carrusel/lgs-carrusel.component"
   templateUrl: './formulario-alta-trabajo-modal.component.html',
   styleUrls: ['./formulario-alta-trabajo-modal.component.scss'],
   imports: [IonGrid, CommonModule, FormsModule, ModalFooterComponent, LgsInputComponent,
-    IonText, ListadoArreglosComponent, IonCol, IonRow, LgsDesplegableComponent, IonTitle,
-    LgsCarruselComponent],
+    ListadoArreglosComponent, IonCol, IonRow, LgsDesplegableComponent, IonTitle,
+    LgsCarruselComponent, IonContent],
 })
 export class FormularioAltaTrabajoModalComponent  {
   //! =============== Variables y servicios ===============

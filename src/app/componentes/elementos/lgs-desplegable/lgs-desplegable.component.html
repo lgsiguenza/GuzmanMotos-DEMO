@@ -1,31 +1,28 @@
-
-  
 <div class="gm-select-wrapper">
 
-  <ion-select
-    class="gm-select"
-    [label]="label()"
-    labelPlacement="floating"
-    [disabled]="deshabilitar"
-    [placeholder]="placeholder()"
-    [formControl]="control()"
-    interface="alert"
-    [interfaceOptions]="{ cssClass: 'gm-select-alert' }"
-  >
+  <div class="gm-select" (click)="abrirModal()" [class.disabled]="deshabilitar">
 
-    @for(opcion of listado(); track $index){
-      <ion-select-option [value]="parametroValor() ? opcion[parametroValor()] : opcion">
-        {{opcion[parametroNombre()]}} {{opcion[parametroAdicional() ?? '']}}
-      </ion-select-option>
+    <label class="gm-label">
+      {{ label() }}
+    </label>
+
+    @if(control().value){
+      <span>
+        {{ obtenerTextoSeleccionado() }}
+      </span>
+    } @else {
+      <span class="placeholder">
+        {{ placeholder() }}
+      </span>
     }
 
-  </ion-select>
-@if (control().invalid &&control().touched) {
-  <div class="validators small mt-1">
-    No válido.<br />
-    {{ mensajeValidacion() | titlecase }}
   </div>
-}
+
+  @if (control().invalid && control().touched) {
+    <div class="validators small mt-1">
+      No válido.<br />
+      {{ mensajeValidacion() | titlecase }}
+    </div>
+  }
 
 </div>
-

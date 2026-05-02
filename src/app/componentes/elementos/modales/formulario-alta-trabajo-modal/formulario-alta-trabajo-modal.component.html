@@ -1,9 +1,12 @@
-<form>
+
+<ion-content class="fondo-gris-card">
+
+  <form>
 <br>
-  <ion-text class="title ion-text-center">{{this.isEdicion ? 'Actualizar trabajo' : 'Agregar trabajo'}}</ion-text>
+  <ion-title class="title ion-text-center">{{this.isEdicion ? 'Actualizar trabajo' : 'Agregar trabajo'}}</ion-title>
   <ion-grid class="flex">
 <!--//! ================== Modelo vehículo ==================-->
-    <ion-row>
+    <ion-row class="ion-align-items-center">
 
         <ion-col>
           <app-lgs-desplegable
@@ -22,25 +25,29 @@
         style="margin-bottom: 1rem;
           margin-top: 0.25rem; border-radius: 0.8rem;">
           <ion-title class="ion-text-center texto-acento"> 
-            Propietario: 
+            Propietario: <br>
               <strong class="texto-naranja">{{vehiculoSeleccionado() ?? 'No seleccionado'}} </strong>
              </ion-title>
         </ion-col>  
+         <ion-col >
+        <app-lgs-input
+          class="ion-text-center"
+          control="observaciones"
+          tipo="textarea"
+          [form]="form"
+          mensajeValidacion="Debe poseer al menos 3 caracteres"
+          placeholder="Observaciones destacables."
+          size="md"  
+        ></app-lgs-input>
+      </ion-col>
       
     </ion-row>    
       
 <!--//! ================== Observaciones ==================-->
-
-      <app-lgs-input
-        class="ion-text-center"
-        control="observaciones"
-        tipo="textarea"
-        [form]="form"
-        mensajeValidacion="Debe poseer al menos 3 caracteres"
-        placeholder="Observaciones destacables."
-        size="md"  
-      ></app-lgs-input>
-
+    <ion-row class="">
+     
+    </ion-row>
+      
     <ion-row>
       <ion-col class="contenedor-20vh ion-justify-content-center ">
         <app-lgs-carrusel
@@ -73,3 +80,4 @@
     
   </ion-grid>
 </form>
+</ion-content>

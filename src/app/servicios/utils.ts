@@ -111,23 +111,26 @@ export class Utils {
   async crearModal(component: any, size: 'sm' | 'md' | 'lg'|'' = '', 
     data?: Record<string, any>, dismissBackdrop: boolean = true, cssClassExtra?: string) {
 
-  const clases: string[] = ['gm-modal', `gm-modal-${size}`];
+    let clases: string[]
 
-  if (cssClassExtra) {
-    clases.push(cssClassExtra);
+    if(size === '') clases = ['modalAdaptable'];
+    else clases = ['gm-modal', `gm-modal-${size}`];
+    
+    if (cssClassExtra) {
+      clases.push(cssClassExtra);
+    }
+
+    const modal = await this.modalCtrl.create({
+      component: component,
+      componentProps: data ?? {},
+      backdropDismiss: dismissBackdrop,
+      cssClass: clases
+    });
+
+    await modal.present();
+
+    return modal;
   }
-
-  const modal = await this.modalCtrl.create({
-    component: component,
-    componentProps: data ?? {},
-    backdropDismiss: dismissBackdrop,
-    cssClass: clases
-  });
-
-  await modal.present();
-
-  return modal;
-}
   
     //! ==================== Desencriptación ====================
   formatearPdf147(str: string): string {

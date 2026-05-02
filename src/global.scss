@@ -132,6 +132,19 @@ ion-content {
   --width: 800px;
 }
 
+.modalAdaptable{
+  --height: auto;          // 👈 clave
+  --max-height: 90vh;      // límite por seguridad
+
+  --border-radius: 20px;
+
+  &::part(content) {
+
+    height: auto;          // 👈 clave
+    max-height: 90vh;
+  }
+}
+
 .gm-modal {
 
   /* 👇 CLAVE: altura controlada para que ion-content funcione */

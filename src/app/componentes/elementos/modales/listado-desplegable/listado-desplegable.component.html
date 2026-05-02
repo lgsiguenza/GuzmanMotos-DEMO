@@ -1,3 +1,70 @@
-<p>
-  listado-desplegable works!
-</p>
+<div class="ion-display-flex ion-flex-column ion-justify-content-start">
+
+  <ion-header class="fondo-bg-soft">
+    <ion-toolbar>
+      <ion-title class="ion-text-center texto-acento">
+        Seleccionar
+      </ion-title>
+      
+      <ion-buttons slot="end">
+      <ion-button color="danger" shape="round" (click)="cerrar()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="gm-alert-content">
+  
+  
+  <!-- 🔎 BUSCADOR -->
+  <ion-searchbar
+  placeholder="Buscar..."
+  (ionInput)="filtro.set($event.detail.value ?? '')"
+  ></ion-searchbar>
+  
+  <!-- 📋 LISTADO -->
+  <ion-list>
+    
+    <ion-radio-group (ionChange)="seleccionarRadio($event.detail.value)">
+      
+      @for(item of paginados; track $index){
+        <ion-item>
+          <ion-radio
+          slot="start"
+          [value]="parametroValor() ? item[parametroValor()!] : item"
+          ></ion-radio>
+          
+          <ion-label>
+            {{item[parametroNombre()]}} {{item[parametroOpcional() ?? '']}}
+          </ion-label>
+        </ion-item>
+      }
+      
+    </ion-radio-group>
+    
+  </ion-list>
+  <div class="gm-paginacion">
+    
+    <ion-button color="secondary" shape="round" size="small" (click)="anterior()" [disabled]="pagina() === 0">
+      <ion-icon slot="icon-only" name="chevron-back-circle-outline"></ion-icon>
+    </ion-button>
+    
+    <span>
+      {{ pagina() + 1 }} de {{this.totalPaginas()}}
+    </span>
+    
+    <ion-button color="secondary" shape="round"
+      size="small"
+      (click)="siguiente()"
+      [disabled]="(pagina() + 1) * tamanio >= filtrados.length"
+      >
+    <ion-icon slot="icon-only" name="chevron-forward-circle-outline" ></ion-icon>
+    </ion-button>
+  
+</div>
+
+<ion-button expand="block" color="warning" (click)="confirmar()">
+  Seleccionar
+</ion-button>
+</div>
+</div>

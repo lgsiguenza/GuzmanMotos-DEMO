@@ -1,0 +1,84 @@
+.gm-paginacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.8rem 1rem;
+
+  span {
+    font-size: 0.9rem;
+  }
+}
+
+.gm-alert-content {
+  display: flex;
+  flex-direction: column;
+
+  max-height: 70vh;
+  padding: 1rem;
+
+  background: #223133; // tu alert base
+  color: #F2F6F7;
+}
+
+/* 🔎 Search */
+ion-searchbar {
+  --background: #2B3233;
+  --color: #F2F6F7;
+
+  margin-bottom: 0.5rem;
+}
+
+/* 📋 Lista scrolleable */
+ion-list {
+  flex: 1;
+  overflow-y: auto;
+
+  background: transparent;
+  padding: 0;
+}
+
+/* Items estilo alert */
+ion-item {
+  --background: transparent;
+  --color: #F2F6F7;
+
+  --border-color: rgba(255,255,255,0.05);
+
+  border-radius: 0.6rem;
+  margin-bottom: 0.3rem;
+
+  transition: background 0.2s ease;
+}
+
+ion-item:hover {
+  --background: rgba(255,255,255,0.05);
+}
+
+/* Radio custom */
+ion-radio {
+  --color: #1D9DB1;
+  --color-checked: #FF6B3D;
+}
+
+/* 🔁 Paginación */
+.gm-paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.5rem 0;
+
+  ion-button{
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
+/* Botón confirm tipo alert */
+ion-button[color="warning"] {
+  --background: #FF6B3D;
+  --color: white;
+
+  margin-top: 0.5rem;
+}

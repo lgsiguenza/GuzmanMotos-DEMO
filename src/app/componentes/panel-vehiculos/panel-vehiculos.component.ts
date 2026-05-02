@@ -38,7 +38,7 @@ export class PanelVehiculosComponent  implements OnInit {
         case 2:
           return 2;
         default: 
-          return 3;
+          return 2;
       }
     }); 
     
