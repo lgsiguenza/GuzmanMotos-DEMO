@@ -21,7 +21,13 @@
           ></app-lgs-desplegable>
         </ion-col>  
           
-        <ion-col class="ion-display-flex ion-justify-content-center fondo-principal" 
+       
+      
+    </ion-row>    
+      
+<!--//! ================== Observaciones ==================-->
+    <ion-row class="">
+       <ion-col class="ion-display-flex ion-justify-content-center fondo-principal" 
         style="margin-bottom: 1rem;
           margin-top: 0.25rem; border-radius: 0.8rem;">
           <ion-title class="ion-text-center texto-acento"> 
@@ -29,7 +35,11 @@
               <strong class="texto-naranja">{{vehiculoSeleccionado() ?? 'No seleccionado'}} </strong>
              </ion-title>
         </ion-col>  
-         <ion-col >
+        
+    </ion-row>
+
+    <ion-row class="">
+      <ion-col >
         <app-lgs-input
           class="ion-text-center"
           control="observaciones"
@@ -40,16 +50,10 @@
           size="md"  
         ></app-lgs-input>
       </ion-col>
-      
-    </ion-row>    
-      
-<!--//! ================== Observaciones ==================-->
-    <ion-row class="">
-     
     </ion-row>
       
     <ion-row>
-      <ion-col class="contenedor-20vh ion-justify-content-center ">
+      <ion-col class="contenedor-41vh ion-justify-content-center ">
         <app-lgs-carrusel
           [imagenes]="imagenes()"
           [editable]="true"
