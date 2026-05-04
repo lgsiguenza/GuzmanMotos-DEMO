@@ -1,0 +1,37 @@
+
+
+/* CONTENEDOR GRID */
+.grid-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* MATRIZ 2x2 */
+.button-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* BOTONES */
+ion-button {
+  height: 100%;
+  min-height: 5rem;
+  font-size: 1.2rem;
+}
+
+
+  .grid-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .button-grid {
+    height: 100%;
+  }
+
+

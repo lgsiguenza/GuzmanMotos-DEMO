@@ -15,18 +15,31 @@
       </div>
 
       <!-- Botón Cerrar sesión 15% -->
-      <div class="col cerrar">
-        <ion-button  (click)="cerrarSesion()">
-          <ion-icon name="log-out-outline"></ion-icon>
-        </ion-button>
-      </div>
+       @if(this.userSvc.usrActual() != null){
+         <div class="col cerrar">
+           <ion-button  (click)="cerrarSesion()">
+             <ion-icon name="log-out-outline"></ion-icon>
+           </ion-button>
+         </div>
+       } @else{
+         <div class="col cerrar" (click)="iniciarSesion()" style="margin-left: 1rem;">
+          <ion-button> Iniciar sesión</ion-button>
+        </div>
+
+       }
 
       <!-- Botón Opciones 10% -->
       <div class="col opciones">
-        <ion-button fill="clear" (click)="abrirOpciones()">
-          <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      @if(estoyEnControlOCliente){
+        <ion-button fill="clear" (click)="irSobreNos()">
+          <ion-icon slot="icon-only" name="home-outline"></ion-icon>
         </ion-button>
-      </div>
+      }@else{
+        <ion-button fill="clear" (click)="irControl()">
+          <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+        </ion-button>  
+      }
+    </div>
 
     </ion-row>
   </ion-toolbar>

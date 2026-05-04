@@ -9,7 +9,6 @@
 
 .title {
   font-size: 1.6rem;
-  color: $gm-principal;
   justify-content: center;
   font-weight: 600;
   letter-spacing: -0.03rem;
@@ -116,5 +115,12 @@
 
 .telefono-input app-lgs-input{
   flex: 1;
+}
+
+
+.form-wrapper {
+  height: 80%;
+  display: flex;
+  align-items: center; // centra vertical
 }
 

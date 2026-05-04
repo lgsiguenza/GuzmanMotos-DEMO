@@ -7,6 +7,7 @@ import { Utils } from 'src/app/servicios/utils';
 import { defineCustomElements } from '@ionic/core/loader';
 import { RegistroModalComponent } from 'src/app/componentes/elementos/modales/registro-modal/registro-modal.component';
 import { IngresoModalComponent } from 'src/app/componentes/elementos/modales/ingreso-modal/ingreso-modal.component';
+import { HeaderComponent } from "src/app/componentes/elementos/header/header.component";
 
 
 @Component({
@@ -14,7 +15,7 @@ import { IngresoModalComponent } from 'src/app/componentes/elementos/modales/ing
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
   standalone: true,
-  imports: [IonButton, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonContent, CommonModule, FormsModule]
+  imports: [IonButton, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonContent, CommonModule, FormsModule, HeaderComponent]
 })
 export class InicioPage implements OnInit {
 
@@ -47,7 +48,7 @@ export class InicioPage implements OnInit {
 
 
   async irRegistro(){
-    await this.utilSvc.crearModal(RegistroModalComponent, 'md',{},false)
+    await this.utilSvc.crearModal(RegistroModalComponent, 'sm',{},false)
   }
 
 

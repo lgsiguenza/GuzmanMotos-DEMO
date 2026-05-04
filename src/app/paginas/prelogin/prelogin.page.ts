@@ -25,7 +25,7 @@ export class PreloginPage implements OnInit {
     setTimeout(() => {
       this.noise?.remove()
       {  
-        return this.utilSvc.redirigir('/inicio',true); 
+        return this.utilSvc.redirigir('/sobre-nos',true); 
       }
     }, 3000);
   }

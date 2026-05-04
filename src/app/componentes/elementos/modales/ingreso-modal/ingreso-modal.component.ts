@@ -54,7 +54,8 @@ export class IngresoModalComponent {
     await carga.present();
     try{
       await this.userSvc.iniciarSesion(correo, contrasenia);
-      await this.utilSvc.redirigir('/control');      
+      if(this.userSvc.usrActual()?.rol === 'dueño')await this.utilSvc.redirigir('/control')
+      else await this.utilSvc.redirigir('/cliente');      
     }catch(e){
       await this.utilSvc.mostrarAlert("¡Ha ocurrido un error!", (e as Error).message);
     }

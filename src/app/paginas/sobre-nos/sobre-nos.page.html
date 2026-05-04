@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<ion-content class="fondo-gris-card">
+
+  <div class="container">
+
+    <!-- IMAGEN LATERAL -->
+    <div class="aside">
+      <img src="assets/guzmanIcon1200.png" />
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="content">
+
+      <h1 class="title ion-text-center texto-acento ion-flex-row">Guzman Motos</h1>
+      <ion-row >
+        <ion-col class="ion-display-flex fondo-naranja-light ion-justify-content-center"
+          style="border-radius: 1rem;"  
+        >
+          <ion-text class="ion-text-center texto-azul-claro" 
+            style="font-size: 1.5rem; border-radius: 0.5rem;">
+            Trabajamos vehículos como:</ion-text>
+        </ion-col>
+      </ion-row>
+
+      <!-- CARRUSEL -->
+      <div class="teaser">
+        @for (item of arr; track $index) {
+          <figure>
+            <img [src]="item.pic" />
+            <figcaption>
+              <h3 class="texto-naranja-light borde-acento fondo-principal">{{ item.title }}</h3>
+            </figcaption>
+          </figure>
+        }
+      </div>
+
+      <!-- TEXTO -->
+      <p class="ion-text-center texto-naranja-light">
+        Somos un taller apasionado por las motos, enfocados en brindar calidad,
+        confianza y servicio en cada trabajo.
+      <br> <br>
+        En Guzman Motos buscamos que cada cliente se lleve no solo una solución,
+        sino una experiencia.
+      </p>
+
+    </div>
+
+  </div>
+
+</ion-content>

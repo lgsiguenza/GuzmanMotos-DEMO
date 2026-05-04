@@ -1,0 +1,94 @@
+@use 'src/theme/variables.scss' as *;
+
+:host {
+  display: block;
+}
+
+/* CONTENEDOR GENERAL */
+.container {
+  display: flex;
+  min-height: 100%;
+}
+
+/* IMAGEN LATERAL */
+.aside {
+  width: 40%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+/* CONTENIDO */
+.content {
+  width: 60%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* TITULO */
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* CARRUSEL */
+.teaser {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  figure {
+    min-width: 12rem;
+    position: relative;
+  }
+
+  img {
+    width: 100%;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+
+  figcaption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+
+    h3 {
+      font-size: 0.9rem;
+      margin: 0;
+      padding: 0.2rem;
+    }
+  }
+}
+
+/* TEXTO */
+p {
+  font-size: 0.95rem;
+}
+
+/* RESPONSIVE (clave para Ionic) */
+@media (max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .aside {
+    width: 100%;
+    height: 25vh;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+}

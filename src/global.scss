@@ -131,11 +131,11 @@ ion-content {
 ========================= */
 
 .gm-modal-sm {
-  --width: 320px;
+  --width: 450px;
 }
 
 .gm-modal-md {
-  --width: 500px;
+  --width: 650px;
 }
 
 .gm-modal-lg {
@@ -194,7 +194,6 @@ ion-content {
     top: 0;
     left: 0;
 
-    width: 100%;
     height: 4px;
 
     background: linear-gradient(
@@ -219,7 +218,6 @@ ion-content {
   }
 
   .gm-modal::part(content) {
-    width: 100%;
     max-width: 900px; // podés mantener tus tamaños
   }
 

@@ -4,7 +4,7 @@ import { App } from '@capacitor/app';
 import { IonHeader, IonToolbar, IonLabel, IonButtons,IonButton, IonTitle,
    ModalController, IonRouterOutlet, IonGrid, IonRow, IonCol, IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
-import { arrowBackCircleOutline, ellipsisVertical, logOutOutline } from 'ionicons/icons';
+import { arrowBackCircleOutline, ellipsisVertical, homeOutline, logOutOutline, personCircleOutline } from 'ionicons/icons';
 import { UsuarioSb } from 'src/app/servicios/usuario-sb';
 import { Utils } from 'src/app/servicios/utils';
 
@@ -23,26 +23,21 @@ export class HeaderComponent  implements OnInit {
   protected userSvc = inject(UsuarioSb);
   private router = inject(Router)
   protected estoyEnControlOCliente = this.router.url === '/control' || this.router.url === '/cliente'
-
+  
 
 //!================== Métodos ==================
   //? Botón de cerrar sesión
   async cerrarSesion(){
     await this.userSvc.cerrarSesion();
-    this.utilSvc.redirigir('inicio');
+    this.utilSvc.redirigir('sobre-nos');
   }
 
-  protected async salirDeLaApp()
-  {
-    await App.exitApp();
-    this.noise.play();
+  async iniciarSesion(){
+    this.utilSvc.redirigir('inicio')
   }
 
-  ngOnInit(): void
-  {
-    this.noise = new Audio();
-    this.noise.src = '../../../assets/sounds/8-bit_failure.ogg';
-    this.noise.load();
+  async ngOnInit(){
+    await this.userSvc.recuperarSesion()
   }
 
   protected volver()
@@ -52,10 +47,17 @@ export class HeaderComponent  implements OnInit {
   }
 
   constructor(){
-    addIcons({ellipsisVertical, arrowBackCircleOutline, logOutOutline})
+    addIcons({ellipsisVertical, arrowBackCircleOutline, logOutOutline, homeOutline, personCircleOutline})
   }
 
-  abrirOpciones(){
-    alert("XD")
+  irSobreNos(){
+    this.utilSvc.redirigir('sobre-nos')
+  }
+  irControl(){
+    if(this.userSvc.usrActual()?.rol === 'cliente'){
+      this.utilSvc.redirigir('cliente')
+    } else{
+      this.utilSvc.redirigir('dueño')
+    }
   }
 }

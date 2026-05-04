@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { IonGrid, IonRow, IonCol, ModalController, IonText, IonLabel } from '@ionic/angular/standalone';
+import { IonGrid, IonRow, IonCol, ModalController, IonText, IonLabel, IonContent, IonFooter } from '@ionic/angular/standalone';
 import { ModalFooterComponent } from "../modal-footer/modal-footer.component";
 import { Utils } from 'src/app/servicios/utils';
 import { UsuarioSb } from 'src/app/servicios/usuario-sb';
@@ -13,8 +13,8 @@ import { Usuario } from 'src/app/models/usuario';
   templateUrl: './registro-modal.component.html',
   styleUrls: ['./registro-modal.component.scss'],
   standalone: true,
-  imports: [IonLabel,  IonCol, IonRow, IonGrid,
-    CommonModule, FormsModule, ModalFooterComponent, LgsInputComponent, IonText]
+  imports: [IonLabel, IonCol, IonRow, IonGrid,
+    CommonModule, FormsModule, ModalFooterComponent, LgsInputComponent, IonText, IonContent, IonFooter]
 })
 export class RegistroModalComponent{
 

@@ -1,96 +1,120 @@
-<form>
-<br>
-  <ion-text class="title ion-text-center">Registro</ion-text>
-  <ion-grid class="flex">
-    <ion-row>
-<!--//! ================== Nombre ==================-->
-      <ion-col size="6">
-        <app-lgs-input
-        control="nombre"
-        [form]="form"
-        mensajeValidacion="Debe poseer al menos 3 caracteres"
-          placeholder="Nombre."
-          size="sm"  
-          ></app-lgs-input>
+<ion-content class="fondo-gris-card">
+
+  <ion-grid class="form-wrapper">
+    <ion-row class="ion-justify-content-center">
+
+      <!-- ESTE ion-col ahora sí controla el ancho -->
+      <ion-col size="12" sizeSm="12" sizeMd="12" sizeLg="12">
+
+        <ion-text class="title ion-text-center texto-acento">
+          Registro
+        </ion-text>
+
+        <ion-grid>
+          
+          <ion-row>
+            <ion-col size="6">
+              <app-lgs-input
+                control="nombre"
+                [form]="form"
+                mensajeValidacion="Debe poseer al menos 3 caracteres"
+                placeholder="Nombre."
+                size="sm">
+              </app-lgs-input>
+            </ion-col>
+
+            <ion-col size="6">
+              <app-lgs-input
+                control="apellido"
+                tipo="text"
+                [form]="form"
+                mensajeValidacion="Debe poseer al menos 3 caracteres"
+                placeholder="Apellido."
+                size="sm">
+              </app-lgs-input>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <app-lgs-input
+                control="correo"
+                tipo="email"
+                [form]="form"
+                mensajeValidacion="Debe poseer el formato 'texto@texto.texto'"
+                placeholder="Ingrese su correo."
+                size="sm">
+              </app-lgs-input>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <app-lgs-input
+                control="documento"
+                tipo="number"
+                [maxLength]="8"
+                [form]="form"
+                mensajeValidacion="Debe poseer 8 caracteres"
+                placeholder="DNI."
+                size="lg">
+              </app-lgs-input>
+            </ion-col>
+
+            <ion-col>
+              <div class="telefono-input">
+                <ion-label class="prefijo">+54</ion-label>
+
+                <app-lgs-input
+                  control="telefono"
+                  tipo="number"
+                  [form]="form"
+                  mensajeValidacion="Debe poseer 10 dígitos"
+                  placeholder="Ingrese su teléfono(opcional)."
+                  [maxLength]="10"
+                  size="sm">
+                </app-lgs-input>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="6">
+              <app-lgs-input
+                control="contrasenia"
+                tipo="password"
+                [form]="form"
+                mensajeValidacion="Debe poseer al menos 8 caracteres"
+                placeholder="Contraseña."
+                size="sm">
+              </app-lgs-input>
+            </ion-col>
+
+            <ion-col size="6">
+              <app-lgs-input
+                control="repetirContrasenia"
+                tipo="password"
+                [form]="form"
+                mensajeValidacion="Debe coincidir con la contraseña"
+                placeholder="Repita contraseña."
+                nombreControl="Repetición de contraseña">
+              </app-lgs-input>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
       </ion-col>
-      <ion-col size="6">
-<!--//! ================== Apellido ==================-->
-        <app-lgs-input
-        control="apellido"
-        tipo="text"
-          [form]="form"
-          mensajeValidacion="Debe poseer al menos 3 caracteres"
-          placeholder="Apellido."
-          size="sm"  
-        ></app-lgs-input>
-      </ion-col>
+
     </ion-row>
-<!--//! ================== Documento ==================-->
-    <app-lgs-input
-    control="documento"
-    tipo="number"
-      [maxLength]="8"
-      [form]="form"
-      mensajeValidacion="Debe poseer 8 caracteres"
-      placeholder="DNI."
-      size="lg"  
-      ></app-lgs-input>
-<!--//! ================== Correo ==================-->
-      <app-lgs-input
-      control="correo"
-      tipo="email"
-      [form]="form"
-      mensajeValidacion="Debe poseer el formato 'texto@texto.texto'"
-      placeholder="Ingrese su correo."
-      size="sm"  
-    ></app-lgs-input>
-<!--//! ================== Teléfono ==================-->
-<div class="telefono-input">
-
-  <ion-label class="prefijo">
-      +54
-    </ion-label>
-
-    <app-lgs-input
-      control="telefono"
-      tipo="number"
-      [form]="form"
-      mensajeValidacion="Debe poseer 10 dígitos"
-      placeholder="Ingrese su teléfono(opcional)."
-      [maxLength]="10"
-      size="sm">
-    </app-lgs-input>
-
-  </div>
-      <!--//! ================== Contraseña y repetición ==================-->
-  <ion-row>
-    <ion-col size="6">
-    <app-lgs-input
-    control="contrasenia"
-    tipo="password"
-    [form]="form"
-    mensajeValidacion="Debe poseer al menos 8 caracteres"
-          placeholder="Contraseña."
-          size="sm"  
-        ></app-lgs-input>
-      </ion-col>
-      <ion-col size="6">
-        <app-lgs-input
-          control="repetirContrasenia"
-          tipo="password"
-          [form]="form"
-          mensajeValidacion="Debe coincidir con la contraseña"
-          placeholder="Repita contraseña."
-          nombreControl="Repetición de contraseña"
-          ></app-lgs-input>
-        </ion-col>
-      </ion-row>
-<!--//! ================== Botón de registro ==================-->
-    <app-modal-footer class="submit"
-      (cerrar)="cerrarModal()"
-      (success)="registrar()" 
-      successText="Registrar"
-    ></app-modal-footer>
-    
   </ion-grid>
-</form>
+
+</ion-content>
+
+<ion-footer class="fondo-gris-card">
+  <app-modal-footer class="submit"
+    (cerrar)="cerrarModal()"
+    (success)="registrar()" 
+    successText="Registrar">
+  </app-modal-footer>
+</ion-footer>
