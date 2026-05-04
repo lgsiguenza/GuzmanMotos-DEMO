@@ -176,9 +176,10 @@ ion-card{
   --background:#{$gm-azul};
   --color:#{$gm-naranja};
 
-  width:3rem;
-  height:3rem;
-
+  width:1.5rem;
+  height:1.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -211,7 +212,6 @@ ion-card{
 
   position:absolute;
 
-  top:2rem;
   left: 13rem;
 
   z-index:999;
@@ -316,7 +316,7 @@ ion-card{
 
     position:absolute;
 
-    top:2rem;
+    top:1rem;
     left: 0rem;
   }
 }
@@ -326,7 +326,7 @@ ion-card{
 
     position:absolute;
 
-    top:2rem;
+    top:1rem;
     left: 0rem;
   }
 

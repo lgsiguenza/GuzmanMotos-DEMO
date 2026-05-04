@@ -31,16 +31,16 @@ export class PanelVehiculosComponent  implements OnInit {
 
     //* ✅ Señal para la página actual
   page = signal(1);
-    pageSize = computed(()=>{
-      switch(this.listaFiltrada().length){
-        case 1: 
-          return 1;
-        case 2:
-          return 2;
-        default: 
-          return 2;
-      }
-    }); 
+  pageSize = computed(()=>{
+    switch(this.listaFiltrada().length){
+      case 1: 
+        return 1;
+      case 2:
+        return 2;
+      default: 
+        return 2;
+    }
+  }); 
     
     //* ✅ Lista paginada derivada de la lista filtrada
     get paginatedItems(): Vehiculo[] {
@@ -103,7 +103,7 @@ export class PanelVehiculosComponent  implements OnInit {
   
   async abrirFormularioEdicion(vehiculo: Vehiculo){
     const vehiculoSignal = signal<Vehiculo>(vehiculo)
-    const modal = await this.utilSvc.crearModal(FormularioAltaVehiculoModalComponent, '',
+    const modal = await this.utilSvc.crearModal(FormularioAltaVehiculoModalComponent, 'lg',
       {isEdicion: true, vehiculoEditado: vehiculoSignal},true)
     
   }

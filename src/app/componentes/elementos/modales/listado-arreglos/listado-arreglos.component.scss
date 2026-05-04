@@ -206,3 +206,34 @@ ion-button{
   }
 
 }
+
+/* =========================
+   MODO EDICIÓN
+========================= */
+
+.modo-edicion {
+
+  .unidades {
+    width: 15%;
+  }
+
+  .nombre {
+    width: 18%;
+  }
+
+  .detalle {
+    width: 44%;
+  }
+
+  .precio {
+    width: 20%;
+  }
+
+  .estado {
+    width: 10%;
+  }
+
+}
+.modo-edicion .fila {
+  padding-right: 2.5rem; // espacio para el botón
+}

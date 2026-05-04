@@ -1,12 +1,13 @@
 .carousel-container {
-  width: 30vw;
+  width: 100%;
   height: 100%;
-  max-height: 30vh;
+  max-width: 40vw;
+
+  aspect-ratio: 16 / 9; // 🔥 clave
   position: relative;
-  overflow: hidden;
 
   display: flex;
-  min-height: 0; // 🔥 clave en Ionic
+  min-height: 0;
 }
 
 .empty {
@@ -31,17 +32,13 @@
   height: 100%;
   overflow: hidden;
   border-radius: 0.8rem;
-
-  display: flex;     // 🔥 importante
-  min-height: 0;     // 🔥 evita overflow vertical
 }
 
 .slides {
   display: flex;
   height: 100%;
   transition: transform 0.35s ease;
-
-  min-height: 0; // 🔥 FIX PRINCIPAL
+  min-height: 0;
 }
 
 .slide {
@@ -50,28 +47,25 @@
   min-height: 0;
 
   display: flex;
-  align-items: stretch;   // 🔥 antes center
-  justify-content: stretch; // 🔥 antes center
+  align-items: center;
+  justify-content: center;
 }
 
 .img-wrapper {
-  position: relative;
   width: 100%;
   height: 100%;
 
   display: flex;
-  align-items: stretch;   // 🔥 agregado
-  justify-content: stretch; // 🔥 agregado
+  align-items: center;
+  justify-content: center;
 
   overflow: hidden;
 }
 
 .slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;; // 🔥 LLENA TODO (recomendado)
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .add-btn {
@@ -129,7 +123,6 @@
   }
 }
 
-// SOLO desktop
 @media (min-width: 1201px) {
   .nav-side.visual {
     position: fixed !important;

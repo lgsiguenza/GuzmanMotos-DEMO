@@ -2,12 +2,35 @@
 
   <!------------- BOTON FLOTANTE ------------->
   
-  <div class="btn-add-floating">
-  <ion-button (click)="abrirFormularioNuevo()">
-    <ion-icon name="add-outline"></ion-icon>
-  </ion-button>
+ <div class="top-bar">
+
+  <!------------- BOTON ADD ------------->  
+  <div class="btn-add">
+    <ion-button (click)="abrirFormularioNuevo()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!------------- PAGINACIÓN ------------->  
+  @if(this.paginatedItems.length >= 1){
+    <div class="pagination">
+    
+      <ion-button class="btn-paginacion" shape="round"
+      (click)="prevPage()" [disabled]="page() === 1">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    
+      <span>{{ page() }} de {{ totalPages() }}</span>
+    
+      <ion-button shape="round" class="btn-paginacion"
+      (click)="nextPage()" [disabled]="page() === totalPages()">
+        <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    
+    </div>
+  }
+
 </div>
-<br><br>
 <!------------- CONTENIDO ------------->
 
 @if (paginatedItems.length === 0) {
@@ -69,10 +92,10 @@
               Editar
             </ion-button>
             
-            <ion-button color="primary" (click)="verDetalles(item)">
+            <!-- <ion-button color="primary" (click)="verDetalles(item)">
               <ion-icon slot="start" name="aperture-outline"></ion-icon>
-              Detalles
-            </ion-button>
+              Botón sin uso
+            </ion-button> -->
             
           </div>
           
@@ -93,22 +116,4 @@
 
 
 
-<!------------- PAGINACIÓN ------------->
-@if(this.paginatedItems.length >= 1){
-  <div class="pagination">
-  
-    <ion-button class="btn-paginacion" shape="round"
-    (click)="prevPage()" [disabled]="page() === 1">
-      <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
-    </ion-button>
-  
-    <span>{{ page() }} de {{ totalPages() }}</span>
-  
-    <ion-button shape="round" class="btn-paginacion"
-    (click)="nextPage()" [disabled]="page() === totalPages()">
-      <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
-    </ion-button>
-  
-  </div>
-}
 </ion-col>

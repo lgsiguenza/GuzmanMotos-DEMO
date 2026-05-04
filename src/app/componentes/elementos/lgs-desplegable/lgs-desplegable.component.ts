@@ -21,6 +21,7 @@ export class LgsDesplegableComponent  implements OnInit {
   control = input.required<FormControl>()
   mensajeValidacion = input<string>();
   @Input() deshabilitar:boolean = false;
+  @Input() placeholderBusqueda:string = '';
 
   parametroNombre = input.required<string>() 
   parametroValor = input.required<string>() 
@@ -49,7 +50,8 @@ export class LgsDesplegableComponent  implements OnInit {
         listado: this.listado,
         parametroNombre: this.parametroNombre,
         parametroOpcional: this.parametroAdicional,
-        parametroValor: this.parametroValor
+        parametroValor: this.parametroValor,
+        placeholderBusqueda: this.placeholderBusqueda
       },
       cssClass: 'modalAdaptable'
     });

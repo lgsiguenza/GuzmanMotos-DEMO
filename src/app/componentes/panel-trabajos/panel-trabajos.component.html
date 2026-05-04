@@ -96,14 +96,9 @@
             <ion-buttons class="card-buttons">
               <ion-buttons>
 
-                <ion-button size="small" color="warning" fill="outline" (click)="abrirFormularioEdicion(item)">
-                  <ion-icon slot="start" name="build-outline"></ion-icon>
-                  Actualizar
-                </ion-button>
-                
                 <ion-button color="primary" fill="outline" (click)="verDetalles(item)">
                 <ion-icon slot="start" name="aperture-outline"></ion-icon>
-                Detalles
+                Actualizar
               </ion-button>
             </ion-buttons>
               
@@ -115,7 +110,7 @@
             }
             @if (item.estado === 'completado') {
               <ion-button color="danger" fill="solid" expand="block" (click)="completarTrabajo(item)">
-                <ion-icon slot="start" name="trash-outline"></ion-icon>
+                <ion-icon slot="start" style="font-size: 1rem;" name="trash-outline"></ion-icon>
                 Eliminar del registro
               </ion-button>
             }

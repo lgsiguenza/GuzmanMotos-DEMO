@@ -1,49 +1,95 @@
-<div class="modal-container">
+<ion-content [fullscreen]="true">
 
-  <!-- 5% -->
-  <div class="modal-titulo">
-    <h2>Estado de trabajo</h2>
-  </div>
+  <div class="modal-container">
+    <!-- HEADER -->
+    <ion-grid>
+    <div class="modal-titulo">
+      <h1>Estado de trabajo: {{tbj.estado | titlecase}}</h1>
+    </div>
+      <ion-row class="ion-no-padding ion-display-flex ion-justify-content-center ion-text-center fondo-principal">
+        <ion-text class="texto-naranja">Datos del propietario</ion-text>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <!-- PARAMETROS -->
+          <div class="modal-parametros">
+            <div class="parametro">
+              <span class="label">Propietario</span>
+              <span style="font-size: 1.6rem;" class="valor"><strong>{{tbj.vehiculo?.nombrePropietario}}</strong></span>
+            </div>
+            
+            <div class="parametro">
+              <span class="label">Modelo</span>
+              <span style="font-size: 1.6rem;" class="valor"><strong>{{tbj.vehiculo?.modelo}}</strong></span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-no-padding ion-display-flex ion-justify-content-center ion-text-center fondo-principal">
+        <ion-text class="texto-naranja">Observaciones</ion-text>
+      </ion-row>
+      <ion-row>
 
-  <!-- 15% -->
-  <div class="modal-parametros">
+        <ion-col>
+           <app-lgs-input
+            class="ion-text-center"
+            control="observaciones"
+            tipo="textarea"
+            [form]="form"
+            mensajeValidacion="Debe poseer al menos 3 caracteres"
+            placeholder="Observaciones destacables."
+            size="md"  
+        ></app-lgs-input>
+        </ion-col>
+      </ion-row>
 
-    <div class="parametro">
-      <span class="label">Propietario</span>
-      <!-- <span class="valor"><strong>{{tbj.usuario}}</strong></span> -->
+      
+    <!-- CONTENIDO (ahora crece solo) -->
+     <div #inicioPresupuesto></div>
+    <div class="modal-contenido">
+      <app-listado-arreglos
+        [isEdicion]="true"
+        [listadoArreglos]="arreglos()"
+        (listaArreglos)="arreglos()"  
+        (totalChange)="presupuesto.set($event)"
+      ></app-listado-arreglos>
+    </div>
+     <div #finalPresupuesto></div>
+
+    <!-- PRESUPUESTO -->
+    <div class="modal-presupuesto ">
+      <span>Presupuesto total</span>
+      <strong>{{presupuesto() | currency}}</strong>
+    </div>
+    <span class="modal-presupuesto ion-margin-top">Imágenes</span>
+    <!-- CARRUSEL -->
+    <div class="contenedor-carrusel ion-display-flex ion-justify-content-center ion-margin-top ">
+      <app-lgs-carrusel
+        [editable]="true"
+        [imagenes]="this.imagenes()"
+        (imagenesChange)="imagenes.set($event)"
+      ></app-lgs-carrusel>
     </div>
 
-    <div class="parametro">
-      <span class="label">Modelo</span>
-      <span class="valor"><strong>{{tbj.vehiculo}}</strong></span>
-    </div>
-
+  </ion-grid>
   </div>
 
-  <!-- 60% -->
-  <div class="modal-contenido">
-    <app-listado-arreglos
-      [isEdicion]="true"
-      [listadoArreglos]="arreglos()"
-      (listaArreglos)="arreglos()"  
-      (totalChange)="presupuesto()"
-    ></app-listado-arreglos>
+  <!-- BOTONES FLOTANTES (OK dejarlos fixed) -->
+  <div class="scroll-buttons">
+    <ion-button shape="round" color="warning" fill="outline" size="small" (click)="irArriba()">
+      <ion-icon slot="icon-only" name="chevron-up-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button shape="round" color="warning" fill="outline" size="small" (click)="irAbajo()">
+      <ion-icon slot="icon-only" name="chevron-down-outline"></ion-icon>
+    </ion-button>
   </div>
 
-  <!-- 10% -->
-  <div class="modal-presupuesto">
+</ion-content>
 
-    <span>Presupuesto total</span>
-    <strong>${{this.presupuesto()}}</strong>
-
+<ion-footer>
+  <div class="ion-display-flex ion-justify-content-center fondo-azul">
+    <ion-button (click)="cerrarModal()" fill="outline">Cancelar</ion-button>
+    <ion-button (click)="guardarCambios()" color="warning" >Guardar</ion-button>
   </div>
-
-  <!-- 10% -->
-  <div class="modal-footer">
-
-    <ion-button fill="outline">Cancelar</ion-button>
-    <ion-button color="warning">Guardar</ion-button>
-
-  </div>
-
-</div>
+</ion-footer>

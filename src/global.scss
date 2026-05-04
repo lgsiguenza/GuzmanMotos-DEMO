@@ -220,14 +220,14 @@ ion-content {
 
   .gm-modal::part(content) {
     width: 100%;
-    max-width: 600px; // podés mantener tus tamaños
+    max-width: 900px; // podés mantener tus tamaños
   }
 
 }
 /* ================== Loader Custom ================== */
 
 /* Overlay glass */
-.cust|om-loading {
+.custom-loading {
   --background: rgba(34, 49, 51, 0.55);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);

@@ -1,13 +1,18 @@
-<div class="lista-servicios fondo-gris-card">
+<div class="lista-servicios fondo-gris-card" [class.modo-edicion]="isEdicion">
 
-  <div class="lista-header">
-    <div class="col unidades">Unid.</div>
+  <div class="lista-header ion-text-center">
+    <div class="col unidades">Unidades</div>
     <div class="col nombre">Nombre</div>
     <div class="col detalle">Detalle</div>
     <div class="col precio">Precio</div>
     @if(this.isEdicion){
     <div class="col estado">Estado</div>
-    }
+    <div class="col-estado ion-display-flex ion-justify-content-start"> 
+       ¿
+      <ion-icon slot="" name="trash"></ion-icon>
+      ? 
+    </div>
+  }
   </div>
 
   @for(group of arreglos.controls; let i = $index; track $index){
@@ -45,7 +50,7 @@
           <ion-input 
             type="number" 
             formControlName="costo"
-            placeholder="$20.000"
+            placeholder="20.000"
             (ionChange)="calcularTotal()">
             <ion-label slot="start">$</ion-label>
           </ion-input>

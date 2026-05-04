@@ -18,7 +18,7 @@
   
   <!-- 🔎 BUSCADOR -->
   <ion-searchbar
-  placeholder="Buscar..."
+  placeholder="Buscar {{placeholderBusqueda}}"
   (ionInput)="filtro.set($event.detail.value ?? '')"
   ></ion-searchbar>
   
@@ -61,10 +61,9 @@
     <ion-icon slot="icon-only" name="chevron-forward-circle-outline" ></ion-icon>
     </ion-button>
   
+    <ion-button expand="block" shape="round" color="success" (click)="confirmar()">
+      Seleccionar
+    </ion-button>
 </div>
-
-<ion-button expand="block" color="warning" (click)="confirmar()">
-  Seleccionar
-</ion-button>
-</div>
+  </div>
 </div>

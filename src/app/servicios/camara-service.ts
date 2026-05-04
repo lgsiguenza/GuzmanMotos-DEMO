@@ -31,7 +31,6 @@ export class CamaraService {
         try {
           const base64 = await this.convertirArchivoABase64(file);
           retorno(base64) ;
-          console.log(retorno)
         } catch (error) {
           reject(error);
         }
@@ -53,7 +52,6 @@ export class CamaraService {
       reader.onload = () => {
         const result = reader.result as string;
         resolve(result);
-        console.log(resolve)
       };
 
       reader.onerror = (error) => reject(error);

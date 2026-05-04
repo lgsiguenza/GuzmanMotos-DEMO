@@ -1,8 +1,8 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { IonGrid, IonRow, IonCol, ModalController, IonText, IonLabel, IonTitle, IonIcon, IonContent } from '@ionic/angular/standalone';
+import { IonGrid, IonRow, IonCol, ModalController, IonText, IonLabel, IonTitle, IonIcon, IonContent, IonButton, IonFooter } from '@ionic/angular/standalone';
 import { ModalFooterComponent } from "../modal-footer/modal-footer.component";
 import { Utils } from 'src/app/servicios/utils';
 import { UsuarioSb } from 'src/app/servicios/usuario-sb';
@@ -14,16 +14,16 @@ import { TrabajoSb } from 'src/app/servicios/trabajo-sb';
 import { VehiculoSb } from 'src/app/servicios/vehiculo-sb';
 import { LgsDesplegableComponent } from "../../lgs-desplegable/lgs-desplegable.component";
 import { addIcons } from 'ionicons';
-import { cameraOutline } from 'ionicons/icons';
+import { cameraOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons';
 import { LgsCarruselComponent } from "../../lgs-carrusel/lgs-carrusel.component";
 
 @Component({
   selector: 'app-formulario-alta-trabajo-modal',
   templateUrl: './formulario-alta-trabajo-modal.component.html',
   styleUrls: ['./formulario-alta-trabajo-modal.component.scss'],
-  imports: [IonGrid, CommonModule, FormsModule, ModalFooterComponent, LgsInputComponent,
+  imports: [IonButton, IonGrid, CommonModule, FormsModule, ModalFooterComponent, LgsInputComponent,
     ListadoArreglosComponent, IonCol, IonRow, LgsDesplegableComponent, IonTitle,
-    LgsCarruselComponent, IonContent],
+    LgsCarruselComponent, IonContent, IonIcon, IonFooter],
 })
 export class FormularioAltaTrabajoModalComponent  {
   //! =============== Variables y servicios ===============
@@ -39,11 +39,12 @@ export class FormularioAltaTrabajoModalComponent  {
   protected trabajoActualización!: Trabajo
   
   protected imagenes = signal<string[]>([])
-  //~ =============== signals
+  //~ =============== Signals y propiedades
   presupuesto = signal<number>(0);
   arreglos = signal<Arreglo[]>([])
 
-  
+  @ViewChild(IonContent) scroll!: IonContent;
+
   //~ =============== Formulario
   protected form = new FormGroup({
     vehiculo: new FormControl('', [Validators.required,Validators.minLength(3),
@@ -65,7 +66,7 @@ export class FormularioAltaTrabajoModalComponent  {
     })
 
    
-  
+  //~ =============== Inicialización
   async ngOnInit() {
     await this.vehiculoSvc.iniciarCanalVehiculos();
     if(this.isEdicion){
@@ -85,11 +86,23 @@ export class FormularioAltaTrabajoModalComponent  {
   }
 
   constructor(){
-    addIcons({cameraOutline})
+    addIcons({cameraOutline, chevronUpOutline, chevronDownOutline})
   }
 
-  //! =============== Métodos funcionales ===============
 
+
+  //! =============== Métodos ===============
+  
+  //~ =============== Visuales
+  irArriba() {
+    this.scroll.scrollToTop(300);
+  }
+
+  irAbajo() {
+    this.scroll.scrollToBottom(300);
+  }
+    
+  //~ =============== Funcionales
   async cerrarModal(){
     this.trabajoSvc.listaArreglos.set([])
     return this.modalCtrl.dismiss(null, 'cancel');

@@ -1,7 +1,7 @@
 
-<ion-content class="fondo-gris-card">
+<ion-content  class="fondo-gris-card" [scrollY]="true">
 
-  <form>
+  <form style="position: absolute;">
 <br>
   <ion-title class="title ion-text-center">{{this.isEdicion ? 'Actualizar trabajo' : 'Agregar trabajo'}}</ion-title>
   <ion-grid class="flex">
@@ -14,6 +14,7 @@
             placeholder="Seleccione un vehículo."
             [control]="form.controls.vehiculo"
             [opciones]="vehiculoSvc.listaVehiculos()"
+            placeholderBusqueda="por modelo."
             parametroValor="uid"
             parametroNombre="modelo"
             parametroAdicional="nombrePropietario"
@@ -75,13 +76,54 @@
   <div class="presupuesto-total">
     Presupuesto total: {{ presupuesto() | currency:'ARS':'symbol':'1.0-0' }}
   </div>
-<!--//! ================== Botón de registro ==================-->
-    <app-modal-footer class="submit"
-      (cerrar)="cerrarModal()"
-      (success)="registrar()" 
-      successText="Registrar"
-    ></app-modal-footer>
-    
+
+
   </ion-grid>
+
+<!--//! ================== Botón de registro ==================-->
+<div style=
+  "position: fixed;
+    right: 1rem;
+    bottom: 6rem;
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.5rem; 
+    z-index: 10;
+  ">
+
+  <!-- SCROLL ARRIBA -->
+  <ion-button
+    shape="round"
+    color="warning"
+    fill="outline"
+    size="small"
+    (click)="irArriba()"
+  >
+    <ion-icon slot="icon-only" style="font-size: 2rem;" 
+     name="chevron-up-outline"></ion-icon>
+  </ion-button>
+
+  <!-- SCROLL ABAJO -->
+  <ion-button
+    shape="round"
+    color="warning"
+    fill="outline"
+    size="small"
+    (click)="irAbajo()"
+  >
+    <ion-icon slot="icon-only" style="font-size: 2rem;" 
+      name="chevron-down-outline"></ion-icon>
+  </ion-button>
+
+</div>
+
 </form>
 </ion-content>
+<ion-footer class="fondo-gris-card">
+  <!--//! ================== Botón de registro ==================-->
+  <app-modal-footer class="submit"
+    (cerrar)="cerrarModal()"
+    (success)="registrar()" 
+    successText="Registrar"
+  ></app-modal-footer>
+</ion-footer>

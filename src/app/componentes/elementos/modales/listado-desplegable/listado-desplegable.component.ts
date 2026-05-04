@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, OnInit, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, Input, input, OnInit, output, signal } from '@angular/core';
 import { ModalController, IonHeader, IonToolbar, IonButtons, IonSearchbar, IonButton, IonTitle, IonContent, IonItem, IonList, IonRadioGroup, IonRadio, IonLabel, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { chevronBackCircleOutline, chevronForwardCircleOutline, closeCircleOutline, closeOutline } from 'ionicons/icons';
@@ -15,6 +15,7 @@ export class ListadoDesplegableComponent  implements OnInit {
   
   //! ===================== Propiedades =====================
   listado = input.required<any[]>();
+  @Input() placeholderBusqueda:string = ''
   parametroNombre = input.required<string>();
   parametroOpcional = input<string>();
   parametroValor = input<string | null>(null);

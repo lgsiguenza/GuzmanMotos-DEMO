@@ -155,10 +155,6 @@ ion-card{
   justify-content:center;
 
   gap:1.5rem;
-
-  margin-top:2rem;
-  padding:.6rem 1rem;
-
   border-radius:.5rem;
 
   background:$gm-naranja-soft;
@@ -171,8 +167,8 @@ ion-card{
   --background:#{$gm-azul};
   --color:#{$gm-naranja};
 
-  width:3rem;
-  height:3rem;
+  width:1rem;
+  height:1rem;
 
   display:flex;
   align-items:center;
@@ -198,21 +194,29 @@ ion-card{
 }
 
 
+
 /* ======================
-   BOTÓN FLOTANTE
+   TOP BAR (ADD + PAGINACIÓN)
 ====================== */
 
-.btn-add-floating{
+.top-bar{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-evenly;
 
-  position:absolute;
+  padding:0 1.5rem;
+  margin-top:.5rem;
+}
 
-  top:0.1rem;
-  left:3.2rem;
 
-  z-index:999;
+/* ======================
+   BOTÓN ADD
+====================== */
+
+.btn-add{
 
   ion-button{
-
     --background:#{$gm-naranja};
     --border-radius:50%;
 
@@ -222,9 +226,24 @@ ion-card{
     ion-icon{
       font-size:1.8rem;
     }
-
   }
 
+}
+
+
+/* ======================
+   PAGINACIÓN AJUSTE
+====================== */
+
+.pagination{
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+
+  padding:.5rem .9rem;
+  border-radius:.6rem;
+
+  background:$gm-naranja-soft;
 }
 
 

@@ -195,7 +195,6 @@ export class TrabajoSb {
           }
         }
       )
-    this.canalTrabajos!
       .on(
         'postgres_changes',
         {
@@ -223,8 +222,35 @@ export class TrabajoSb {
           }
         }
       )
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'Fotos_trabajos'
+        },
+        async (evento) => {
+          console.log('Evento realtime recibido:', evento);
+
+          switch (evento.eventType) {
+            case 'INSERT':
+              setTimeout(async()=> {
+                  await this.recargarListados();
+              }, 1000);
+              break;
+
+            case 'UPDATE':
+              await this.recargarListados();
+              break;
+
+            case 'DELETE':
+              await this.recargarListados();
+              break;
+          }
+        }
+      )
       .subscribe((status) => {
-        console.log("Estado canal realtime TRABAJOS:", status);
+        console.log("Estado canal realtime FOTOS_TRABAJOS:", status);
       });
   }
 

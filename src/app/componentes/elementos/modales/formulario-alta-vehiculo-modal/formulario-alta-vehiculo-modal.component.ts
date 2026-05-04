@@ -1,4 +1,4 @@
-import { Component, inject, Input, input, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, input, OnInit, signal, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { VehiculoSb } from 'src/app/servicios/vehiculo-sb';
@@ -8,7 +8,7 @@ import { LgsDesplegableComponent } from "../../lgs-desplegable/lgs-desplegable.c
 import { LgsInputComponent } from "../../lgs-input/lgs-input.component";
 import { UsuarioSb } from 'src/app/servicios/usuario-sb';
 import { Utils } from 'src/app/servicios/utils';
-import { addCircle, cameraOutline } from 'ionicons/icons';
+import { addCircle, cameraOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons';
 import { RegistroModalComponent } from '../registro-modal/registro-modal.component';
 import { Vehiculo } from 'src/app/models/vehiculo';
 import { LgsCarruselComponent } from "../../lgs-carrusel/lgs-carrusel.component";
@@ -29,6 +29,7 @@ export class FormularioAltaVehiculoModalComponent  implements OnInit {
   private modalCtrl = inject(ModalController);
 
   //~ ======================= Propiedades
+  @ViewChild(IonContent) scroll!: IonContent;
   @Input() isEdicion!: boolean;
   vehiculoEditado = input<Vehiculo | null>()
   perfilActual = this.usuarioSvc.usrActual()?.rol
@@ -42,9 +43,13 @@ export class FormularioAltaVehiculoModalComponent  implements OnInit {
     modelo: new FormControl('',[Validators.required]),
     observaciones: new FormControl('',[Validators.required]),
   })
+
+
+
+
   //~ ======================= Inicializadores
     constructor() {
-      addIcons({cameraOutline,addCircle});
+      addIcons({cameraOutline,addCircle, chevronUpOutline, chevronDownOutline});
     }
   
     async ngOnInit() {
@@ -69,7 +74,13 @@ export class FormularioAltaVehiculoModalComponent  implements OnInit {
     //! ======================= Métodos =======================
     
     //~ ======================= Visuales
-    
+    irArriba() {
+      this.scroll.scrollToTop(300);
+    }
+
+    irAbajo() {
+      this.scroll.scrollToBottom(300);
+    }
     async cerrar(){
       await this.modalCtrl.dismiss(null, 'cancel');
     }
