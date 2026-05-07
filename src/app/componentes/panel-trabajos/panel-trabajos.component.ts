@@ -13,6 +13,7 @@ import { FormatoFechaPipe } from 'src/app/pipes/formato-fecha-pipe';
 import { DetallesActualizacionTrabajoModalComponent } from '../elementos/modales/detalles-actualizacion-trabajo-modal/detalles-actualizacion-trabajo-modal.component';
 import { LgsCarruselComponent } from "../elementos/lgs-carrusel/lgs-carrusel.component";
 import { UsuarioSb } from 'src/app/servicios/usuario-sb';
+import { FacturacionModalComponent } from "../elementos/modales/facturacion-modal/facturacion-modal.component";
 
 @Component({
   selector: 'app-panel-trabajos',
@@ -37,7 +38,7 @@ export class PanelTrabajosComponent {
     addIcons({chevronForwardOutline, chevronBackOutline,
       addOutline, buildOutline, apertureOutline, trashOutline,
       constructOutline, cloudOfflineOutline, bagCheckOutline, caretUpOutline, 
-      logoWhatsapp, shareSocialOutline})
+      logoWhatsapp, downloadOutline})
     }
   async ngOnInit() {
     await this.tbjSvc.iniciarCanalTrabajos()
@@ -95,7 +96,7 @@ export class PanelTrabajosComponent {
   //! =================== Métodos funcionales ===================
    async modificarTrabajo(trabajo: Trabajo, isPdf:boolean = false) {
     if(isPdf){
-      alert("XD")
+      await this.utilSvc.crearModal(FacturacionModalComponent, 'pdf',{trabajo: trabajo},true)
       return
     }
 
@@ -121,16 +122,7 @@ export class PanelTrabajosComponent {
             await this.utilSvc.mostrarToast('Aún hay reparaciones pendientes.', 'error','middle',1200)
             return;
           }
-          const ahora = new Date();
-          const fechaFormateada =
-            ahora.getUTCFullYear() + '-' +
-            String(ahora.getUTCMonth() + 1).padStart(2, '0') + '-' +
-            String(ahora.getUTCDate()).padStart(2, '0') + ' ' +
-            String(ahora.getUTCHours()).padStart(2, '0') + ':' +
-            String(ahora.getUTCMinutes()).padStart(2, '0') + ':' +
-            String(ahora.getUTCSeconds()).padStart(2, '0') + '.' +
-            String(ahora.getUTCMilliseconds()).padStart(3, '0') +
-            '+00';
+          const fechaFormateada = new Date().toISOString();
 
           await this.tbjSvc.actualizarTrabajo({...trabajo, estado: 'completado', egreso: fechaFormateada});
           await this.utilSvc.mostrarToast('¡Reparación actualizada!', 'success','middle',200)
@@ -187,7 +179,7 @@ export class PanelTrabajosComponent {
         case 'completado':
             mensaje = `Buenas, tu ${trabajo.vehiculo?.modelo} ya se encuentra listo para su retiro.`
       }
-      link = `https://wa.me/${numeroCliente}?text=${mensaje}`
+      link = `https://wa.me/54${numeroCliente}?text=${mensaje}`
     }
 
     return link ?? this.utilSvc.mostrarAlert('¡Hubo un problema', 'No se pudo generar el link')

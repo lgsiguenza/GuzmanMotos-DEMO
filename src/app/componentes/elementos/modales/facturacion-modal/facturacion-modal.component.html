@@ -1,0 +1,216 @@
+<ion-content class="fondo-naranja-light">
+<div class="pdf-root">
+  <div class="ticket-container ion-display-flex ion-justify-content-center ion-padding">
+
+    <div #ticket class="ticket fondo-bg-soft borde-borde">
+
+      <!-- //! ================= HEADER ================= -->
+
+      <section class="header">
+
+        <img src="assets/guzmanLogo.png">
+
+        <p class="subtitulo texto-azul">
+          Ticket de reparación
+        </p>
+
+      </section>
+
+      <!-- //! ================= VEHÍCULO ================= -->
+
+<section class="seccion">
+
+  <h2 class="texto-principal">
+    Datos del vehículo
+  </h2>
+
+  <div class="vehiculo-grid">
+
+    <div class="dato">
+      <span class="label texto-naranja-strong">
+        Propietario:
+      </span>
+
+      <span class="valor texto-azul">
+        {{ trabajo.vehiculo?.nombrePropietario }}
+      </span>
+    </div>
+
+    <div class="dato">
+      <span class="label texto-naranja-strong">
+        Modelo:
+      </span>
+
+      <span class="valor texto-azul">
+        {{ trabajo.vehiculo?.modelo }}
+      </span>
+    </div>
+
+    <div class="dato">
+      <span class="label texto-naranja-strong">
+        Patente:
+      </span>
+
+      <span class="valor texto-azul">
+        {{ trabajo.vehiculo?.patente }}
+      </span>
+    </div>
+
+    <div class="dato">
+      <span class="label texto-naranja-strong">
+        Chásis:
+      </span>
+
+      <span class="valor texto-azul">
+        {{ trabajo.vehiculo?.chasis?.length === 0
+          ? 'No registrado'
+          : trabajo.vehiculo?.chasis }}
+      </span>
+    </div>
+
+    <div class="dato">
+      <span class="label texto-naranja-strong">
+        Kilometraje:
+      </span>
+
+      <span class="valor texto-azul">
+        {{ trabajo.vehiculo?.metraje }}
+      </span>
+    </div>
+
+    <!-- //! ================= INGRESO ================= -->
+
+    <div class="dato">
+
+      <span class="label texto-naranja-strong">
+        Ingreso:
+      </span>
+
+      <span class="valor texto-azul">
+        {{ trabajo.ingreso | formatoFecha }}
+      </span>
+
+    </div>
+
+    <!-- //! ================= EGRESO ================= -->
+
+    <div class="dato">
+
+      <span class="label texto-naranja-strong">
+        Egreso:
+      </span>
+
+      <span class="valor texto-azul">
+
+        @if(trabajo.egreso === 'En proceso'){
+
+          En proceso
+
+        } @else {
+
+          {{ trabajo.egreso | formatoFecha }}
+
+        }
+
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+      <!-- //! ================= PRESUPUESTO ================= -->
+
+      <section class="seccion">
+
+        <h2 class="texto-principal">
+          Presupuesto
+        </h2>
+
+        <table class="tabla-presupuesto">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Cantidad
+              </th>
+
+              <th>
+                Producto o reparación
+              </th>
+
+              <th>
+                Detalle
+              </th>
+
+              <th>
+                Precio
+              </th>
+
+              <th>
+                Subtotal
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            @for(item of trabajo.arreglos; track item.nombre){
+
+              <tr>
+
+                <td class="texto-acento">
+                  {{ item.cantidad }}
+                </td>
+
+                <td class="texto-acento">
+                  {{ item.nombre }}
+                </td>
+
+                <td class="texto-acento">
+                  {{ item.problema }}
+                </td>
+
+                <td class="texto-acento">
+                  ${{ item.costo }}
+                </td>
+
+                <td class="texto-acento">
+                  ${{ item.costo * item.cantidad }}
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+        <div class="total texto-principal">
+
+          TOTAL:
+          <span class="texto-naranja-strong">
+            ${{ total }}
+          </span>
+
+        </div>
+        @if(isModal){
+
+          <ion-button color="success" shape="round" (click)="descargarPDF()">
+            <ion-icon slot="icon-only" name="download-outline"></ion-icon>
+          </ion-button>
+          
+        }
+      </section>
+
+    </div>
+
+  </div>
+</div>
+</ion-content>

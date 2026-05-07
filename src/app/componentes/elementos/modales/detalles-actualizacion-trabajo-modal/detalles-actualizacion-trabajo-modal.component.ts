@@ -132,7 +132,7 @@ export class DetallesActualizacionTrabajoModalComponent  implements OnInit {
   }
 
   async guardarCambios(){
-
+    if(this.rolUsuarioActual() === 'cliente') return;
     const trabajo: Trabajo = {
       ...this.tbj,
       arreglos: this.arreglos(),

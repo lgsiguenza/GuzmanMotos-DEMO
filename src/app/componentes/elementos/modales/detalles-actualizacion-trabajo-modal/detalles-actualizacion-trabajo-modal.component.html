@@ -101,7 +101,9 @@
 
 <ion-footer>
   <div class="ion-display-flex ion-justify-content-center fondo-azul">
-    <ion-button (click)="cerrarModal()" fill="outline">Cancelar</ion-button>
-    <ion-button (click)="guardarCambios()" color="warning" >Guardar</ion-button>
+    <ion-button (click)="cerrarModal()" fill="outline">Cerrar</ion-button>
+    @if(rolUsuarioActual() === 'dueño'){  
+      <ion-button (click)="guardarCambios()" color="warning" >Guardar</ion-button>
+    }
   </div>
 </ion-footer>

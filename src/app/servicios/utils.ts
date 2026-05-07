@@ -143,12 +143,13 @@ export class Utils {
   }
 
   //! ================== Modals ==================
-  async crearModal(component: any, size: 'sm' | 'md' | 'lg'|'' = '', 
+  async crearModal(component: any, size: 'sm' | 'md' | 'lg'| 'pdf'| '' = '', 
     data?: Record<string, any>, dismissBackdrop: boolean = true, cssClassExtra?: string) {
 
     let clases: string[]
 
-    if(size === '') clases = ['modalAdaptable'];
+    if(size === '') clases = ['gm-modal'];
+    else if(size === 'pdf')clases = ['gm-modal-pdf'];
     else clases = ['gm-modal', `gm-modal-${size}`];
     
     if (cssClassExtra) {

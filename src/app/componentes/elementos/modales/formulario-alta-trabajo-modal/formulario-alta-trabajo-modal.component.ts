@@ -46,12 +46,18 @@ export class FormularioAltaTrabajoModalComponent  {
   listaVehiculos = computed(() => {
     const vehiculos = this.vehiculoSvc.listaVehiculos();
     const usuario = this.usuarioSvc.usrActual();
-    console.log(usuario?.rol)
+    const reparacionesActuales = this.trabajoSvc.listaTrabajos().filter(
+      (t) => t.estado !== 'completado')
+
     if (usuario?.rol !== 'dueño') {
-      return vehiculos.filter(v => v.uid_propietario === usuario?.uid);
+      const vehiculosCliente = vehiculos.filter(v => v.uid_propietario === usuario?.uid);
+      const vehiculosSeleccionables = vehiculosCliente.filter((v)=>
+        !reparacionesActuales.some((rep) => rep.uid_vehiculo === v.uid));
+      return vehiculosSeleccionables
     }
 
-    return vehiculos;
+    return vehiculos.filter((v) =>
+      !reparacionesActuales.some((rep) => rep.uid_vehiculo === v.uid));
   });
 
   @ViewChild(IonContent) scroll!: IonContent;

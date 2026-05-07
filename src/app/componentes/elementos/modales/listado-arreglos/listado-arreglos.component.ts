@@ -92,7 +92,7 @@ export class ListadoArreglosComponent {
         });
 
         this.calcularTotal();
-        this.arreglos.push(this.crearArregloForm());
+        if(!this.esSoloVista) this.arreglos.push(this.crearArregloForm());
       }
     }
   }

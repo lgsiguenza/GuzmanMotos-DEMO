@@ -5,8 +5,8 @@
     <div class="col nombre">Nombre</div>
     <div class="col detalle">Detalle</div>
     <div class="col precio">Precio</div>
-    @if(this.isEdicion && !(esSoloVista)){
     <div class="col estado">Estado</div>
+    @if(this.isEdicion && !esSoloVista){
     <div class="col-estado ion-display-flex ion-justify-content-start"> 
        ¿
       <ion-icon slot="" name="trash"></ion-icon>
@@ -50,6 +50,7 @@
           <ion-input 
             type="number" 
             formControlName="costo"
+            [readonly]="esSoloVista"
             placeholder="20.000"
             (ionChange)="calcularTotal()">
             <ion-label slot="start">$</ion-label>
@@ -62,13 +63,11 @@
         }
       </div>
 
-      @if(this.isEdicion && !esSoloVista){
         <div class="col estado">
-          <ion-checkbox   [checked]="group.value.estado === 'completado'"
+          <ion-checkbox  [disabled]="esSoloVista" [checked]="group.value.estado === 'completado'"
            (ionChange)="toggleEstado(group, $event.detail.checked)">
           </ion-checkbox>
         </div>
-      }
 
       @if(i !== arreglos.length - 1 && !esSoloVista){
         <div class="col eliminar ion-display-flex ion-justify-content-center ion-align-items-center">
@@ -84,10 +83,12 @@
     </div>
   }
 
-  <div class="agregar-container">
-    <ion-button color="success" type="button" (click)="agregar()" shape="round">
-      <ion-icon slot="icon-only" name="add"></ion-icon>
-    </ion-button>
-  </div>
+  @if(!esSoloVista){
+    <div class="agregar-container">
+      <ion-button color="success" type="button" (click)="agregar()" shape="round">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </div>
+  }
 
 </div>

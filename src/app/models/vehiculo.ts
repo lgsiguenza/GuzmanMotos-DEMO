@@ -3,8 +3,8 @@ import { Usuario } from "./usuario";
 export interface Vehiculo{
     //* ============= Parámetros de la base de datos ============= 
     id?: number,
-    chasis?: string,
     observaciones?: string,
+    chasis?: string,
     uid?: string,
     metraje: string,
     uid_propietario: string,

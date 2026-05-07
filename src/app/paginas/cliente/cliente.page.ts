@@ -5,7 +5,7 @@ import { IonContent, IonButton, IonIcon, ModalController } from '@ionic/angular/
 import { HeaderComponent } from "src/app/componentes/elementos/header/header.component";
 import { RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { carSportOutline, clipboardOutline, constructOutline, handLeftOutline, handRightOutline } from 'ionicons/icons';
+import { buildOutline, carSportOutline, clipboardOutline, constructOutline, handLeftOutline, handRightOutline } from 'ionicons/icons';
 import { Utils } from 'src/app/servicios/utils';
 import { FormularioAltaTrabajoModalComponent } from 'src/app/componentes/elementos/modales/formulario-alta-trabajo-modal/formulario-alta-trabajo-modal.component';
 import { FormularioAltaVehiculoModalComponent } from 'src/app/componentes/elementos/modales/formulario-alta-vehiculo-modal/formulario-alta-vehiculo-modal.component';
@@ -24,14 +24,14 @@ export class ClientePage implements OnInit {
 
   constructor() {
     addIcons({handLeftOutline,handRightOutline, carSportOutline,
-      clipboardOutline,constructOutline,});
+      clipboardOutline,constructOutline, buildOutline});
    }
 
   ngOnInit() {
   }
 
   async abrirReparacion(){
-    await this.utilSvc.crearModal(FormularioAltaTrabajoModalComponent,'sm',{},true)
+    await this.utilSvc.crearModal(FormularioAltaTrabajoModalComponent,'md',{},true)
   }  
 
   async abrirRegistroVehicular(){

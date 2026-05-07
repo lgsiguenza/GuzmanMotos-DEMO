@@ -40,12 +40,13 @@
   </div>
     <ion-icon name="construct-outline"></ion-icon>
 
-    <h2>No hay trabajos todavía</h2>
-    
-    <p>
-      Cuando los clientes soliciten trabajos aparecerán aquí.
-    </p>
-
+    <h2>No hay reparaciones todavía todavía</h2>
+    @if(rolActual() === 'dueño'){
+      <p>
+        Cuando los clientes soliciten trabajos aparecerán aquí.
+      </p>
+    }
+      
   </div>
   
 } @else {
@@ -142,19 +143,18 @@
                 </ion-button>
               }
 
-              @if(item.estado === 'completado'){
-                <ion-button class="bottom-button" color="warning" fill="solid" (click)="modificarTrabajo(item, true)">
-                  <ion-icon slot="start" name="share-social-outline"></ion-icon>
-                  Compartir PDF
-                </ion-button>
-              }
+            }
+            @if(item.estado === 'completado'){
+              <ion-button class="bottom-button" color="warning" fill="solid" (click)="modificarTrabajo(item, true)">
+                <ion-icon slot="start" name="download-outline"></ion-icon>
+                Descargar PDF
+              </ion-button>
 
             }
 
           </ion-buttons>
 
         </ion-card-content>
-        
       </ion-card>
       
     }
