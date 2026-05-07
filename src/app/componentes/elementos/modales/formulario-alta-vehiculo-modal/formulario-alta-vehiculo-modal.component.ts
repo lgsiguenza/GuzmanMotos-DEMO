@@ -41,7 +41,7 @@ export class FormularioAltaVehiculoModalComponent  implements OnInit {
     metraje: new FormControl('',[Validators.required]),
     patente: new FormControl('',[Validators.required]),
     modelo: new FormControl('',[Validators.required]),
-    observaciones: new FormControl('',[Validators.required]),
+    observaciones: new FormControl('',[]),
   })
 
 

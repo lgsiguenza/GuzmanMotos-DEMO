@@ -74,7 +74,7 @@
       </span>
 
       <span class="valor texto-azul">
-        {{ trabajo.vehiculo?.metraje }}
+        {{ trabajo.vehiculo?.metraje | number }}
       </span>
     </div>
 
@@ -102,9 +102,9 @@
 
       <span class="valor texto-azul">
 
-        @if(trabajo.egreso === 'En proceso'){
+        @if(trabajo.estado === 'en proceso'){
 
-          En proceso
+          Aún en el taller.
 
         } @else {
 
@@ -165,7 +165,7 @@
               <tr>
 
                 <td class="texto-acento">
-                  {{ item.cantidad }}
+                  {{ item.cantidad |number}}
                 </td>
 
                 <td class="texto-acento">
@@ -177,11 +177,11 @@
                 </td>
 
                 <td class="texto-acento">
-                  ${{ item.costo }}
+                  ${{ item.costo |number}}
                 </td>
 
                 <td class="texto-acento">
-                  ${{ item.costo * item.cantidad }}
+                  ${{ item.costo * item.cantidad |number}}
                 </td>
 
               </tr>
@@ -196,7 +196,7 @@
 
           TOTAL:
           <span class="texto-naranja-strong">
-            ${{ total }}
+            ${{ total |number}}
           </span>
 
         </div>

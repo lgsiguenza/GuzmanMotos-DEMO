@@ -176,7 +176,7 @@ export class UsuarioSb {
     //? Verificamos que el dato sea correcto
     if(usr.contraseña === null) throw new Error('No se han recopilado correctamente los datos')
     //? Verficamos existencia
-    const existe = this.listaUsuarios().some(u => u.correo === usr.correo);
+    const existe = this.listaUsuarios().some(u => u.correo === usr.correo || u.dni === usr.dni);
     if(existe) throw new Error('Usuario ya registrado');  
 
    //? Registramos en la base de datos 
@@ -190,6 +190,7 @@ export class UsuarioSb {
       apellido: usr.apellido,
       dni: usr.dni,
       correo: usr.correo,
+      telefono: usr.telefono,
       nombre: usr.nombre,
       rol: usr.rol,
     }

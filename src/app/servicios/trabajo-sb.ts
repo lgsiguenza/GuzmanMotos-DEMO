@@ -105,7 +105,6 @@ export class TrabajoSb {
             uid_trabajo: tbj.uid
           };
           nuevoArreglo.id = undefined;
-          alert(JSON.stringify(nuevoArreglo))
           return this.sbSvc.insertar('Arreglos', nuevoArreglo);
         })
       );

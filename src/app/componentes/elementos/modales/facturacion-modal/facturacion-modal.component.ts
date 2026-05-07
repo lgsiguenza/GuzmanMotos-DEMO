@@ -6,12 +6,13 @@ import { Trabajo } from 'src/app/models/trabajo';
 import { IonContent, IonButton, ModalController, IonIcon } from "@ionic/angular/standalone";
 import { Utils } from 'src/app/servicios/utils';
 import { FormatoFechaPipe } from 'src/app/pipes/formato-fecha-pipe';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-facturacion-modal',
   templateUrl: './facturacion-modal.component.html',
   styleUrls: ['./facturacion-modal.component.scss'],
-  imports: [IonIcon, IonContent, IonButton, FormatoFechaPipe]
+  imports: [IonIcon, IonContent, IonButton, FormatoFechaPipe, DecimalPipe]
 })
 export class FacturacionModalComponent  {
   private utilSvc = inject(Utils);

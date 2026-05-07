@@ -128,7 +128,7 @@ export class Utils {
     duracion: number = 1500
   ){
     let tipoAsig: string
-    if(tipo === 'info') tipoAsig = 'secondary' 
+    if(tipo === 'info') tipoAsig = 'primary' 
     if(tipo === 'error') tipoAsig = 'danger' 
     else tipoAsig = tipo; 
     const toast = await this.toastCtrl.create({

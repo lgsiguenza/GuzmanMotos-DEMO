@@ -60,17 +60,8 @@ export class ListadoArreglosComponent {
   total = signal(0);
 
   ngOnInit() {
-   this.arreglos.valueChanges.subscribe(() => {
-      const validos = this.obtenerArreglosValidos();
-
-      const total = validos.reduce((acc, item) => {
-        return acc + (item.cantidad * item.costo);
-      }, 0);
-
-      this.total.set(total);
-      this.totalChange.emit(total);
-    });
   }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['listadoArreglos']) {
 
@@ -99,13 +90,16 @@ export class ListadoArreglosComponent {
   
   //~ ======================= Lógicos
   calcularTotal() {
-    const total = this.arreglos.value.reduce((acc, item) => {
-      const subtotal = (item.cantidad || 0) * (item.costo || 0);
-      return acc + subtotal;
+    const validos = this.obtenerArreglosValidos();
+
+    const total = validos.reduce((acc, item) => {
+      return acc + (item.cantidad * item.costo);
     }, 0);
-    
+
+    this.total.set(total);
     this.totalChange.emit(total);
   }
+
   get arreglos(): FormArray<FormGroup> {
     return this.form.get('arreglos') as FormArray<FormGroup>;
   }
@@ -126,6 +120,7 @@ export class ListadoArreglosComponent {
 
     // 🔥 emitís SOLO los válidos (ANTES de crear la nueva fila)
     this.listaArreglos.emit(this.obtenerArreglosValidos());
+    this.calcularTotal();
 
     // recién ahora agregás la fila vacía
     this.arreglos.push(this.crearArregloForm());

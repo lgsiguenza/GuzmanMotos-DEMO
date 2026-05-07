@@ -66,6 +66,7 @@ export class RegistroModalComponent{
       correo: this.form.controls.correo.value!,
       dni: this.form.controls.documento.value!,
       nombre: this.form.controls.nombre.value!,
+      telefono: this.form.controls.telefono.value!,
       contraseña: this.form.controls.contrasenia.value!,
       rol: 'cliente',
     }
@@ -75,7 +76,7 @@ export class RegistroModalComponent{
       await this.userSvc.agregarUsuario(usr);      
     }catch(e){
       e = e as Error;
-      await this.utilSvc.mostrarAlert("¡Ha ocurrido un error!", (e as Error).message);
+      await this.utilSvc.mostrarToast("¡Ha ocurrido un error!",'error','middle',500);
     }
 
     await carga.dismiss();
