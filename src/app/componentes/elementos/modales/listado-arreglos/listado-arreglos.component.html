@@ -5,7 +5,7 @@
     <div class="col nombre">Nombre</div>
     <div class="col detalle">Detalle</div>
     <div class="col precio">Precio</div>
-    @if(this.isEdicion){
+    @if(this.isEdicion && !(esSoloVista)){
     <div class="col estado">Estado</div>
     <div class="col-estado ion-display-flex ion-justify-content-start"> 
        ¿
@@ -23,7 +23,7 @@
           type="number" 
           formControlName="cantidad"
           placeholder="Ej: 10"
-          [readonly]="i !== arreglos.length - 1"
+          [readonly]="i !== arreglos.length - 1 || esSoloVista || esSoloVista"
           (ionInput)="calcularTotal()">
         </ion-input>
       </div>
@@ -32,7 +32,7 @@
         <ion-textarea 
           formControlName="nombre"
           placeholder="Ej: Abolladura en el chásis"
-          [readonly]="i !== arreglos.length - 1">
+          [readonly]="i !== arreglos.length - 1 || esSoloVista">
         </ion-textarea>
       </div>
 
@@ -40,7 +40,7 @@
         <ion-textarea 
           formControlName="problema"
           placeholder="Ej: Deformación en la carrosería producto de un impácto."
-          [readonly]="i !== arreglos.length - 1">
+          [readonly]="i !== arreglos.length - 1 || esSoloVista">
         </ion-textarea>
       </div>
 
@@ -62,14 +62,15 @@
         }
       </div>
 
-      @if(this.isEdicion){
+      @if(this.isEdicion && !esSoloVista){
         <div class="col estado">
-          <ion-checkbox (ionChange)="toggleEstado(group.value, $event.detail.checked)">
+          <ion-checkbox   [checked]="group.value.estado === 'completado'"
+           (ionChange)="toggleEstado(group, $event.detail.checked)">
           </ion-checkbox>
         </div>
       }
 
-      @if(i !== arreglos.length - 1){
+      @if(i !== arreglos.length - 1 && !esSoloVista){
         <div class="col eliminar ion-display-flex ion-justify-content-center ion-align-items-center">
           <ion-button 
             shape="round" 

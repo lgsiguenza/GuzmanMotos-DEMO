@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { addIcons } from 'ionicons';
 import { VehiculoSb } from 'src/app/servicios/vehiculo-sb';
 import { IonContent, IonGrid, IonRow, IonCol,
-  ModalController, IonTitle, IonButton, IonIcon, IonButtons, IonLabel } from "@ionic/angular/standalone";
+  ModalController, IonTitle, IonButton, IonIcon, IonButtons, IonLabel, IonText } from "@ionic/angular/standalone";
 import { LgsDesplegableComponent } from "../../lgs-desplegable/lgs-desplegable.component";
 import { LgsInputComponent } from "../../lgs-input/lgs-input.component";
 import { UsuarioSb } from 'src/app/servicios/usuario-sb';
@@ -17,7 +17,7 @@ import { LgsCarruselComponent } from "../../lgs-carrusel/lgs-carrusel.component"
   selector: 'app-formulario-alta-vehiculo-modal',
   templateUrl: './formulario-alta-vehiculo-modal.component.html',
   styleUrls: ['./formulario-alta-vehiculo-modal.component.scss'],
-  imports: [IonLabel, IonButtons, IonIcon, IonButton, IonTitle, IonCol, IonRow, IonGrid,
+  imports: [ IonLabel, IonButtons, IonIcon, IonButton, IonTitle, IonCol, IonRow, IonGrid,
     IonContent, LgsDesplegableComponent, LgsInputComponent, ReactiveFormsModule, LgsCarruselComponent],
 })
 export class FormularioAltaVehiculoModalComponent  implements OnInit {
@@ -68,7 +68,12 @@ export class FormularioAltaVehiculoModalComponent  implements OnInit {
         patente: this.vehiculoEditado()?.patente ?? '',
         propietario: this.vehiculoEditado()?.propietario?.uid ?? '',
       })
-
+      if(this.perfilActual === 'cliente'){
+        this.form.patchValue({
+          propietario: this.usuarioSvc.usrActual()?.uid
+        })
+        
+      }
       await carga.dismiss()
     }
     //! ======================= Métodos =======================

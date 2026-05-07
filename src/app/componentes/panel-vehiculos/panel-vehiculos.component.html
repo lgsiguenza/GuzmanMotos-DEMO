@@ -61,7 +61,7 @@
       <ion-card>
 
         <ion-card-header>
-          <ion-card-title class="ion-text-center texto-acento"><strong> {{ item.modelo }} ─ {{item.nombrePropietario}}</strong></ion-card-title>
+          <ion-card-title class="ion-text-center texto-acento"><strong> {{ item.modelo }} {{ this.usuariosSvc.usrActual()?.rol === 'cliente' ? '' : `─ ${item.nombrePropietario}`}}</strong></ion-card-title>
         </ion-card-header>
 
         <ion-card-content>

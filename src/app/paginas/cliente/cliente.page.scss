@@ -1,37 +1,27 @@
+.home-content {
+  --padding-top: 0;
+  --padding-bottom: 0;
 
-
-/* CONTENEDOR GRID */
-.grid-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
 }
 
-/* MATRIZ 2x2 */
+/* GRID 2x2 QUE OCUPA TODO */
 .button-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  grid-template-rows: 1fr 1fr;
 
   width: 100%;
   height: 100%;
+  gap: 0.5rem;
+  padding: 0.5rem;
 }
 
-/* BOTONES */
+/* BOTONES = CELDAS COMPLETAS */
 ion-button {
+  width: 100%;
   height: 100%;
-  min-height: 5rem;
-  font-size: 1.2rem;
+  margin: 0;
+  font-size: 1.1rem;
 }
-
-
-  .grid-wrapper {
-    width: 100%;
-    height: 100%;
-  }
-
-  .button-grid {
-    height: 100%;
-  }
-
-

@@ -130,26 +130,34 @@ ion-card{
 /* ======================
    BOTONES CARD
 ====================== */
-
 .card-buttons{
 
   display:flex;
-  flex-direction: column;
+  flex-direction:column;
   gap:.6rem;
   margin-top:1rem;
-  
-      flex-direction: column;
-      flex-wrap: wrap;
-      align-content: center;
-      align-items: stretch;
-  
-  ion-button{
+  width:100%;
+
+}
+
+.top-buttons{
+
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  width:100%;
+
+  ion-button:first-child{
     flex:1;
-    font-size:.9rem;
   }
 
 }
 
+.bottom-button{
+
+  width:100%;
+
+}
 
 /* ======================
    PAGINACIÓN

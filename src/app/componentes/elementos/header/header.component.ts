@@ -15,15 +15,17 @@ import { Utils } from 'src/app/servicios/utils';
   imports: [IonIcon, IonRow, IonToolbar, IonHeader, IonButton],
 
 })
-export class HeaderComponent  implements OnInit {
+export class HeaderComponent  {
   private noise: any
   //!================== Servicios y variables==================
   
   private utilSvc = inject(Utils)
   protected userSvc = inject(UsuarioSb);
   private router = inject(Router)
-  protected estoyEnControlOCliente = this.router.url === '/control' || this.router.url === '/cliente'
-  
+
+  get estoyEnControlOCliente() {
+    return this.router.url === '/control' || this.router.url === '/cliente';
+  }
 
 //!================== Métodos ==================
   //? Botón de cerrar sesión
@@ -36,9 +38,7 @@ export class HeaderComponent  implements OnInit {
     this.utilSvc.redirigir('inicio')
   }
 
-  async ngOnInit(){
-    await this.userSvc.recuperarSesion()
-  }
+
 
   protected volver()
   {
@@ -57,7 +57,7 @@ export class HeaderComponent  implements OnInit {
     if(this.userSvc.usrActual()?.rol === 'cliente'){
       this.utilSvc.redirigir('cliente')
     } else{
-      this.utilSvc.redirigir('dueño')
+      this.utilSvc.redirigir('control')
     }
   }
 }

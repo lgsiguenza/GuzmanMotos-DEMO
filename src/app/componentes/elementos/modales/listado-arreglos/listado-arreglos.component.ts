@@ -28,12 +28,12 @@ export class ListadoArreglosComponent {
   
   //~ ======================= Propiedades
   
-  @Input() listadoArreglos:Arreglo[] = [];
-  @Input() isEdicion!: boolean
+  @Input({required: true}) listadoArreglos:Arreglo[] = [];
+  @Input() isEdicion: boolean = false
+  @Input() esSoloVista: boolean = false
   @Output() totalChange = new EventEmitter<number>();
   @Output() listaArreglos = new EventEmitter<Arreglo[]>()
   
-  private actualizandoDesdeInterno = false;
   protected form = new FormGroup({
     arreglos: new FormArray<FormGroup>([])
   });
@@ -45,11 +45,18 @@ export class ListadoArreglosComponent {
   
   //! ======================= Métodos =======================
   //~ ======================= Visuales
-  toggleEstado(item:any, estado:boolean){
-    item.estado = estado;
-    this.calcularTotal();
-    
-  } 
+  toggleEstado(group: FormGroup, checked: boolean){
+
+    group.patchValue({
+      estado: checked ? 'completado' : 'en proceso'
+    });
+
+    const listaActualizada = this.arreglos.controls
+      .slice(0, -1) // 🔥 excluye la fila vacía editable
+      .map(ctrl => ctrl.value as Arreglo);
+    this.listaArreglos.emit(listaActualizada);
+  }
+
   total = signal(0);
 
   ngOnInit() {
@@ -136,10 +143,12 @@ export class ListadoArreglosComponent {
   //~ ======================= Privados
   private crearArregloForm(arreglo?: Arreglo): FormGroup {
     return new FormGroup({
+      id: new FormControl(arreglo?.id ?? undefined), // 👈 agregar esto
       cantidad: new FormControl(arreglo?.cantidad ?? null, Validators.required),
       nombre: new FormControl(arreglo?.nombre ?? '', Validators.required),
       problema: new FormControl(arreglo?.problema ?? '', Validators.required),
       costo: new FormControl(arreglo?.costo ?? null, Validators.required),
+      estado: new FormControl(arreglo?.estado ?? 'en proceso'), // 👈 importante
     });
   }
 

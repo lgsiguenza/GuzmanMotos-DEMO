@@ -1,6 +1,6 @@
-import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, computed, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IonButton, ModalController, IonFooter, IonContent, IonIcon, IonGrid, IonRow, IonCol, IonText } from "@ionic/angular/standalone";
+import { IonButton, ModalController, IonFooter, IonContent, IonIcon, IonGrid, IonRow, IonCol, IonText, IonTitle } from "@ionic/angular/standalone";
 import { Arreglo } from 'src/app/models/arreglo';
 import { Trabajo } from 'src/app/models/trabajo';
 import { TrabajoSb } from 'src/app/servicios/trabajo-sb';
@@ -18,20 +18,33 @@ import { LgsInputComponent } from "../../lgs-input/lgs-input.component";
   templateUrl: './detalles-actualizacion-trabajo-modal.component.html',
   styleUrls: ['./detalles-actualizacion-trabajo-modal.component.scss'],
   imports: [IonIcon, IonButton, ListadoArreglosComponent, IonFooter, IonContent,
-    CurrencyPipe, LgsCarruselComponent, TitleCasePipe, IonGrid, IonRow, IonCol, LgsInputComponent, IonText]
+    CurrencyPipe, LgsCarruselComponent, TitleCasePipe, IonGrid, IonRow, IonCol, LgsInputComponent, IonText, IonTitle]
 })
 export class DetallesActualizacionTrabajoModalComponent  implements OnInit {
-    //! ======================= Variables y servicios =======================
-  //~ ======================= Propiedades
-  @ViewChild(IonContent) scroll!: IonContent;
-  @ViewChild('inicioPresupuesto') inicioPresupuesto!: ElementRef
-  @ViewChild('finalPresupuesto') finalPresupuesto!: ElementRef
-
+  //! ======================= Variables y servicios =======================
   //~ =============== Servicios
   private utilSvc = inject(Utils);
   private userSvc = inject(UsuarioSb);
   private tbjSvc = inject(TrabajoSb);
   private modalCtrl = inject(ModalController);
+  //~ ======================= Propiedades
+  @ViewChild(IonContent) scroll!: IonContent;
+  @ViewChild('inicioPresupuesto') inicioPresupuesto!: ElementRef
+  @ViewChild('finalPresupuesto') finalPresupuesto!: ElementRef
+
+  rolUsuarioActual = computed(() => 
+    this.userSvc.usrActual()?.rol ?? 'cliente'
+  );
+
+  puedeVerArreglos = computed(() => {
+    if(this.arreglos().length != 0) return true;
+
+    if(this.rolUsuarioActual() === 'cliente') return false
+    if(this.rolUsuarioActual() === 'dueño') return true
+    
+    return false;
+  })
+  
 
   //~ =============== Signals
   presupuesto = signal<number>(0);
@@ -119,6 +132,7 @@ export class DetallesActualizacionTrabajoModalComponent  implements OnInit {
   }
 
   async guardarCambios(){
+
     const trabajo: Trabajo = {
       ...this.tbj,
       arreglos: this.arreglos(),

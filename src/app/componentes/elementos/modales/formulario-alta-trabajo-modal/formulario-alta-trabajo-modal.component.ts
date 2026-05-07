@@ -31,6 +31,7 @@ export class FormularioAltaTrabajoModalComponent  {
   private utilSvc = inject(Utils);
   private trabajoSvc = inject(TrabajoSb);
   private modalCtrl = inject(ModalController);
+  protected usuarioSvc = inject(UsuarioSb); 
 
   protected vehiculoSvc = inject(VehiculoSb);
   
@@ -42,6 +43,16 @@ export class FormularioAltaTrabajoModalComponent  {
   //~ =============== Signals y propiedades
   presupuesto = signal<number>(0);
   arreglos = signal<Arreglo[]>([])
+  listaVehiculos = computed(() => {
+    const vehiculos = this.vehiculoSvc.listaVehiculos();
+    const usuario = this.usuarioSvc.usrActual();
+    console.log(usuario?.rol)
+    if (usuario?.rol !== 'dueño') {
+      return vehiculos.filter(v => v.uid_propietario === usuario?.uid);
+    }
+
+    return vehiculos;
+  });
 
   @ViewChild(IonContent) scroll!: IonContent;
 
@@ -80,6 +91,7 @@ export class FormularioAltaTrabajoModalComponent  {
         vehiculo: this.trabajoActualización.vehiculo!.uid,
         observaciones: this.trabajoActualización.descripcion,
       })
+
       await carga.dismiss()
     };
 
@@ -114,7 +126,7 @@ export class FormularioAltaTrabajoModalComponent  {
       this.utilSvc.mostrarToast('¡Debe rellenar todos los campos correctamente!', 'error','middle',500)
       return
     }
-    if(this.arreglos().length <= 0){
+    if(this.arreglos().length <= 0 && this.usuarioSvc.usrActual()?.rol !== 'cliente'){
       await this.utilSvc.mostrarToast('¡Se debe agregar al menos un arreglo!',
          'error','middle',50)
       return
@@ -130,6 +142,7 @@ export class FormularioAltaTrabajoModalComponent  {
       imagenes: this.imagenes(),
     }
 
+    if(this.usuarioSvc.usrActual()?.rol === 'cliente') tbj.estado = 'solicitado';
     const carga = await this.utilSvc.loading();
 
     try {

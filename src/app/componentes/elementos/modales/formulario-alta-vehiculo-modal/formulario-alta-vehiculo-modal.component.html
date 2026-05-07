@@ -11,43 +11,50 @@
         </ion-title>
 
         <ion-row class="ion-align-items-center">
-          @if(isEdicion === false && this.usuarioSvc.usrActual()?.rol !== 'cliente'){
-          <ion-col>
-            <app-lgs-desplegable
-              label="Propietario"
-              placeholder="Seleccione o añada."
-              placeholderBusqueda="por nombre del usuario."
-              [opciones]="this.usuarioSvc.listaUsuarios()"
-              parametroValor="uid"
-              parametroNombre="nombre"
-              parametroAdicional="apellido"
-              [control]="form.controls.propietario"
-            >
+          @if(this.usuarioSvc.usrActual()?.rol !== 'cliente'){
 
-            </app-lgs-desplegable>
+            @if(isEdicion === false ){
+              <ion-col>
+                <app-lgs-desplegable
+                label="Propietario"
+                placeholder="Seleccione o añada."
+                placeholderBusqueda="por nombre del usuario."
+                [opciones]="this.usuarioSvc.listaUsuarios()"
+                parametroValor="uid"
+                parametroNombre="nombre"
+                parametroAdicional="apellido"
+                [control]="form.controls.propietario"
+                >
 
-          </ion-col>
-          @if(this.usuarioSvc.usrActual()?.rol != 'cliente'){
-            <ion-col
-                  size="1"
-                  size-md="1"
-                  size-lg="1"
-                  class="ion-align-items-center ion-justify-content-start">
+              </app-lgs-desplegable>
+              
+            </ion-col>
+            @if(this.usuarioSvc.usrActual()?.rol != 'cliente'){
+              <ion-col
+              size="1"
+              size-md="1"
+              size-lg="1"
+              class="ion-align-items-center ion-justify-content-start">
               <ion-button style="margin-bottom: 1.5rem; margin-left: -0.3rem;"
-                shape="round" size="small" color="warning" (click)="agregarUsuario()">
+              shape="round" size="small" color="warning" (click)="agregarUsuario()">
               <ion-icon name="add-circle" slot="icon-only" style="font-size:2rem"></ion-icon>
             </ion-button>
           </ion-col>
-          }
+        }
       } @else{
-            <ion-col class="ion-display-flex ion-justify-content-center fondo-principal" 
-              style="margin-bottom: 1rem;
+        <ion-col class="ion-display-flex ion-justify-content-center fondo-principal" 
+        style="margin-bottom: 1rem;
                 margin-top: 0.25rem; border-radius: 0.8rem;">
                 <ion-title class="ion-text-center texto-acento"> 
                   Propietario: 
-                    <strong class="texto-naranja">{{vehiculoEditado()!.nombrePropietario}} </strong>
-                  </ion-title>
+                  <strong class="texto-naranja">{{vehiculoEditado()!.nombrePropietario}} </strong>
+                </ion-title>
               </ion-col> 
+            }
+          } @else{
+            <ion-title class="ion-text-center texto-acento" >
+              Propietario: <strong>{{this.usuarioSvc.usrActual()?.nombre}} {{this.usuarioSvc.usrActual()?.apellido}}</strong>
+            </ion-title>
           }
         </ion-row>
           <ion-row>
@@ -90,7 +97,7 @@
 
         <div class="ion-text-center ion-margin-bottom ion-display-flex ion-justify-content-center">
           <ion-row>
-            <ion-col class="contenedor-30vh ion-display-flex ion-justify-content-center ion-align-items-center">
+            <ion-col style="overflow: hidden;" class="contenedor-30vh ion-display-flex ion-justify-content-center ion-align-items-center">
               <app-lgs-carrusel
               [imagenes]="imagenes()"
               [editable]="true"

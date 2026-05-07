@@ -8,7 +8,7 @@
       [formControl]="formControl"
       (ionInput)="limitarLongitud($event)"
       placeholder="{{placeholder | titlecase}}"
-      [disabled]="this.deshabilitado">
+      [readonly]="this.deshabilitado">
     </ion-textarea>
 
   } @else {

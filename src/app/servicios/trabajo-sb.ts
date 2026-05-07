@@ -66,7 +66,6 @@ export class TrabajoSb {
 
   
   async actualizarTrabajo(tbj: Trabajo){
-
     const trabajoUpdate: any = {
       ...tbj,
       arreglos: undefined,
@@ -76,6 +75,50 @@ export class TrabajoSb {
     };
 
     await this.sbSvc.actualizar('Trabajos', 'uid', tbj.uid!, trabajoUpdate);
+    //? =================== Arreglos ===================
+    
+    const arreglosNuevos = tbj.arreglos ?? [];
+    const arreglosPrevios = this.trabajoSeleccionado()?.arreglos ?? [];
+
+    const arreglosInsertar = arreglosNuevos.filter(arr =>arr.id === undefined || arr.id === null);
+    const arreglosActualizar = arreglosNuevos.filter((arr) => arr.id !== null && arr.id !== undefined );
+    const arreglosEliminados = arreglosPrevios.filter(
+      arrPrev =>!arreglosNuevos.some(arrNuevo => arrNuevo.id === arrPrev.id));
+
+      
+      
+    //? 🔹 1. Eliminar descartados
+    if (arreglosEliminados.length !== 0) {
+      await Promise.all(
+        arreglosEliminados.map(arr =>
+          this.sbSvc.eliminar('Arreglos', 'id', String(arr.id!))
+        )
+      );
+    }
+
+    //? 🔹 2. Insertar nuevos
+    if (arreglosInsertar.length !== 0) {
+      await Promise.all(
+        arreglosInsertar.map(arr => {
+          const nuevoArreglo = {
+            ...arr,
+            uid_trabajo: tbj.uid
+          };
+          nuevoArreglo.id = undefined;
+          alert(JSON.stringify(nuevoArreglo))
+          return this.sbSvc.insertar('Arreglos', nuevoArreglo);
+        })
+      );
+    }
+
+    if (arreglosActualizar.length !== 0) {
+      await Promise.all(
+        arreglosActualizar.map(arr => {
+          return this.sbSvc.actualizar('Arreglos','id', String(arr.id!), arr);
+        })
+      );
+    }
+
 
     //? =================== Imágenes ===================
 

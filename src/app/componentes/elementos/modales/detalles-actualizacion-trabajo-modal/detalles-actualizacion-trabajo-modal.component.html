@@ -34,6 +34,7 @@
            <app-lgs-input
             class="ion-text-center"
             control="observaciones"
+            [deshabilitado]="rolUsuarioActual() === 'cliente'"
             tipo="textarea"
             [form]="form"
             mensajeValidacion="Debe poseer al menos 3 caracteres"
@@ -43,29 +44,40 @@
         </ion-col>
       </ion-row>
 
-      
+      <div #inicioPresupuesto></div>
+    
+  @if(puedeVerArreglos()){
+
     <!-- CONTENIDO (ahora crece solo) -->
-     <div #inicioPresupuesto></div>
     <div class="modal-contenido">
       <app-listado-arreglos
         [isEdicion]="true"
+        [esSoloVista]="rolUsuarioActual() === 'cliente'"
         [listadoArreglos]="arreglos()"
-        (listaArreglos)="arreglos()"  
+        (listaArreglos)="arreglos.set($event)"  
         (totalChange)="presupuesto.set($event)"
       ></app-listado-arreglos>
     </div>
-     <div #finalPresupuesto></div>
 
     <!-- PRESUPUESTO -->
     <div class="modal-presupuesto ">
       <span>Presupuesto total</span>
       <strong>{{presupuesto() | currency}}</strong>
     </div>
+    
+  } @else{
+    <div class="modal-presupuesto ion-display-flex ion-justify-content-center ion-text-center">
+      <br><ion-title>Aún no hay reparaciones para mostrar.</ion-title><br>
+    </div>
+  }
+
+     <div #finalPresupuesto></div>
+
     <span class="modal-presupuesto ion-margin-top">Imágenes</span>
     <!-- CARRUSEL -->
     <div class="contenedor-carrusel ion-display-flex ion-justify-content-center ion-margin-top ">
       <app-lgs-carrusel
-        [editable]="true"
+        [editable]="rolUsuarioActual() != 'cliente'"
         [imagenes]="this.imagenes()"
         (imagenesChange)="imagenes.set($event)"
       ></app-lgs-carrusel>

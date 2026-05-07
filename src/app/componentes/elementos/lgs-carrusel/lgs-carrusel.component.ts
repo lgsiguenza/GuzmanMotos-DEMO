@@ -1,7 +1,7 @@
 import { Component, computed, EventEmitter, inject, input, Input, OnInit, Output, signal } from '@angular/core';
 import { IonIcon, IonButton } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
-import { cameraOutline, chevronBack, chevronForward } from 'ionicons/icons';
+import { cameraOutline, chevronBack, chevronForward, trashOutline } from 'ionicons/icons';
 import { CamaraService } from 'src/app/servicios/camara-service';
 import { Utils } from 'src/app/servicios/utils';
 
@@ -32,7 +32,7 @@ export class LgsCarruselComponent  implements OnInit {
   
   //~ ======================= Inicializadores
   constructor() {
-    addIcons({cameraOutline, chevronBack, chevronForward})
+    addIcons({cameraOutline, chevronBack, chevronForward, trashOutline})
   }
   
   ngOnInit() {}
@@ -99,21 +99,20 @@ export class LgsCarruselComponent  implements OnInit {
   }
 
   eliminar(indice: number) {
+    const listaActual = this.imagenes();
 
-  const listaActual = this.imagenes();
+    if (!listaActual || listaActual.length === 0) return;
 
-  if (!listaActual || listaActual.length === 0) return;
+    const nuevaLista = listaActual.filter((_, i) => i !== indice);
 
-  const nuevaLista = listaActual.filter((_, i) => i !== indice);
+    this.imagenesChange.emit(nuevaLista);
 
-  this.imagenesChange.emit(nuevaLista);
-
-  // 👇 ajustar índice para no romper el carrusel
-  if (this.index() > 0) {
-    this.index.update(v => Math.min(v - 1, nuevaLista.length - 1));
-  } else {
-    this.index.set(0);
+    // 👇 ajustar índice para no romper el carrusel
+    if (this.index() > 0) {
+      this.index.update(v => Math.min(v - 1, nuevaLista.length - 1));
+    } else {
+      this.index.set(0);
+    }
   }
-}
 
 }

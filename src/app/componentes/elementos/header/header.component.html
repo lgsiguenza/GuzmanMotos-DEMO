@@ -29,18 +29,20 @@
        }
 
       <!-- Botón Opciones 10% -->
-      <div class="col opciones">
-      @if(estoyEnControlOCliente){
-        <ion-button fill="clear" (click)="irSobreNos()">
-          <ion-icon slot="icon-only" name="home-outline"></ion-icon>
-        </ion-button>
-      }@else{
-        <ion-button fill="clear" (click)="irControl()">
-          <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
-        </ion-button>  
-      }
-    </div>
-
+       @if(this.userSvc.usrActual() != null){
+         <div class="col opciones">
+           @if(estoyEnControlOCliente){
+             <ion-button fill="clear" (click)="irSobreNos()">
+               <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+              </ion-button>
+            }@else{
+              <ion-button fill="clear" (click)="irControl()">
+                <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+              </ion-button>  
+            }
+          </div>
+        }
+          
     </ion-row>
   </ion-toolbar>
 </ion-header>

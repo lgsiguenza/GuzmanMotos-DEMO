@@ -34,7 +34,7 @@ export class RegistroModalComponent{
       Validators.maxLength(8),Validators.pattern(/^\d{7,8}$/),]),
     correo: new FormControl('', [Validators.required,Validators.email,
       Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),]),
-    telefono: new FormControl('',Validators.min(1000000000)),
+    telefono: new FormControl('',[Validators.min(1000000000), Validators.required]),
     contrasenia: new FormControl('', [Validators.required,Validators.minLength(8),]),
     repetirContrasenia: new FormControl('', [Validators.required, this.matchPassword]),
   });

@@ -1,9 +1,14 @@
 
-<ion-content  class="fondo-gris-card" [scrollY]="true">
+<ion-content 
+  class="fondo-gris-card ion-display-flex ion-justify-content-center ion-flex-col" [scrollY]="true">
 
-  <form style="position: absolute;">
+  <form >
 <br>
+@if(this.usuarioSvc.usrActual()?.rol !== 'cliente'){
   <ion-title class="title ion-text-center">{{this.isEdicion ? 'Actualizar trabajo' : 'Agregar trabajo'}}</ion-title>
+} @else{
+  <ion-title class="title ion-text-center">Solicitar repación.</ion-title>
+}
   <ion-grid class="flex">
 <!--//! ================== Modelo vehículo ==================-->
     <ion-row class="ion-align-items-center">
@@ -13,7 +18,7 @@
             label="Vehículo."
             placeholder="Seleccione un vehículo."
             [control]="form.controls.vehiculo"
-            [opciones]="vehiculoSvc.listaVehiculos()"
+            [opciones]="listaVehiculos()"
             placeholderBusqueda="por modelo."
             parametroValor="uid"
             parametroNombre="modelo"
@@ -33,7 +38,11 @@
           margin-top: 0.25rem; border-radius: 0.8rem;">
           <ion-title class="ion-text-center texto-acento"> 
             Propietario: <br>
+            @if(this.usuarioSvc.usrActual()?.rol === 'dueño'){
               <strong class="texto-naranja">{{vehiculoSeleccionado() ?? 'No seleccionado'}} </strong>
+            } @else {
+              <strong class="texto-naranja">{{vehiculoSeleccionado() ? 'Usted': 'No seleccionado'}} </strong>
+            }
              </ion-title>
         </ion-col>  
         
@@ -63,6 +72,7 @@
       </ion-col>
     </ion-row>
 <!--//! ================== Arreglos ==================-->
+@if(usuarioSvc.usrActual()?.rol !== 'cliente'){
   <div class="zona-futura">
     <app-listado-arreglos 
       [listadoArreglos]="this.arreglos()"
@@ -72,11 +82,12 @@
     ></app-listado-arreglos>
   </div>
   
-<!--//! ================== Presupuesto ==================-->
+  <!--//! ================== Presupuesto ==================-->
   <div class="presupuesto-total">
     Presupuesto total: {{ presupuesto() | currency:'ARS':'symbol':'1.0-0' }}
   </div>
-
+  
+}
 
   </ion-grid>
 
@@ -90,6 +101,7 @@
     gap: 0.5rem; 
     z-index: 10;
   ">
+  @if(this.usuarioSvc.usrActual()?.rol === 'dueño'){
 
   <!-- SCROLL ARRIBA -->
   <ion-button
@@ -114,6 +126,7 @@
     <ion-icon slot="icon-only" style="font-size: 2rem;" 
       name="chevron-down-outline"></ion-icon>
   </ion-button>
+  }
 
 </div>
 

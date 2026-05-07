@@ -94,33 +94,64 @@
           
           
             <ion-buttons class="card-buttons">
-              <ion-buttons>
 
+            <div class="top-buttons">
+              @if(rolActual() === 'cliente' && item.estado != 'solicitado'){
                 <ion-button color="primary" fill="outline" (click)="verDetalles(item)">
-                <ion-icon slot="start" name="aperture-outline"></ion-icon>
-                Actualizar
+                  <ion-icon slot="start" name="aperture-outline"></ion-icon>
+                    Ver detalles
+                </ion-button>
+              }
+
+              @if(rolActual() === 'dueño'){
+
+                @if(item.estado === 'en proceso'){
+                  <ion-button color="primary" fill="outline" (click)="verDetalles(item)">
+                    <ion-icon slot="start" name="aperture-outline"></ion-icon>
+                    Actualizar
+                  </ion-button>
+                }
+
+                @if(item.estado === 'completado'){
+                  <ion-button color="danger" fill="solid" (click)="modificarTrabajo(item)">
+                    <ion-icon slot="start" name="trash-outline"></ion-icon>
+                    Eliminar Registro
+                  </ion-button>
+                }
+
+              }
+
+              <ion-button color="success" size="small" fill="outline" [href]="enviarMensajeWhatapp(item)">
+                <ion-icon slot="icon-only" name="logo-whatsapp"></ion-icon>
               </ion-button>
-            </ion-buttons>
-              
-            @if(item.estado === 'en proceso'){
-              <ion-button color="success" fill="solid" expand="block" (click)="completarTrabajo(item)">
-                <ion-icon slot="start" name="bag-check-outline"></ion-icon>
-                Completar
-              </ion-button>
+
+            </div>
+
+            @if(rolActual() == 'dueño'){
+
+              @if(item.estado === 'solicitado'){
+                <ion-button class="bottom-button" color="tertiary" fill="solid" (click)="modificarTrabajo(item)">
+                  <ion-icon slot="start" name="caret-up-outline"></ion-icon>
+                  Aceptar Solicitud
+                </ion-button>
+              }
+              @if(item.estado === 'en proceso'){
+                <ion-button class="bottom-button" color="success" fill="solid" (click)="modificarTrabajo(item)">
+                  <ion-icon slot="start" name="bag-check-outline"></ion-icon>
+                  Completar
+                </ion-button>
+              }
+
+              @if(item.estado === 'completado'){
+                <ion-button class="bottom-button" color="warning" fill="solid" (click)="modificarTrabajo(item, true)">
+                  <ion-icon slot="start" name="share-social-outline"></ion-icon>
+                  Compartir PDF
+                </ion-button>
+              }
+
             }
-            @if (item.estado === 'completado') {
-              <ion-button color="danger" fill="solid" expand="block" (click)="completarTrabajo(item)">
-                <ion-icon slot="start" style="font-size: 1rem;" name="trash-outline"></ion-icon>
-                Eliminar del registro
-              </ion-button>
-            }
-            @if (item.estado === 'solicitado') {
-              <ion-button color="tertiary" fill="solid" expand="block" (click)="completarTrabajo(item)">
-                <ion-icon slot="start" name="caret-up-outline"></ion-icon>
-                Aceptar solicitud.
-              </ion-button>
-            }
-              </ion-buttons>
+
+          </ion-buttons>
 
         </ion-card-content>
         

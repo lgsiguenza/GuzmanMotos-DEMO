@@ -1,23 +1,16 @@
 <app-header></app-header>
 
-<ion-content class="ion-display-flex ion-flex-col ion-justify-content-center">
+<ion-content class="fondo-bg-soft ion-display-flex ion-flex-col ion-justify-content-center">
 
-  <ion-grid>
-    <ion-row class="ion-justify-content-center">
-
-      <!-- CONTENEDOR CONTROLADO POR ION-COL -->
-      <ion-col size="12" sizeLg="6" class="grid-wrapper">
-
-        <div class="button-grid">
-          <ion-button expand="block">A</ion-button>
-          <ion-button expand="block">B</ion-button>
-          <ion-button expand="block">C</ion-button>
-          <ion-button expand="block">D</ion-button>
-        </div>
-
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
+  <div class="button-grid">
+    <ion-button class="fondo-azul texto-naranja" routerLink="/panel-vehiculos-cliente" expand="block">
+      <ion-icon name="car-sport-outline"></ion-icon> Mis vehículos</ion-button>
+    <ion-button class="fondo-azul texto-naranja" (click)="abrirReparacion()" expand="block">
+      <ion-icon name="construct-outline"></ion-icon> Solicitar reparación</ion-button>
+    <ion-button class="fondo-azul texto-naranja" (click)="abrirRegistroVehicular()" expand="block">
+      <ion-icon name="clipboard-outline"></ion-icon> Registrar vehículo</ion-button>
+    <ion-button class="fondo-azul texto-naranja" routerLink="/panel-reparaciones-cliente" expand="block">
+      <ion-icon name="hand-left-outline"></ion-icon><ion-icon name="hand-right-outline"></ion-icon> Seguir reparaciones</ion-button>
+  </div>
 
 </ion-content>

@@ -9,6 +9,7 @@ import { IonButton, IonButtons, IonCard, IonCardTitle, IonCardHeader, IonCardCon
 import { FormularioAltaVehiculoModalComponent } from '../elementos/modales/formulario-alta-vehiculo-modal/formulario-alta-vehiculo-modal.component';
 import { CommonModule } from '@angular/common';
 import { LgsCarruselComponent } from "../elementos/lgs-carrusel/lgs-carrusel.component";
+import { UsuarioSb } from 'src/app/servicios/usuario-sb';
 
 @Component({
   selector: 'app-panel-vehiculos',
@@ -20,14 +21,21 @@ export class PanelVehiculosComponent  implements OnInit {
 
 //! =================== Servicios y variables ===================
   private vehiculoSvc = inject(VehiculoSb);
+  protected usuariosSvc = inject(UsuarioSb);
   private utilSvc = inject(Utils);
 
   //! =================== Métodos visuales / Paginación ===================
   //~ =================== Paginación
-  listaFiltrada = computed(() =>
-    (this.vehiculoSvc.listaVehiculos() ?? [])
+  listaFiltrada = computed(() =>{
+    if(this.usuariosSvc.usrActual()?.rol === 'dueño'){
+    return (this.vehiculoSvc.listaVehiculos() ?? [])
       .sort((a, b) => a.id! - b.id!)
-  );
+    } else{
+      return (this.vehiculoSvc.listaVehiculos() ?? [])
+        .sort((a, b) => a.id! - b.id!)
+        .filter((v) => v.uid_propietario === this.usuariosSvc.usrActual()?.uid)      
+    }
+  });
 
     //* ✅ Señal para la página actual
   page = signal(1);

@@ -33,4 +33,12 @@ export const routes: Routes = [
     path: 'sobre-nos',
     loadComponent: () => import('./paginas/sobre-nos/sobre-nos.page').then( m => m.SobreNosPage)
   },
+  {
+    path: 'panel-vehiculos-cliente',
+    loadComponent: () => import('./paginas/cliente/panel-vehiculos/panel-vehiculos-cliente.page').then( m => m.PanelVehiculosClientePage)
+  },
+  {
+    path: 'panel-reparaciones-cliente',
+    loadComponent: () => import('./paginas/cliente/panel-reparaciones-cliente/panel-reparaciones-cliente.page').then( m => m.PanelReparacionesClientePage)
+  },
 ];

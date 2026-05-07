@@ -86,6 +86,41 @@ export class Utils {
 
     await alert.present();
   }
+
+  async mostrarAlertConfirm(opciones: {
+    header?: string;
+    message: string;
+    textoAceptar?: string;
+    textoCancelar?: string;
+    onAceptar?: () => Promise<void> | void;
+    onCancelar?: () => void;
+  }): Promise<void> {
+
+    const alert = await this.alertCtrl.create({
+      header: opciones.header ?? 'Confirmar',
+      message: opciones.message,
+      cssClass: 'gm-select-alert',
+      buttons: [
+        {
+          text: opciones.textoCancelar ?? 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            opciones.onCancelar?.();
+          }
+        },
+        {
+          text: opciones.textoAceptar ?? 'Aceptar',
+          handler: async () => {
+            if (opciones.onAceptar) {
+              await opciones.onAceptar();
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
   //! ================== Toast ==================
   async mostrarToast(mensaje: string,
     tipo: ('success' | 'error' | 'info' | 'warning' | 'dark'| 'primary') = 'dark',
