@@ -40,11 +40,10 @@ export class FacturacionModalComponent  {
     await carga.present();
 
     await new Promise(resolve =>
-      setTimeout(resolve, 150)
+      setTimeout(resolve, 250)
     );
 
-    const element =
-    this.ticketRef.nativeElement;
+    const element = this.ticketRef.nativeElement;
 
     const canvas = await html2canvas(element, {
       scale: 2,
@@ -52,8 +51,7 @@ export class FacturacionModalComponent  {
       backgroundColor: '#FFFFFF'
     });
 
-    const imgData =
-    canvas.toDataURL('image/png');
+    const imgData = canvas.toDataURL('image/png');
 
     const pdf = new jsPDF({
       orientation: 'portrait',
@@ -62,29 +60,61 @@ export class FacturacionModalComponent  {
     });
 
     const pdfWidth =
-    pdf.internal.pageSize.getWidth();
-
-    const imgProps =
-    pdf.getImageProperties(imgData);
+      pdf.internal.pageSize.getWidth();
 
     const pdfHeight =
-    (imgProps.height * pdfWidth)
-    / imgProps.width;
+      pdf.internal.pageSize.getHeight();
 
+    const imgProps =
+      pdf.getImageProperties(imgData);
+
+    const imgWidth = pdfWidth;
+
+    const imgHeight =
+      (imgProps.height * imgWidth)
+      / imgProps.width;
+
+    let heightLeft = imgHeight;
+
+    let position = 0;
+
+    // Primera página
     pdf.addImage(
       imgData,
       'PNG',
       0,
-      0,
-      pdfWidth,
-      pdfHeight
+      position,
+      imgWidth,
+      imgHeight
     );
+
+    heightLeft -= pdfHeight;
+
+    // Páginas restantes
+    while (heightLeft > 0) {
+
+      position = heightLeft - imgHeight;
+
+      pdf.addPage();
+
+      pdf.addImage(
+        imgData,
+        'PNG',
+        0,
+        position,
+        imgWidth,
+        imgHeight
+      );
+
+      heightLeft -= pdfHeight;
+    }
 
     pdf.save(`ticket-${this.trabajo.uid}.pdf`);
 
-    this.modalCrtl.dismiss(null);
     await carga.dismiss();
 
     this.isModal = true;
+
+    this.modalCrtl.dismiss(null);
   }
 }

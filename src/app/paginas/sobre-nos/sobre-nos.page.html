@@ -19,29 +19,77 @@
         >
           <ion-text class="ion-text-center texto-azul-claro" 
             style="font-size: 1.5rem; border-radius: 0.5rem;">
-            Trabajamos vehículos como:</ion-text>
+            Algunas muestras de nuestro trabajo:</ion-text>
         </ion-col>
       </ion-row>
 
-      <!-- CARRUSEL -->
-      <div class="teaser">
-        @for (item of arr; track $index) {
-          <figure>
-            <img [src]="item.pic" />
-            <figcaption>
-              <h3 class="texto-naranja-light borde-acento fondo-principal">{{ item.title }}</h3>
-            </figcaption>
-          </figure>
-        }
+     <!-- CARRUSEL -->
+      <div class="teaser-wrapper">
+
+        <!-- IZQUIERDA -->
+        <ion-button
+          size="small"
+          color="tertiary"
+          style="opacity: 0.4;"
+          shape="round"
+          class="nav-btn left"
+          (click)="scrollTeaser('left')">
+
+          <ion-icon
+            slot="icon-only"
+            name="chevron-back-outline">
+          </ion-icon>
+
+        </ion-button>
+
+        <!-- CARRUSEL -->
+        <div class="teaser" #carousel>
+
+          @for (item of arr; track $index) {
+
+            <figure>
+              <img [src]="item.pic" />
+
+              @if(item.title.length != 0){
+
+                <figcaption>
+                  <h3 class="texto-naranja-light borde-acento fondo-principal">
+                    {{ item.title }}
+                  </h3>
+                </figcaption>
+
+              }
+
+            </figure>
+
+          }
+
+        </div>
+
+        <!-- DERECHA -->
+        <ion-button
+          size="small"
+          color="tertiary"
+          style="opacity: 0.4;"
+          shape="round"
+          class="nav-btn right"
+          (click)="scrollTeaser('right')">
+
+          <ion-icon
+            slot="icon-only"
+            name="chevron-forward-outline">
+          </ion-icon>
+
+        </ion-button>
+
       </div>
 
       <!-- TEXTO -->
       <p class="ion-text-center texto-naranja-light">
-        Somos un taller apasionado por las motos, enfocados en brindar calidad,
+        Somos un taller apasionado por las moto, enfocados en brindar calidad,
         confianza y servicio en cada trabajo.
       <br> <br>
-        En Guzman Motos buscamos que cada cliente se lleve no solo una solución,
-        sino una experiencia.
+        En Guzman Motos brindamos atención, transparencia y eficiencia en cada servicio.
       </p>
 
     </div>

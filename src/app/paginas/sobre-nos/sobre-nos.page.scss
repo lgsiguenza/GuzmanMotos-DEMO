@@ -92,3 +92,47 @@ p {
   }
 
 }
+
+
+.teaser-wrapper{
+
+  position:relative;
+
+  display:flex;
+  align-items:center;
+
+  width:100%;
+}
+.teaser{
+
+  display:flex;
+  gap:1rem;
+
+  overflow-x:auto;
+  scroll-behavior:smooth;
+
+  width:100%;
+
+}
+.nav-btn{
+
+  position:absolute;
+  z-index:10;
+
+  --border-radius:50%;
+
+  top:50%;
+  transform:translateY(-50%);
+
+  &.left{
+    left:.5rem;
+  }
+
+  &.right{
+    right:.5rem;
+  }
+
+}
+.teaser::-webkit-scrollbar{
+  display:none;
+}
