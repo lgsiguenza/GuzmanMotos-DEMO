@@ -131,15 +131,15 @@ ion-content {
 ========================= */
 
 .gm-modal-sm {
-  --width: 450px;
+  --width: min(450px, 95vw);
 }
 
 .gm-modal-md {
-  --width: 650px;
+  --width: min(650px, 95vw);
 }
 
 .gm-modal-lg {
-  --width: 800px;
+  --width: min(800px, 95vw);
 }
 
 .modalAdaptable{
@@ -163,10 +163,10 @@ ion-content {
   /* 👇 CLAVE: altura controlada para que ion-content funcione */
   --height: 100%;
   --max-height: 90vh;
+  --max-width: 95vw;
 
   --border-radius: 20px;
   --backdrop-opacity: 0.45;
-
   &::part(content) {
     background: $gm-bg-soft;
     border-radius: 18px;
